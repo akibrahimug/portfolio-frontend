@@ -69,15 +69,16 @@ function BigProject() {
               <div className="flex justify-center flex-wrap mt-4  bg-slate-100  rounded-md  ">
                 {filteredTechnologies?.map((tech, i) =>
                   tech !== null ? (
-                    <img
-                      key={i}
-                      src={tech.pictureUrl}
-                      className={`${
-                        tech.techTitle === "NPM" ? "w-10 m-4 mt-6 " : ""
-                      } w-8 m-4 ${
-                        tech.techTitle === "Tailwind CSS" ? "w-10" : ""
-                      }`}
-                    />
+                    <div key={i}>
+                      <img
+                        src={tech.pictureUrl}
+                        className={`${
+                          tech.techTitle === "NPM" ? "w-10 m-4 mt-6 " : ""
+                        } w-8 m-4 ${
+                          tech.techTitle === "Tailwind CSS" ? "w-10" : ""
+                        }`}
+                      />
+                    </div>
                   ) : (
                     <></>
                   )
