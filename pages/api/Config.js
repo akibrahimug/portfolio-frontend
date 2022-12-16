@@ -1,4 +1,4 @@
 export const api = {
-  apiBaseUrl: "http://localhost:8080/api",
-  apiUploadUrl: "http://localhost:8080/pictures",
+  apiBaseUrl: "https://portfolio-backend-d37x6uvl3a-uc.a.run.app/api",
+  apiUploadUrl: "https://portfolio-backend-d37x6uvl3a-uc.a.run.app/pictures",
 };
