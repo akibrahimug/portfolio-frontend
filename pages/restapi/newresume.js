@@ -6,7 +6,7 @@ import { Context } from "../Context";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function newresume() {
+function Newresume() {
   const { backend, authenticatedUser } = useContext(Context);
   const router = useRouter();
 
@@ -161,4 +161,4 @@ function newresume() {
   );
 }
 
-export default newresume;
+export default Newresume;

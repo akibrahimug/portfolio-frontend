@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-function projects() {
+function Projects() {
   const router = useRouter();
   const { backend } = useContext(Context);
 
@@ -103,4 +103,4 @@ function projects() {
   );
 }
 
-export default projects;
+export default Projects;

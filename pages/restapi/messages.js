@@ -5,7 +5,7 @@ import { Context } from "../Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
-function message() {
+function Message() {
   const router = useRouter();
   const { backend } = useContext(Context);
   const [messages, setMessages] = useState([]);
@@ -86,4 +86,4 @@ function message() {
   );
 }
 
-export default message;
+export default Message;

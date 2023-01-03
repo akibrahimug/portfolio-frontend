@@ -5,6 +5,7 @@
  **/
 // Renders a "Canel" button that redirects to '/'
 
+import Link from "next/link";
 import { Router } from "next/router";
 import React, { useState, useContext } from "react";
 import Form from "../components/Form";
@@ -129,9 +130,9 @@ function UserSignUp() {
         />
         <p className="text-center mt-4 font-semibold text-gray-500">
           Already have an account?{" "}
-          <a href="/signin" className="text-gray-700">
+          <Link href="/signin" className="text-gray-700">
             Sign In
-          </a>
+          </Link>
         </p>
       </div>
     </>

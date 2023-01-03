@@ -8,7 +8,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import Box from "@mui/material/Box";
 
-function newexperience() {
+function Newexperience() {
   const { backend, authenticatedUser } = useContext(Context);
   const router = useRouter();
   const [value, setValue] = useState([null, null]);
@@ -206,4 +206,4 @@ function newexperience() {
   );
 }
 
-export default newexperience;
+export default Newexperience;

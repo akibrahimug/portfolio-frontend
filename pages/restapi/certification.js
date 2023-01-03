@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-function certifications() {
+function Certifications() {
   const router = useRouter();
   const { backend } = useContext(Context);
 
@@ -14,8 +14,6 @@ function certifications() {
       setCertifications(res);
     });
   }, []);
-
-  console.log(certifications);
 
   return (
     <div>
@@ -83,4 +81,4 @@ function certifications() {
   );
 }
 
-export default certifications;
+export default Certifications;

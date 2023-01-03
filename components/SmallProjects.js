@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Context } from "../pages/Context";
+import Link from "next/link";
 
 export default function SmallProjects() {
   const { backend } = useContext(Context);
@@ -100,9 +101,13 @@ export default function SmallProjects() {
                       : ""
                   }bg-red-500 p-3 px-4 rounded-md text-white `}
                 >
-                  <a href={project.githubUrl} target="_blank">
+                  <Link
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Project Code
-                  </a>
+                  </Link>
                 </button>
               </div>
               <div

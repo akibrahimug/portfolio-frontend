@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-function technologies() {
+function Technologies() {
   const router = useRouter();
   const { backend } = useContext(Context);
 
@@ -77,4 +77,4 @@ function technologies() {
   );
 }
 
-export default technologies;
+export default Technologies;

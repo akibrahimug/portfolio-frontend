@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-function profiles() {
+function Profiles() {
   const router = useRouter();
   const { backend } = useContext(Context);
   const [personalStatement, setPersonalStatement] = useState([]);
@@ -98,4 +98,4 @@ function profiles() {
   );
 }
 
-export default profiles;
+export default Profiles;

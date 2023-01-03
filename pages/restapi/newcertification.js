@@ -10,7 +10,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 
-function newproject() {
+function Newproject() {
   const { googleUpload, backend, authenticatedUser } = useContext(Context);
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -285,4 +285,4 @@ function newproject() {
   );
 }
 
-export default newproject;
+export default Newproject;

@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import GoogleLogin from "react-google-login";
+
 import axios from "axios";
 import Cookie from "js-cookie";
 // form component with a destructed object
@@ -59,20 +59,6 @@ export default function Form({ errors, submit, submitButtonText, elements }) {
           </button>
         </div>
       </form>
-      <div className="flex flex-col justify-center items-center my-10">
-        <div>OR</div>
-        <div className="flex items-center mt-4 p-4 ml-4 mr-4 rounded-xl  active:scale-95 transition duration-100 ">
-          <GoogleLogin
-            className="mx-3 hover:scale-150 transition duration-100 scale-125 cursor-pointer"
-            buttonText={`${submitButtonText} with Google`}
-            // clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
-            onSuccess={responseGoogle}
-            onFailure={() => handlefailure}
-            cookiePolicy={"single_host_origin"}
-          ></GoogleLogin>
-        </div>
-        <p>Google Login is disable but will be coming soon</p>
-      </div>
     </div>
   );
 }

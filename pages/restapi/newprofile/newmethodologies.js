@@ -3,7 +3,7 @@ import RestHead from "../../../components/RestHead";
 import { useRouter } from "next/router";
 import { Context } from "../../Context";
 
-function newmethodology() {
+function Newmethodology() {
   const { googleUpload, backend, authenticatedUser } = useContext(Context);
   const router = useRouter();
 
@@ -147,4 +147,4 @@ function newmethodology() {
   );
 }
 
-export default newmethodology;
+export default Newmethodology;

@@ -2,6 +2,7 @@
 // Renders a "Sign In" button
 // Renders a "Cancel" button that redirects to '/'
 
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useContext, useEffect } from "react";
 import Form from "../components/Form";
@@ -94,10 +95,10 @@ function UserSignIn() {
         )}
       />
       <p className="text-center mt-4 font-semibold text-gray-500">
-        Don't have a user account?{" "}
-        <a href="/signup" className="text-gray-700">
+        Do not have a user account?{" "}
+        <Link href="/signup" className="text-gray-700">
           Sign Up
-        </a>
+        </Link>
       </p>
     </div>
   );

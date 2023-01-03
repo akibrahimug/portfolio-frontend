@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-function badges() {
+function Badges() {
   const router = useRouter();
   const { backend } = useContext(Context);
 
@@ -74,4 +74,4 @@ function badges() {
   );
 }
 
-export default badges;
+export default Badges;

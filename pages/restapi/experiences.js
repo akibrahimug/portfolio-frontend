@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-function experiences() {
+function Experiences() {
   const router = useRouter();
   const { backend } = useContext(Context);
 
@@ -84,4 +84,4 @@ function experiences() {
   );
 }
 
-export default experiences;
+export default Experiences;

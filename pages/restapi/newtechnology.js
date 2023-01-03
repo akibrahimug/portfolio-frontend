@@ -6,7 +6,7 @@ import { Context } from "../Context";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function newtechonlogy() {
+function Newtechonlogy() {
   const { googleUpload, backend, authenticatedUser } = useContext(Context);
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -297,4 +297,4 @@ function newtechonlogy() {
   );
 }
 
-export default newtechonlogy;
+export default Newtechonlogy;
