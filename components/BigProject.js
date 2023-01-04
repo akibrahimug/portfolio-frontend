@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Airbnb from "./projectpics/Airbnb.png";
-import { Context } from "../pages/Context";
+import { Context } from "./Context";
 import Image from "next/image";
 
 function BigProject() {

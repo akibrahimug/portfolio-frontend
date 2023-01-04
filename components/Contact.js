@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import SocialMedia from "./SocialMedia";
 import { Google, Twitter, LinkedIn } from "@mui/icons-material";
-import { Context } from "../pages/Context";
+import { Context } from "./Context";
 
 export default function Contact() {
   const { backend } = useContext(Context);

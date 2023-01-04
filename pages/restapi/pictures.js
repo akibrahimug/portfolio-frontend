@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Context } from "../Context";
+import { Context } from "../../components/Context";
 import { useRouter } from "next/router";
 import RestHead from "../../components/RestHead";
 import CircularProgress from "@mui/material/CircularProgress";

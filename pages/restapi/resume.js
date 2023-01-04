@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import RestHead from "../../components/RestHead";
 import { useRouter } from "next/router";
-import { Context } from "../Context";
+import { Context } from "../../components/Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 function Resumes() {

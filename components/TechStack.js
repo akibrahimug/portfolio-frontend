@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Context } from "../pages/Context";
+import { Context } from "./Context";
 
 export default function TechStack() {
   const { backend } = useContext(Context);

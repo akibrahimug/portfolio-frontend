@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Context } from "../../Context";
+import { Context } from "../../../components/Context";
 import Header from "../../../components/Header";
 import RestHead from "../../../components/RestHead";
 import { useRouter } from "next/router";

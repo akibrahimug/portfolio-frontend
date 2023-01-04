@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import RestHead from "../../../components/RestHead";
 import { useRouter } from "next/router";
-import { Context } from "../../Context";
+import { Context } from "../../../components/Context";
 
 function Newmethodology() {
   const { googleUpload, backend, authenticatedUser } = useContext(Context);

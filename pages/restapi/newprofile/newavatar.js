@@ -2,19 +2,31 @@ import React, { useState, useContext, useEffect } from "react";
 import RestHead from "../../../components/RestHead";
 import { useRouter } from "next/router";
 import Popover from "@mui/material/Popover";
-import { Context } from "../../Context";
+import { Context } from "../../../components/Context";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import TextField from "@mui/material/TextField";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { DateRangePicker } from "react-date-range";
 
 function Newproject() {
   const { googleUpload, backend, authenticatedUser } = useContext(Context);
   const router = useRouter();
   const [value, setValue] = useState([null, null]);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
+  const selectionRange = {
+    startDate: startDate,
+    endDate: endDate,
+    key: "selection",
+  };
+
+  const handleSelect = (ranges) => {
+    setStartDate(ranges.selection.startDate);
+    setEndDate(ranges.selection.endDate);
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -61,14 +73,15 @@ function Newproject() {
   useEffect(() => {
     if (value) {
       setDate({
-        from: new Date(value[0]).toISOString().slice(0, 10),
-        to: new Date(value[1]).toISOString().slice(0, 10),
+        from: startDate.toISOString().slice(0, 10),
+        to: endDate.toISOString().slice(0, 10),
       });
     }
   }, [value]);
 
   data.from = date ? date.from : "";
   data.to = date ? date.to : "";
+
   // create a change method
   const change = (e) => {
     // create name and value to store the event targets
@@ -190,24 +203,11 @@ function Newproject() {
                   </div>
                 </div>
                 <div className=" my-4 mx-6">
-                  <LocalizationProvider
-                    dateAdapter={AdapterDayjs}
-                    localeText={{ start: "Check-in", end: "Check-out" }}
-                  >
-                    <DateRangePicker
-                      value={value}
-                      onChange={(newValue) => {
-                        setValue(newValue);
-                      }}
-                      renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                          <TextField {...startProps} />
-                          <Box sx={{ mx: 2 }}> to </Box>
-                          <TextField {...endProps} />
-                        </React.Fragment>
-                      )}
-                    />
-                  </LocalizationProvider>
+                  <DateRangePicker
+                    ranges={[selectionRange]}
+                    rangeColors={["rgb(107 114 128 )"]}
+                    onChange={handleSelect}
+                  />
                 </div>
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6 flex gap-4 justify-end">
                   <button

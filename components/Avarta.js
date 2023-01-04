@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Line from "./svg/line.svg";
 import Bio from "./Bio";
-import { Context } from "../pages/Context";
+import { Context } from "./Context";
 
 function Avarta() {
   const { backend } = useContext(Context);

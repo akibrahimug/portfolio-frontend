@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import { Context } from "./Context";
+import { Context } from "../components/Context";
 
 function SignOut() {
   // pull in the signOut method from the context
@@ -14,7 +14,7 @@ function SignOut() {
     router.push("/restapi");
   }, []);
 
-  return;
+  return <div />;
 }
 
 export default SignOut;

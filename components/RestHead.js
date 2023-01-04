@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Context } from "../pages/Context";
+import { Context } from "./Context";
 import Link from "next/link";
 import Avatar from "@mui/material/Avatar";
 function RestHead() {

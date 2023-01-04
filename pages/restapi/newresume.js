@@ -1,10 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import RestHead from "../../components/RestHead";
 import { useRouter } from "next/router";
-import Popover from "@mui/material/Popover";
-import { Context } from "../Context";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Context } from "../../components/Context";
 
 function Newresume() {
   const { backend, authenticatedUser } = useContext(Context);

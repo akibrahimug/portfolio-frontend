@@ -6,10 +6,10 @@
 // Renders a "Canel" button that redirects to '/'
 
 import Link from "next/link";
-import { Router } from "next/router";
+import { useRouter } from "next/router";
 import React, { useState, useContext } from "react";
 import Form from "../components/Form";
-import { Context } from "./Context";
+import { Context } from "../components/Context";
 
 function UserSignUp() {
   // pull in the data and signIn methods from the context
@@ -22,7 +22,7 @@ function UserSignUp() {
     password: "",
   });
 
-  const router = Router;
+  const router = useRouter();
 
   // create the errors instence in state and set it to an empty array
   const [errors, setErrors] = useState([]);

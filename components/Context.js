@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Backend from "./api/Backend";
-import GoogleUpload from "./api/GoogleUpload";
+import Backend from "../pages/api/Backend";
+import GoogleUpload from "../pages/api/GoogleUpload";
 import Cookies from "js-cookie";
 
 export const Context = React.createContext();
