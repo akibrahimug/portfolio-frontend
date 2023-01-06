@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Line from "./svg/line.svg";
+import Line from "./projectpics/line.svg";
 import Bio from "./Bio";
 import { Context } from "./Context";
 

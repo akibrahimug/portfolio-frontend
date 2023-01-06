@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "./svg/Logo.svg";
+import Logo from "./projectpics/Logo.svg";
 import { GitHub } from "@mui/icons-material";
 
 export default function ModalMenu({ title, handleClick }) {

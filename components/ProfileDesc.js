@@ -1,7 +1,7 @@
 import React from "react";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import CallMadeOutlinedIcon from "@mui/icons-material/CallMadeOutlined";
-import Line from "./svg/line.svg";
+import Line from "./projectpics/line.svg";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { LinkedIn, Twitter } from "@mui/icons-material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";

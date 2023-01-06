@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "./svg/Logo.svg";
+import Logo from "./projectpics/Logo.svg";
 import MainHeader from "./MainHeader";
 import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
