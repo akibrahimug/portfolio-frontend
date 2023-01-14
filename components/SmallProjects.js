@@ -7,7 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Context } from "./Context";
-import Link from "next/link";
 
 export default function SmallProjects() {
   const { backend } = useContext(Context);
@@ -92,21 +91,30 @@ export default function SmallProjects() {
               </Typography>
             </CardContent>
             <div className="flex m-4 justify-between">
-              <div>
+              <div className="flex gap-5 h-12">
                 <button
                   className={`${
                     project.projectTitle === "CHICOTÁS: STRETCHES OF LIFE"
-                      ? "disabled"
+                      ? "hidden w-0"
                       : ""
                   }bg-red-500 p-3 px-4 rounded-md text-white `}
                 >
-                  <Link
-                    href={project.githubUrl}
+                  <a href={project.githubUrl} target="_blank" rel="noreferrer">
+                    Project Code
+                  </a>
+                </button>
+                <button
+                  className={`
+                    
+                  bg-red-500 p-3 px-4 rounded-md text-white `}
+                >
+                  <a
+                    href={project.liveSiteUrl}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Project Code
-                  </Link>
+                    Live Site
+                  </a>
                 </button>
               </div>
               <div
@@ -130,14 +138,6 @@ export default function SmallProjects() {
                 )}
               </div>
             </div>
-
-            <p
-              className={`${
-                project.projectTitle === "Airbnb-clone" ? "visible" : "hidden"
-              } text-sm border-2 border-red-500 rounded-tl-md rounded-br-md p-1 px-1 text-red-500 absolute w-[200px] top-0 right-10 font-bold `}
-            >
-              Some browsers might clasify this site as unsafe to visit.
-            </p>
           </Card>
         ))
       ) : (

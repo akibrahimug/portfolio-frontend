@@ -8,6 +8,7 @@ export const Context = React.createContext();
 export const Provider = (props) => {
   const backend = new Backend();
   const googleUpload = new GoogleUpload();
+
   // create a userCookies instance in the state and set it to get the cookies
   const [userCookies] = useState(Cookies.get("userCookies"));
   // create an authenticatedUser instance in state and set it to userCookies if there any
@@ -49,7 +50,13 @@ export const Provider = (props) => {
 
   return (
     <Context.Provider
-      value={{ backend, signOut, authenticatedUser, signIn, googleUpload }}
+      value={{
+        backend,
+        signOut,
+        authenticatedUser,
+        signIn,
+        googleUpload,
+      }}
     >
       {props.children}
     </Context.Provider>

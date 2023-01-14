@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "./projectpics/Logo.svg";
 import MainHeader from "./MainHeader";
 import Link from "next/link";

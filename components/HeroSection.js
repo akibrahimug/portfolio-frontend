@@ -2,8 +2,6 @@ import React from "react";
 import Avarta from "./Avarta";
 import ProfileDesc from "./ProfileDesc";
 const cetified = [
-  "Search Engine Optimization",
-  "E-Commerce systems experience",
   "Testing and Debugging",
   "Algorithms and Data Structures",
   "Version control systems",
@@ -15,6 +13,7 @@ const cetified = [
   "Responsive Web Design",
   "Progressive Web Apps",
   "GCP Infrastructure and Services",
+  "Search Engine Optimization",
 ];
 function HeroSection() {
   return (

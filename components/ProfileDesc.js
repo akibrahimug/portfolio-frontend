@@ -97,7 +97,7 @@ function ProfileDesc({ cetified }) {
         <div className="grid md:grid-cols-3 sm:grid-cols-2  justify-center  md:ml-2 ll:grid-cols-1">
           {cetified.map((item, index) => (
             <p key={index} className="text-gray-400 text-sm">
-              <CheckCircleIcon className="text-red-400" />
+              <CheckCircleIcon className="text-red-400 mr-2" />
               {item}
             </p>
           ))}
