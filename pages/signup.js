@@ -13,7 +13,7 @@ import { Context } from "../components/Context";
 
 function UserSignUp() {
   // pull in the data and signIn methods from the context
-  const { backend } = useContext(Context);
+  const { backend, authenticatedUser } = useContext(Context);
   // create a user instence in the component state and set it to an object
   const [user, setUser] = useState({
     firstName: "",
@@ -40,23 +40,27 @@ function UserSignUp() {
   // create the submit function
   const submit = () => {
     //  get the createUser method from context and pass the user object as a param
-    backend
-      .createUser(user)
-      //  then if there is any errors
-      .then((errors) => {
-        if (errors.length) {
-          // set the errors array to display them
-          setErrors(errors);
-          // else signIn with user emailAddress and password
-        } else {
-          router.push("/");
-          signIn(user.emailAddress, user.password);
-        }
-      })
-      // catch any errors thrown by the api and log them to the console
-      .catch((err) => {
-        console.log(err);
-      });
+    if (!authenticatedUser) {
+      router.push("/signin");
+    } else {
+      backend
+        .createUser(user)
+        //  then if there is any errors
+        .then((errors) => {
+          if (errors.length) {
+            // set the errors array to display them
+            setErrors(errors);
+            // else signIn with user emailAddress and password
+          } else {
+            router.push("/");
+            signIn(user.emailAddress, user.password);
+          }
+        })
+        // catch any errors thrown by the api and log them to the console
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   // create the cancel function

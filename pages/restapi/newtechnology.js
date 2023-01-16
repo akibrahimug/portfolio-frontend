@@ -67,21 +67,25 @@ function Newtechonlogy() {
   const [errors, setErrors] = useState([]);
   const submit = (e) => {
     e.preventDefault();
-    backend
-      .createTechnologies(data)
-      .then((errors) => {
-        if (errors.length) {
-          // set the errors array to display them
-          setErrors(errors);
-          // else signIn with user emailAddress and password
-        } else {
-          router.push("technologies");
-        }
-      })
-      // catch any errors thrown by the api and log them to the console
-      .catch((err) => {
-        console.log(err);
-      });
+    if (!authenticatedUser) {
+      router.push("/signin");
+    } else {
+      backend
+        .createTechnologies(data)
+        .then((errors) => {
+          if (errors.length) {
+            // set the errors array to display them
+            setErrors(errors);
+            // else signIn with user emailAddress and password
+          } else {
+            router.push("technologies");
+          }
+        })
+        // catch any errors thrown by the api and log them to the console
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   // get the certificates

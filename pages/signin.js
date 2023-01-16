@@ -50,7 +50,10 @@ function UserSignIn() {
       })
       // catch any errors throw by the api and console log them
       .catch((err) => {
-        console.log(err);
+        setErrors([
+          "Sorry we do not have a user with that email address",
+          "We do not have a user with that password",
+        ]);
       });
   };
 

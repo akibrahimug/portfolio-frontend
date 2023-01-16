@@ -21,13 +21,6 @@ export default function Form({ errors, submit, submitButtonText, elements }) {
     });
 
   const router = useRouter();
-  const responseGoogle = (response) => {
-    console.log(response);
-  };
-
-  const handlefailure = (result) => {
-    alert("Login failed", result);
-  };
 
   const handleCancel = (e) => {
     e.preventDefault();
@@ -66,14 +59,14 @@ export default function Form({ errors, submit, submitButtonText, elements }) {
 function ErrorDisplay({ errors }) {
   let errorsDisplay = null;
 
-  if (errors.length) {
+  if (errors.length > 1) {
     errorsDisplay = (
       <div className="p-4 border border-red-500 rounded-2xl w-[70%] m-auto mt-4 ">
         <h3 className="text-center underline text-xl font-medium text-red-600">
           Validation errors
         </h3>
         <ul>
-          {errors.map((error, index) => (
+          {errors?.map((error, index) => (
             <li key={index} className="mt-2 font-semibold text-gray-600">
               {error}
             </li>

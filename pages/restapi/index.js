@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 const titles = [
   {
     title: "My Pictures",
-    url: "restapi/pictures",
+    url: "restapi/privatepictures",
     tag: "Private",
   },
   {
@@ -40,13 +40,13 @@ const titles = [
   },
   {
     title: "Messages",
-    url: "restapi/messages",
+    url: "restapi/privatemessages",
     tag: "Private",
   },
 ];
 function MyRestAPI() {
   // call the authenticated user data fro context
-  const { authenticatedUser, backend, googleUpload } = useContext(Context);
+  const { backend } = useContext(Context);
   const router = useRouter();
 
   const [messages, setMessages] = useState([]);

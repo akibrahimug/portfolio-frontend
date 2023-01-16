@@ -45,21 +45,25 @@ function Newexperience() {
   const [errors, setErrors] = useState([]);
   const submit = (e) => {
     e.preventDefault();
-    backend
-      .createExperience(data)
-      .then((errors) => {
-        if (errors.length) {
-          // set the errors array to display them
-          setErrors(errors);
-          // else signIn with user emailAddress and password
-        } else {
-          router.push("experiences");
-        }
-      })
-      // catch any errors thrown by the api and log them to the console
-      .catch((err) => {
-        console.log(err);
-      });
+    if (!authenticatedUser) {
+      router.push("/signin");
+    } else {
+      backend
+        .createExperience(data)
+        .then((errors) => {
+          if (errors.length) {
+            // set the errors array to display them
+            setErrors(errors);
+            // else signIn with user emailAddress and password
+          } else {
+            router.push("experiences");
+          }
+        })
+        // catch any errors thrown by the api and log them to the console
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const [date, setDate] = useState();

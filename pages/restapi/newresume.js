@@ -26,23 +26,26 @@ function Newresume() {
   const [errors, setErrors] = useState([]);
   const submit = (e) => {
     e.preventDefault();
-    backend
-      .createResume(data)
-      .then((errors) => {
-        if (errors.length) {
-          // set the errors array to display them
-          setErrors(errors);
-          // else signIn with user emailAddress and password
-        } else {
-          router.push("resume");
-        }
-      })
-      // catch any errors thrown by the api and log them to the console
-      .catch((err) => {
-        console.log(err);
-      });
+    if (!authenticatedUser) {
+      router.push("/signin");
+    } else {
+      backend
+        .createResume(data)
+        .then((errors) => {
+          if (errors.length) {
+            // set the errors array to display them
+            setErrors(errors);
+            // else signIn with user emailAddress and password
+          } else {
+            router.push("resume");
+          }
+        })
+        // catch any errors thrown by the api and log them to the console
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
-  console.log(data);
   return (
     <div>
       <RestHead />

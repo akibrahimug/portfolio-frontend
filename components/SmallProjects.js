@@ -5,74 +5,158 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Context } from "./Context";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+
+const techStack = [
+  {
+    techStackID: 1,
+    techStackName: [
+      "React",
+      "Nextjs",
+      "TailwindCSS",
+      "Vercel",
+      "GIT",
+      "GITHUB",
+      "AJAX",
+    ],
+  },
+  {
+    techStackID: 2,
+    techStackName: ["React", "Firebase", "CSS", "Stripe", "GIT", "GITHUB"],
+  },
+  {
+    techStackID: 3,
+    techStackName: [
+      "React",
+      "React-Router-DOM",
+      "CSS",
+      "GIT",
+      "GITHUB",
+      "Netlify",
+      "AJAX",
+    ],
+  },
+  {
+    techStackID: 4,
+    techStackName: ["React", "AJAX", "CSS", "GIT", "GITHUB", "Netlify"],
+  },
+  {
+    techStackID: 5,
+    techStackName: [
+      "WordPress",
+      "Elementor Page Builder",
+      "CSS",
+      "PHP",
+      "Docker",
+    ],
+  },
+  {
+    techStackID: 6,
+    techStackName: ["Sass", "HTML", "GIT", "GITHUB", "GitHub Pages"],
+  },
+  {
+    techStackID: 7,
+    techStackName: ["Bootstrap", "CSS", "GIT", "GITHUB", "HTML", "Javascript"],
+  },
+  {
+    techStackID: 8,
+    techStackName: ["AJAX", "CSS", "GIT", "GITHUB", "HTML", "Javascript"],
+  },
+  {
+    techStackID: 9,
+    techStackName: ["OOP", "CSS", "GIT", "GITHUB", "HTML", "Javascript"],
+  },
+  {
+    techStackID: 10,
+    techStackName: [
+      "React",
+      "Tailwind",
+      "Nodejs",
+      "Express",
+      "Sequelize",
+      "Postgres",
+      "Google Colud Platform",
+      "Nextjs",
+    ],
+  },
+  {
+    techStackID: 11,
+    techStackName: ["Javascript", "CSS", "HTML", "ChartJS", "LocalStorage"],
+  },
+  {
+    techStackID: 12,
+    techStackName: ["Javascript", "CSS", "HTML", "Regular Expressions"],
+  },
+];
+
+const ITEM_HEIGHT = 48;
 
 export default function SmallProjects() {
   const { backend } = useContext(Context);
-  // get all project tech stack
-  const [projectTechStack, setProjectTechStack] = useState([]);
-  useEffect(() => {
-    backend.getProjectTechStack().then((res) => {
-      setProjectTechStack(res);
-    });
-  }, []);
-
-  // get all tech stack
-  const [techStack, setTechStack] = useState([]);
-  useEffect(() => {
-    backend.getTechnologies().then((res) => {
-      setTechStack(res);
-    });
-  }, []);
 
   // get all projects
   const [projects, setProjects] = useState([]);
   useEffect(() => {
     backend.getProjects().then((res) => {
-      setProjects(res);
+      // rearrange projects array so that the most recent project is first
+      setProjects(res.sort((a, b) => a.projectID - b.projectID));
     });
   }, []);
 
-  // add techStackID to each project object in projects array if it matches the projectID
-  useEffect(() => {
-    projects.forEach((project) => {
-      project.techStack = [];
-      projectTechStack.forEach((projectTech) => {
-        if (projectTech.projectID === project.projectID) {
-          project.techStack.push(projectTech.techStackID);
-        }
-      });
-    });
-  }, [projectTechStack, projects]);
+  // create a new array adding to each object by index
+  // the tech stack that belongs to that project
+  const projectsWithTechStack = projects.map((project, i) => {
+    return { ...project, techStack: techStack[i].techStackName };
+  });
 
-  // compare the techStack array in each project object to the techStack array if it matches the techStackID add the teckStack object to the project object
-  useEffect(() => {
-    projects.forEach((project) => {
-      project.techStack.forEach((techID, i) => {
-        techStack.forEach((tech) => {
-          if (tech.techStackID === techID) {
-            project.techStack[i] = tech;
-            // wait for all techStack objects to be added to the project object before setting the state
-            if (i === project.techStack.length - 1) {
-              setProjects([...projects]);
-            }
-          }
-        });
-      });
-    });
-  }, [techStack]);
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
-    <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-8 place-content-center mt-20">
-      {projects ? (
-        projects.map((project, i) => (
+    <div className="md:grid xl:grid-cols-3 md:grid-cols-2 gap-8 place-content-center mt-20">
+      {projectsWithTechStack ? (
+        projectsWithTechStack.map((project, i) => (
           <Card className="mb-4 shadow-xl relative" key={i}>
             <CardHeader
               action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
+                <div>
+                  <IconButton
+                    aria-label="Technologies"
+                    id="long-button"
+                    aria-controls={open ? "long-menu" : undefined}
+                    aria-expanded={open ? "true" : undefined}
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+                  <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                      "aria-labelledby": "long-button",
+                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      style: {
+                        maxHeight: ITEM_HEIGHT * 4.5,
+                        width: "20ch",
+                        boxShadow: "0 0 6px 0 rgba(0,0,0,0.08)",
+                      },
+                    }}
+                  >
+                    <MenuItem onClick={handleClose}>{/* techstack */}</MenuItem>
+                  </Menu>
+                </div>
               }
               title={project.projectTitle}
               subheader={new Date(project.createdAt).toDateString()}
@@ -97,7 +181,7 @@ export default function SmallProjects() {
                     project.projectTitle === "CHICOTÁS: STRETCHES OF LIFE"
                       ? "hidden w-0"
                       : ""
-                  }bg-red-500 p-3 px-4 rounded-md text-white `}
+                  }bg-red-500 p-3  px-4 rounded-md text-white `}
                 >
                   <a href={project.githubUrl} target="_blank" rel="noreferrer">
                     Project Code
@@ -106,7 +190,7 @@ export default function SmallProjects() {
                 <button
                   className={`
                     
-                  bg-red-500 p-3 px-4 rounded-md text-white `}
+                  bg-red-500 p-3  px-4 rounded-md text-white `}
                 >
                   <a
                     href={project.liveSiteUrl}
@@ -116,26 +200,6 @@ export default function SmallProjects() {
                     Live Site
                   </a>
                 </button>
-              </div>
-              <div
-                className={`${
-                  project.projectTitle === "My Rest API"
-                    ? "grid-cols-5 grid "
-                    : ""
-                }flex flex-wrap`}
-              >
-                {project.techStack ? (
-                  project.techStack.map((tech, i) => (
-                    <img
-                      key={i}
-                      src={tech.pictureUrl}
-                      alt={tech.techStackName}
-                      className="w-8 h-8 m-2"
-                    />
-                  ))
-                ) : (
-                  <></>
-                )}
               </div>
             </div>
           </Card>
