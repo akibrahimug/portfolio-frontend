@@ -10,7 +10,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 
 function Newproject() {
-  const { googleUpload, backend, authenticatedUser } = useContext(Context);
+  const { googleUpload, noAuthRoutes, authenticatedUser } = useContext(Context);
   const router = useRouter();
   const [value, setValue] = useState([null, null]);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -93,7 +93,7 @@ function Newproject() {
   const [errors, setErrors] = useState([]);
   const submit = (e) => {
     e.preventDefault();
-    backend
+    noAuthRoutes
       .createAvarta(data)
       .then((errors) => {
         if (errors.length) {

@@ -7,7 +7,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
 function Newproject() {
-  const { googleUpload, backend, authenticatedUser } = useContext(Context);
+  const { googleUpload, createBadges, noAuthRoutes, authenticatedUser } =
+    useContext(Context);
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
   const [value, setValue] = useState([null, null]);
@@ -48,7 +49,7 @@ function Newproject() {
     badgeTitle: "",
     pictureUrl: "",
     techStackID: "",
-    userID: authenticatedUser ? authenticatedUser.userID : "",
+    userID: authenticatedUser ? authenticatedUser.id : "",
   });
   data.pictureUrl = currentImage ? currentImage : "";
   // create a change method
@@ -72,8 +73,7 @@ function Newproject() {
     if (!authenticatedUser) {
       router.push("/signin");
     } else {
-      backend
-        .createBadges(data)
+      createBadges(data)
         .then((errors) => {
           if (errors.length) {
             // set the errors array to display them
@@ -93,12 +93,10 @@ function Newproject() {
   // get the technologies
   const [technologies, setTechnologies] = useState([]);
   useEffect(() => {
-    backend.getTechnologies().then((technologies) => {
+    noAuthRoutes.getTechnologies().then((technologies) => {
       setTechnologies(technologies);
     });
   }, []);
-
-  console.log(data);
 
   return (
     <div>

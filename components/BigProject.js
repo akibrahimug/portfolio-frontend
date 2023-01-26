@@ -4,10 +4,10 @@ import { Context } from "./Context";
 import Image from "next/image";
 
 function BigProject() {
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
   const [project, setProject] = useState();
   useEffect(() => {
-    backend.getProjects().then((projects) => {
+    noAuthRoutes.getProjects().then((projects) => {
       projects.map((project) =>
         project.projectTitle === "Airbnb-clone" ? setProject(project) : null
       );

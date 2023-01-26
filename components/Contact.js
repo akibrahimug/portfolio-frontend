@@ -4,7 +4,7 @@ import { Google, Twitter, LinkedIn } from "@mui/icons-material";
 import { Context } from "./Context";
 
 export default function Contact() {
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
 
   // get the data from the form
   const [data, setData] = useState({
@@ -26,7 +26,7 @@ export default function Contact() {
   const [errors, setErrors] = useState([]);
   const submit = (e) => {
     e.preventDefault();
-    backend
+    noAuthRoutes
       .createMessage(data)
       .then((errors) => {
         if (errors.length) {

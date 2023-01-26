@@ -7,7 +7,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 
 function Newexperience() {
-  const { backend, authenticatedUser } = useContext(Context);
+  const { noAuthRoutes, authenticatedUser } = useContext(Context);
   const router = useRouter();
   const [value, setValue] = useState([null, null]);
   const [startDate, setStartDate] = useState(new Date());
@@ -48,7 +48,7 @@ function Newexperience() {
     if (!authenticatedUser) {
       router.push("/signin");
     } else {
-      backend
+      noAuthRoutes
         .createExperience(data)
         .then((errors) => {
           if (errors.length) {

@@ -46,7 +46,7 @@ const titles = [
 ];
 function MyRestAPI() {
   // call the authenticated user data fro context
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
   const router = useRouter();
 
   const [messages, setMessages] = useState([]);
@@ -54,7 +54,7 @@ function MyRestAPI() {
   // rerender the page if new message is added
 
   useEffect(() => {
-    backend.getMessage().then((res) => {
+    noAuthRoutes.getMessage().then((res) => {
       setMessages(res);
     });
   }, []);

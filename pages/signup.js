@@ -13,7 +13,7 @@ import { Context } from "../components/Context";
 
 function UserSignUp() {
   // pull in the data and signIn methods from the context
-  const { backend, authenticatedUser } = useContext(Context);
+  const { noAuthRoutes, authenticatedUser } = useContext(Context);
   // create a user instence in the component state and set it to an object
   const [user, setUser] = useState({
     firstName: "",
@@ -43,7 +43,7 @@ function UserSignUp() {
     if (!authenticatedUser) {
       router.push("/signin");
     } else {
-      backend
+      noAuthRoutes
         .createUser(user)
         //  then if there is any errors
         .then((errors) => {

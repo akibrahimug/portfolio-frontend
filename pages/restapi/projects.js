@@ -6,11 +6,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 function Projects() {
   const router = useRouter();
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
 
   const [projects, setProjects] = useState([]);
   useEffect(() => {
-    backend.getProjects().then((res) => {
+    noAuthRoutes.getProjects().then((res) => {
       setProjects(res);
     });
   }, []);

@@ -6,11 +6,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 function Certifications() {
   const router = useRouter();
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
 
   const [certifications, setCertifications] = useState([]);
   useEffect(() => {
-    backend.getCertifications().then((res) => {
+    noAuthRoutes.getCertifications().then((res) => {
       setCertifications(res);
     });
   }, []);

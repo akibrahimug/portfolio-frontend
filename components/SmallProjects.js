@@ -12,7 +12,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const techStack = [
   {
-    techStackID: 1,
+    techStackID: 0,
     techStackName: [
       "React",
       "Nextjs",
@@ -24,11 +24,11 @@ const techStack = [
     ],
   },
   {
-    techStackID: 2,
+    techStackID: 1,
     techStackName: ["React", "Firebase", "CSS", "Stripe", "GIT", "GITHUB"],
   },
   {
-    techStackID: 3,
+    techStackID: 2,
     techStackName: [
       "React",
       "React-Router-DOM",
@@ -40,11 +40,11 @@ const techStack = [
     ],
   },
   {
-    techStackID: 4,
+    techStackID: 3,
     techStackName: ["React", "AJAX", "CSS", "GIT", "GITHUB", "Netlify"],
   },
   {
-    techStackID: 5,
+    techStackID: 4,
     techStackName: [
       "WordPress",
       "Elementor Page Builder",
@@ -54,23 +54,23 @@ const techStack = [
     ],
   },
   {
-    techStackID: 6,
+    techStackID: 5,
     techStackName: ["Sass", "HTML", "GIT", "GITHUB", "GitHub Pages"],
   },
   {
-    techStackID: 7,
+    techStackID: 6,
     techStackName: ["Bootstrap", "CSS", "GIT", "GITHUB", "HTML", "Javascript"],
   },
   {
-    techStackID: 8,
+    techStackID: 7,
     techStackName: ["AJAX", "CSS", "GIT", "GITHUB", "HTML", "Javascript"],
   },
   {
-    techStackID: 9,
+    techStackID: 8,
     techStackName: ["OOP", "CSS", "GIT", "GITHUB", "HTML", "Javascript"],
   },
   {
-    techStackID: 10,
+    techStackID: 9,
     techStackName: [
       "React",
       "Tailwind",
@@ -83,11 +83,11 @@ const techStack = [
     ],
   },
   {
-    techStackID: 11,
+    techStackID: 10,
     techStackName: ["Javascript", "CSS", "HTML", "ChartJS", "LocalStorage"],
   },
   {
-    techStackID: 12,
+    techStackID: 11,
     techStackName: ["Javascript", "CSS", "HTML", "Regular Expressions"],
   },
 ];
@@ -95,12 +95,12 @@ const techStack = [
 const ITEM_HEIGHT = 48;
 
 export default function SmallProjects() {
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
 
   // get all projects
   const [projects, setProjects] = useState([]);
   useEffect(() => {
-    backend.getProjects().then((res) => {
+    noAuthRoutes.getProjects().then((res) => {
       // rearrange projects array so that the most recent project is first
       setProjects(res.sort((a, b) => a.projectID - b.projectID));
     });
@@ -113,13 +113,16 @@ export default function SmallProjects() {
   });
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [selectedIndex, setSelectedIndex] = React.useState(-1);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleClick = (event, index) => {
     setAnchorEl(event.currentTarget);
+    setSelectedIndex(index === selectedIndex ? -1 : index);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <div className="md:grid xl:grid-cols-3 md:grid-cols-2 gap-8 place-content-center mt-20">
       {projectsWithTechStack ? (
@@ -134,28 +137,36 @@ export default function SmallProjects() {
                     aria-controls={open ? "long-menu" : undefined}
                     aria-expanded={open ? "true" : undefined}
                     aria-haspopup="true"
-                    onClick={handleClick}
+                    onClick={(event) => handleClick(event, i)}
                   >
-                    <MoreVertIcon />
+                    <MoreVertIcon className=" text-red-500 text-3xl" />
                   </IconButton>
-                  <Menu
-                    id="long-menu"
-                    MenuListProps={{
-                      "aria-labelledby": "long-button",
-                    }}
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    PaperProps={{
-                      style: {
-                        maxHeight: ITEM_HEIGHT * 4.5,
-                        width: "20ch",
-                        boxShadow: "0 0 6px 0 rgba(0,0,0,0.08)",
-                      },
-                    }}
-                  >
-                    <MenuItem onClick={handleClose}>{/* techstack */}</MenuItem>
-                  </Menu>
+                  {selectedIndex === i && (
+                    <Menu
+                      id={"long-menu"}
+                      MenuListProps={{
+                        "aria-labelledby": "long-button",
+                      }}
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      PaperProps={{
+                        style: {
+                          boxShadow: "0 0 6px 0 rgba(0,0,0,0.05)",
+                          minWidth: 200,
+                        },
+                      }}
+                    >
+                      <h3 className="border-b text-center bg-red-500 font-semibold text-white py-2">
+                        Technologies Used
+                      </h3>
+                      {project.techStack.map((tech, i) => (
+                        <MenuItem onClick={handleClose} key={tech}>
+                          <span className="text-gray-500">{tech}</span>
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  )}
                 </div>
               }
               title={project.projectTitle}

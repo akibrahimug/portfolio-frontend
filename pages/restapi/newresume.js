@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../../components/Context";
 
 function Newresume() {
-  const { backend, authenticatedUser } = useContext(Context);
+  const { noAuthRoutes, authenticatedUser } = useContext(Context);
   const router = useRouter();
 
   // get the data from the form
@@ -29,7 +29,7 @@ function Newresume() {
     if (!authenticatedUser) {
       router.push("/signin");
     } else {
-      backend
+      noAuthRoutes
         .createResume(data)
         .then((errors) => {
           if (errors.length) {

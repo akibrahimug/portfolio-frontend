@@ -6,11 +6,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 function Resumes() {
   const router = useRouter();
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
 
   const [resumes, setReumes] = useState([]);
   useEffect(() => {
-    backend.getResume().then((res) => {
+    noAuthRoutes.getResume().then((res) => {
       setReumes(res);
     });
   }, []);

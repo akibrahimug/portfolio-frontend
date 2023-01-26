@@ -1,6 +1,5 @@
 import { api } from "./Config";
-
-export default class Backend {
+export default class NoAuth {
   // OUR API
   // create an api funtion with path, method, body, requiresAuth, credentials as params
   // set method to defualt(GET) body(null) requiresAuth(false), credentials(null)
@@ -40,6 +39,49 @@ export default class Backend {
     return fetch(url, options);
   }
 
+  // create the createUser async function
+  async createUser(user) {
+    // create a response constant to save the data that POST to the api
+    const response = await this.api("/users", "POST", user);
+    // if the post was successful
+    if (response.status === 201) {
+      // return nothing
+      return [];
+      // else if the post had a problem
+    } else if (response.status === 400) {
+      // return a response as JSOn then
+      return response.json().then((data) => {
+        // return the errors
+        return data.errors;
+      });
+      // else throw any other errors from the api
+    } else {
+      throw new Error("Something went wrong");
+    }
+  }
+
+  // create message
+  async createMessage(message) {
+    // create a response constant to save the data that POST to the api
+    const response = await this.api("/messages", "POST", message);
+    // if the post was successful
+    if (response.status === 201) {
+      // return nothing
+      return [];
+      // else if the post had a problem
+      // else if the post had a problem
+    } else if (response.status === 400) {
+      // return a response as JSOn then
+      return response.json().then((data) => {
+        // return the errors
+        return data.errors;
+      });
+      // else throw any other errors from the api
+    } else {
+      throw new Error("Something went wrong");
+    }
+  }
+
   //   USER
   // create a getUser async function with emailAddress and password as params
   async getUser(emailAddress, password) {
@@ -68,48 +110,6 @@ export default class Backend {
     }
   }
 
-  // create the createUser async function
-  async createUser(user) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api("/users", "POST", user);
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
-  // create project
-  async createProject(project) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api("/projects", "POST", project);
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
   // get projects
   async getProjects() {
     // create a response constant to save the data that GET from the api
@@ -127,74 +127,6 @@ export default class Backend {
     ) {
       return null;
       // else throw an error from the api response
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
-  //create profiles
-  async createAvarta(avartas) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api("/avartas", "POST", avartas);
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
-  // get profiles
-  async getAvartas() {
-    // create a response constant to save the data that GET from the api
-    const response = await this.api("/avartas");
-    // if the get was successful
-    if (response.status === 200) {
-      // return the json data and then save it as data
-      return response.json().then((data) => data);
-      // else id the response has any problem
-    } else if (
-      response.status === 401 ||
-      response.status === 400 ||
-      response.status === 500
-      // return null
-    ) {
-      return null;
-      // else throw an error from the api response
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
-  // create personal statement
-  async createPersonalStatement(personalStatement) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api(
-      "/personalStatement",
-      "POST",
-      personalStatement
-    );
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
     } else {
       throw new Error("Something went wrong");
     }
@@ -222,27 +154,6 @@ export default class Backend {
     }
   }
 
-  // create methodology
-  async createMethodology(methodology) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api("/methodology", "POST", methodology);
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
   // get methodology
   async getMethodology() {
     // create a response constant to save the data that GET from the api
@@ -260,27 +171,6 @@ export default class Backend {
     ) {
       return null;
       // else throw an error from the api response
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
-  // create technologies
-  async createTechnologies(technologies) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api("/technologies", "POST", technologies);
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
     } else {
       throw new Error("Something went wrong");
     }
@@ -308,27 +198,6 @@ export default class Backend {
     }
   }
 
-  // create certifications
-  async createCertifications(certifications) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api("/certifications", "POST", certifications);
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
   // get certifications
   async getCertifications() {
     // create a response constant to save the data that GET from the api
@@ -346,27 +215,6 @@ export default class Backend {
     ) {
       return null;
       // else throw an error from the api response
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
-  // create badges
-  async createBadges(badges) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api("/badges", "POST", badges);
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
     } else {
       throw new Error("Something went wrong");
     }
@@ -394,27 +242,6 @@ export default class Backend {
     }
   }
 
-  // create experience
-  async createExperience(experience) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api("/experiences", "POST", experience);
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
   // get experience
   async getExperience() {
     // create a response constant to save the data that GET from the api
@@ -432,27 +259,6 @@ export default class Backend {
     ) {
       return null;
       // else throw an error from the api response
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
-  // create resume
-  async createResume(resume) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api("/resumes", "POST", resume);
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
     } else {
       throw new Error("Something went wrong");
     }
@@ -480,27 +286,6 @@ export default class Backend {
     }
   }
 
-  // create socialMedia
-  async createSocialMedia(socialMedia) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api("/socials", "POST", socialMedia);
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
   // get socialMedia
   async getSocialMedia() {
     // create a response constant to save the data that GET from the api
@@ -518,27 +303,6 @@ export default class Backend {
     ) {
       return null;
       // else throw an error from the api response
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
-  // create message
-  async createMessage(message) {
-    // create a response constant to save the data that POST to the api
-    const response = await this.api("/messages", "POST", message);
-    // if the post was successful
-    if (response.status === 201) {
-      // return nothing
-      return [];
-      // else if the post had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
     } else {
       throw new Error("Something went wrong");
     }
@@ -566,27 +330,6 @@ export default class Backend {
     }
   }
 
-  // delete message
-  async deleteMessage(id) {
-    // create a response constant to save the data that DELETE from the api
-    const response = await this.api(`/messages/${id}`, "DELETE");
-    // if the delete was successful
-    if (response.status === 204) {
-      // return nothing
-      return [];
-      // else if the delete had a problem
-    } else if (response.status === 400) {
-      // return a response as JSOn then
-      return response.json().then((data) => {
-        // return the errors
-        return data.errors;
-      });
-      // else throw any other errors from the api
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
   // get projectTechStack
   async getProjectTechStack() {
     // create a response constant to save the data that GET from the api
@@ -596,6 +339,28 @@ export default class Backend {
       // return the json data and then save it as data
       return response.json().then((data) => data);
       // else id the response has any problem
+    }
+  }
+
+  // get profiles
+  async getAvartas() {
+    // create a response constant to save the data that GET from the api
+    const response = await this.api("/avartas");
+    // if the get was successful
+    if (response.status === 200) {
+      // return the json data and then save it as data
+      return response.json().then((data) => data);
+      // else id the response has any problem
+    } else if (
+      response.status === 401 ||
+      response.status === 400 ||
+      response.status === 500
+      // return null
+    ) {
+      return null;
+      // else throw an error from the api response
+    } else {
+      throw new Error("Something went wrong");
     }
   }
 }

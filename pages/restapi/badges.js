@@ -6,11 +6,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 function Badges() {
   const router = useRouter();
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
 
   const [badges, setBadges] = useState([]);
   useEffect(() => {
-    backend.getBadges().then((res) => {
+    noAuthRoutes.getBadges().then((res) => {
       setBadges(res);
     });
   }, []);

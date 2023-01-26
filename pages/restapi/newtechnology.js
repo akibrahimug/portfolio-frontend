@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function Newtechonlogy() {
-  const { googleUpload, backend, authenticatedUser } = useContext(Context);
+  const { googleUpload, noAuthRoutes, authenticatedUser } = useContext(Context);
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -70,7 +70,7 @@ function Newtechonlogy() {
     if (!authenticatedUser) {
       router.push("/signin");
     } else {
-      backend
+      noAuthRoutes
         .createTechnologies(data)
         .then((errors) => {
           if (errors.length) {
@@ -91,7 +91,7 @@ function Newtechonlogy() {
   // get the certificates
   const [certificates, setCertificates] = useState([]);
   useEffect(() => {
-    backend.getCertifications().then((res) => {
+    noAuthRoutes.getCertifications().then((res) => {
       setCertificates(res);
     });
   }, []);
@@ -99,7 +99,7 @@ function Newtechonlogy() {
   // get the experiences
   const [experiences, setExperiences] = useState([]);
   useEffect(() => {
-    backend.getExperience().then((res) => {
+    noAuthRoutes.getExperience().then((res) => {
       setExperiences(res);
     });
   }, []);

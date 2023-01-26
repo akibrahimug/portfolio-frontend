@@ -4,12 +4,12 @@ import Bio from "./Bio";
 import { Context } from "./Context";
 
 function Avarta() {
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
 
   // get profile
   const [profile, setProfile] = useState();
   useEffect(() => {
-    backend.getAvartas().then((profile) => {
+    noAuthRoutes.getAvartas().then((profile) => {
       setProfile(profile);
     });
   }, []);

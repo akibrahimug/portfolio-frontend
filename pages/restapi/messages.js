@@ -7,10 +7,10 @@ import Box from "@mui/material/Box";
 
 function Message() {
   const router = useRouter();
-  const { backend } = useContext(Context);
+  const { noAuthRoutes, deleteMessage } = useContext(Context);
   const [messages, setMessages] = useState([]);
   useEffect(() => {
-    backend.getMessage().then((res) => {
+    noAuthRoutes.getMessage().then((res) => {
       setMessages(res);
     });
   }, []);
@@ -61,7 +61,7 @@ function Message() {
                 <button
                   className="p-2 bg-gray-400 rounded-md absolute text-[14px] top-2 right-2 text-sm hover:bg-gray-500 shadow-lg text-white font-bold"
                   onClick={() => {
-                    backend.deleteMessage(message.messageID);
+                    deleteMessage(message.messageID);
                     setMessages(messages.filter((m) => m !== message));
                   }}
                 >

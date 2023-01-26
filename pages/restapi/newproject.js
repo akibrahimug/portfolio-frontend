@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function Newproject() {
-  const { googleUpload, backend, authenticatedUser } = useContext(Context);
+  const { googleUpload, noAuthRoutes, authenticatedUser } = useContext(Context);
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -67,7 +67,7 @@ function Newproject() {
     if (!authenticatedUser) {
       router.push("/signin");
     } else {
-      backend
+      noAuthRoutes
         .createProject(data)
         .then((errors) => {
           if (errors.length) {

@@ -6,17 +6,17 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 function Profiles() {
   const router = useRouter();
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
   const [personalStatement, setPersonalStatement] = useState([]);
   const [avartas, setAvarta] = useState([]);
   useEffect(() => {
-    backend.getAvartas().then((res) => {
+    noAuthRoutes.getAvartas().then((res) => {
       setAvarta(res);
     });
   }, []);
 
   useEffect(() => {
-    backend.getPersonalStatement().then((res) => {
+    noAuthRoutes.getPersonalStatement().then((res) => {
       setPersonalStatement(res);
     });
   }, []);

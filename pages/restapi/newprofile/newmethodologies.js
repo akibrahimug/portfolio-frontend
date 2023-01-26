@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../../../components/Context";
 
 function Newmethodology() {
-  const { googleUpload, backend, authenticatedUser } = useContext(Context);
+  const { googleUpload, noAuthRoutes, authenticatedUser } = useContext(Context);
   const router = useRouter();
 
   // get the data from the form
@@ -25,7 +25,7 @@ function Newmethodology() {
   const [errors, setErrors] = useState([]);
   const submit = (e) => {
     e.preventDefault();
-    backend
+    noAuthRoutes
       .createMethodology(data)
       .then((errors) => {
         if (errors.length) {

@@ -6,11 +6,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 function Technologies() {
   const router = useRouter();
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
 
   const [technologies, setTechnologies] = useState([]);
   useEffect(() => {
-    backend.getTechnologies().then((res) => {
+    noAuthRoutes.getTechnologies().then((res) => {
       setTechnologies(res);
     });
   }, []);

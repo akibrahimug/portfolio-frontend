@@ -6,11 +6,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 function Experiences() {
   const router = useRouter();
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
 
   const [experience, setExperience] = useState([]);
   useEffect(() => {
-    backend.getExperience().then((res) => {
+    noAuthRoutes.getExperience().then((res) => {
       setExperience(res);
     });
   }, []);

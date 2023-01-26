@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "./Context";
 
 export default function TechStack() {
-  const { backend } = useContext(Context);
+  const { noAuthRoutes } = useContext(Context);
   const [techStack, setTechStack] = useState([]);
   useEffect(() => {
-    backend.getTechnologies().then((res) => setTechStack(res));
+    noAuthRoutes.getTechnologies().then((res) => setTechStack(res));
   }, []);
 
   return (
