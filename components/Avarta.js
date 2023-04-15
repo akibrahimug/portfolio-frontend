@@ -2,17 +2,23 @@ import React, { useContext, useEffect, useState } from "react";
 import Line from "./projectpics/line.svg";
 import Bio from "./Bio";
 import { Context } from "./Context";
+import { useFetch } from "../pages/api/useFetch";
 
 function Avarta() {
   const { noAuthRoutes } = useContext(Context);
 
   // get profile
   const [profile, setProfile] = useState();
+  // useEffect(() => {
+  //   noAuthRoutes.getAvartas().then((profile) => {
+  //     setProfile(profile);
+  //   });
+  // }, []);
+
+  const { data: avartas, error } = useFetch("/avartas");
   useEffect(() => {
-    noAuthRoutes.getAvartas().then((profile) => {
-      setProfile(profile);
-    });
-  }, []);
+    setProfile(avartas);
+  }, [avartas]);
 
   return (
     <div className="grid grid-rows-2">

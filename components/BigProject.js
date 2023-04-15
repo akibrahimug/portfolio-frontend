@@ -2,17 +2,24 @@ import React, { useContext, useEffect, useState } from "react";
 import Airbnb from "./projectpics/Airbnb.png";
 import { Context } from "./Context";
 import Image from "next/image";
+import { useFetch } from "../pages/api/useFetch";
 
 function BigProject() {
-  const { noAuthRoutes } = useContext(Context);
+  // const { noAuthRoutes } = useContext(Context);
   const [project, setProject] = useState();
+  // useEffect(() => {
+  //   noAuthRoutes.getProjects().then((projects) => {
+  //     projects.map((project) =>
+  //       project.projectTitle === "Airbnb-clone" ? setProject(project) : null
+  //     );
+  //   });
+  // }, []);
+  const { data: projects, error } = useFetch("/projects");
   useEffect(() => {
-    noAuthRoutes.getProjects().then((projects) => {
-      projects.map((project) =>
-        project.projectTitle === "Airbnb-clone" ? setProject(project) : null
-      );
-    });
-  }, []);
+    projects?.map((project) =>
+      project.projectTitle === "Airbnb-clone" ? setProject(project) : null
+    );
+  }, [projects]);
 
   return (
     <div className="flex lg:mt-20 xl:m-0">
