@@ -32,7 +32,7 @@ function Avarta() {
               <img
                 src={p.from === "2022-11-25" ? p.pictureUrl : ""}
                 alt=""
-                layout="fill"
+                // layout="fill"
               />
             </div>
           ))
