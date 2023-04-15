@@ -9,7 +9,7 @@ import { Context } from "./Context";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-
+import { useFetch } from "../pages/api/useFetch";
 const techStack = [
   {
     techStackID: 0,
@@ -95,25 +95,27 @@ const techStack = [
 const ITEM_HEIGHT = 48;
 
 export default function SmallProjects() {
-  const { noAuthRoutes } = useContext(Context);
+  // const { noAuthRoutes } = useContext(Context);
 
-  // get all projects
-  const [projects, setProjects] = useState([]);
-  useEffect(() => {
-    noAuthRoutes.getProjects().then((res) => {
-      // rearrange projects array so that the most recent project is first
-      setProjects(res.sort((a, b) => a.projectID - b.projectID));
-    });
-  }, []);
+  // // get all projects
+  // const [projects, setProjects] = useState([]);
+  // useEffect(() => {
+  //   noAuthRoutes.getProjects().then((res) => {
+  //     // rearrange projects array so that the most recent project is first
+  //     setProjects(res.sort((a, b) => a.projectID - b.projectID));
+  //   });
+  // }, []);
+
+  const { data: projects, error } = useFetch("/projects");
 
   // create a new array adding to each object by index
   // the tech stack that belongs to that project
-  const projectsWithTechStack = projects.map((project, i) => {
+  const projectsWithTechStack = projects?.map((project, i) => {
     return { ...project, techStack: techStack[i].techStackName };
   });
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(-1);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const open = Boolean(anchorEl);
   const handleClick = (event, index) => {
     setAnchorEl(event.currentTarget);
@@ -200,7 +202,7 @@ export default function SmallProjects() {
                 </button>
                 <button
                   className={`
-                    
+
                   bg-red-500 p-3  px-4 rounded-md text-white `}
                 >
                   <a
