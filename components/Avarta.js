@@ -43,6 +43,7 @@ function Avarta() {
                 src={p.from === "2022-11-25" ? p.pictureUrl : ""}
                 alt=""
                 layout="fill"
+                objectFit="contain"
                 priority
               />
             </div>
