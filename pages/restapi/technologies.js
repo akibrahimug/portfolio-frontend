@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../../components/Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Image from "next/image";
 function Technologies() {
   const router = useRouter();
   const { noAuthRoutes } = useContext(Context);
@@ -50,7 +51,8 @@ function Technologies() {
           technologies.map((tech, i) => (
             <div key={i} className="group relative ">
               <div className="min-h-80 aspect-w-1 aspect-h-1 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-64 ">
-                <img
+                <Image
+                  layout="fill"
                   src={tech.pictureUrl}
                   alt=""
                   className="object-contain object-center lg:h-full lg:w-full p-20"

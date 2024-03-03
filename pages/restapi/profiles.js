@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../../components/Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Image from "next/image";
 function Profiles() {
   const router = useRouter();
   const { noAuthRoutes } = useContext(Context);
@@ -64,7 +65,8 @@ function Profiles() {
           avartas.map((avarta, i) => (
             <div key={i} className="group relative border mx-4">
               <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 ">
-                <img
+                <Image
+                  layout="fill"
                   src={avarta.pictureUrl}
                   alt=""
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"

@@ -39,10 +39,10 @@ function Methodologies() {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
-          className="md:hidden lg:inline-flex"
+          className="inline-flex"
         >
-          <h3 className="text-red-500">My Methodology</h3>
-          <BeakerIcon className="hidden md:inline-flex w-6 text-red-500" />
+          <h3 className="hidden md:inline-flex text-red-500">My Methodology</h3>
+          <BeakerIcon className=" w-6 text-red-500" />
         </button>
         <Menu
           id="basic-menu"

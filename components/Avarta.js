@@ -3,6 +3,9 @@ import Line from "./projectpics/line.svg";
 import Bio from "./Bio";
 import { Context } from "./Context";
 import { useFetch } from "../pages/api/useFetch";
+import Image from "next/image";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function Avarta() {
   const { noAuthRoutes } = useContext(Context);
@@ -20,19 +23,27 @@ function Avarta() {
     setProfile(avartas);
   }, [avartas]);
 
+  const isLoading = !avartas && !error;
+
   return (
     <div className="grid grid-rows-2">
       <div className="flex justify-center lg:justify-end">
-        {profile ? (
+        {isLoading ? (
+          // Display skeleton when data is loading
+          <div className=" w-[100%] ml-8 lg:mt-10">
+            <Skeleton width={450} height={400} />
+          </div>
+        ) : profile ? (
           profile.map((p, i) => (
             <div
               key={i}
               className="relative w-[360px] mt-8 h-[350px] min-w-[300px] md:h-[30em] md:w-[25em] m-auto lg:mt-10"
             >
-              <img
+              <Image
                 src={p.from === "2022-11-25" ? p.pictureUrl : ""}
                 alt=""
-                // layout="fill"
+                layout="fill"
+                priority
               />
             </div>
           ))

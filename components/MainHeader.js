@@ -7,6 +7,7 @@ import NavButtons from "./NavButtons";
 import ModalMenu from "./ModalMenu";
 import Resume from "./Resume";
 import TechStack from "./TechStack";
+import Skeleton from "react-loading-skeleton";
 
 export default function MainHeader() {
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +19,7 @@ export default function MainHeader() {
     e.target.value ? setClickedText(e.target.value) : setClickedText("");
   };
   return (
-    <div className="p-1 border flex rounded-full items-center h-12 text-sm max-w-[320px] min-w-max shadow-sm hover:shadow-md m-auto">
+    <div className=" border flex rounded-full items-center  text-sm   shadow-sm hover:shadow-md m-auto">
       <NavButtons
         handleClick={handleClick}
         showModal={showModal}
@@ -29,7 +30,7 @@ export default function MainHeader() {
       {/* repos made */}
       {/* gitHub icon and link */}
       {showModal && (
-        <div className=" flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+        <div className=" flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none no-scrollbar">
           <div className="w-full h-fit bg-white z-50">
             <ModalMenu title={clickedText} handleClick={handleClick} />
 
@@ -47,7 +48,7 @@ export default function MainHeader() {
                 }}
               />
             </div>
-            <div className="md:hidden border max-w-fit p-2 m-auto rounded-full mt-4">
+            <div className="md:hidden border max-w-fit m-auto rounded-full mt-4">
               <NavButtons
                 handleClick={handleClick}
                 showModal={showModal}

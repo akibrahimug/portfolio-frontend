@@ -3,6 +3,8 @@ import Airbnb from "./projectpics/Airbnb.png";
 import { Context } from "./Context";
 import Image from "next/image";
 import { useFetch } from "../pages/api/useFetch";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function BigProject() {
   // const { noAuthRoutes } = useContext(Context);
@@ -22,7 +24,7 @@ function BigProject() {
   }, [projects]);
 
   return (
-    <div className="flex lg:mt-20 xl:m-0">
+    <div className="flex lg:mt-20 xl:m-0 ">
       <div
         className="text-gray-400 flex-none hidden md:block self-center"
         style={{
@@ -47,7 +49,9 @@ function BigProject() {
           </div>
         </div>
       ) : (
-        <> </>
+        <div className="grow relative  lg:px-20 cursor-pointer  rounded-md lg:border-0 m-4 ">
+          <Skeleton height={300} />
+        </div>
       )}
     </div>
   );

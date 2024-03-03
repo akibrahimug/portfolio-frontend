@@ -8,6 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
+import Image from "next/image";
 
 function Newproject() {
   const { googleUpload, noAuthRoutes, authenticatedUser } = useContext(Context);
@@ -173,7 +174,8 @@ function Newproject() {
                               pictures.map((pic, i) => (
                                 <div key={i} className="group relative">
                                   <div className="max-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                                    <img
+                                    <Image
+                                      layout="fill"
                                       src={pic}
                                       alt=""
                                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"
