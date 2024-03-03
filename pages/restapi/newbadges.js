@@ -5,6 +5,7 @@ import Popover from "@mui/material/Popover";
 import { Context } from "../../components/Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Image from "next/image";
 
 function Newproject() {
   const { googleUpload, createBadges, noAuthRoutes, authenticatedUser } =
@@ -177,7 +178,8 @@ function Newproject() {
                               pictures.map((pic, i) => (
                                 <div key={i} className="group relative">
                                   <div className="max-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                                    <img
+                                    <Image
+                                      layout="fill"
                                       src={pic}
                                       alt=""
                                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"

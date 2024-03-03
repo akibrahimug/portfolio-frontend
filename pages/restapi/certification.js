@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../../components/Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Image from "next/image";
 function Certifications() {
   const router = useRouter();
   const { noAuthRoutes } = useContext(Context);
@@ -50,7 +51,8 @@ function Certifications() {
           certifications.map((cert, i) => (
             <div key={i} className="group relative border">
               <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:aspect-none lg:h-80 ">
-                <img
+                <Image
+                  layout="fill"
                   src={cert.pictureUrl}
                   alt=""
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"

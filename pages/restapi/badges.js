@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "../../components/Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Image from "next/image";
 function Badges() {
   const router = useRouter();
   const { noAuthRoutes } = useContext(Context);
@@ -49,10 +50,13 @@ function Badges() {
         {badges ? (
           badges.map((project, i) => (
             <div key={i} className="group relative">
-              <div className="border-2 border-black rounded-sm shadow-lg">
-                <img
+              <div>
+                <Image
                   src={project.pictureUrl}
                   alt=""
+                  // layout="fill"
+                  width={200}
+                  height={30}
                   className="h-full w-full object-contain object-center lg:h-full lg:w-full"
                 />
               </div>

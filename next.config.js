@@ -6,6 +6,9 @@ const nextConfig = {
 module.exports = nextConfig;
 
 module.exports = {
+  images: {
+    domains: ["storage.googleapis.com"],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
