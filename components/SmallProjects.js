@@ -132,7 +132,7 @@ export default function SmallProjects() {
         {projectsWithTechStack
           ? projectsWithTechStack.map((project, i) => (
               <Card
-                className=" rounded-lg shadow-md py-2  border-t-8 border-black  mb-4"
+                className=" md:rounded-lg md:shadow-md py-4 border-t-8 border-black mb-10 md:mb-4"
                 key={i}
               >
                 <CardHeader

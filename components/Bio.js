@@ -15,7 +15,7 @@ function Bio() {
   }, []);
 
   return (
-    <div className="m-auto rounded-lg shadow-md py-2 max-w-[500px] border-t-8 border-black 2xl:w-[500px] w-[460px] lg:w-[450px] lg:ml-8 xl:m-auto">
+    <div className="m-auto bg-slate-100 md:bg-white md:rounded-lg md:shadow-md py-2 md:max-w-[500px] md:border-t-8 border-black 2xl:w-[500px] lg:w-[450px] lg:ml-8 xl:m-auto">
       <h4 className="text-2xl text-gray-600 mb-3 w-64 text-left mt-16 ml-10">
         {isLoading ? <Skeleton width={128} height={24} /> : "About me"}
       </h4>
