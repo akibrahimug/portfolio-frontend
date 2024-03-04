@@ -40,11 +40,14 @@ function Avarta() {
               className="relative w-[360px] mt-8 h-[350px] min-w-[300px] md:h-[30em] md:w-[25em] m-auto lg:mt-10"
             >
               <Image
-                src={p.from === "2022-11-25" ? p.pictureUrl : ""}
+                // src={p.from === "2022-11-25" ? p.pictureUrl : ""}
+                src="https://storage.googleapis.com/my-rest-api-2022-kasoma/6638de32-0257-46f4-9624-247e5ffedcf2_post.jpeg"
                 alt=""
                 layout="fill"
                 objectFit="contain"
                 priority
+                placeholder="blur"
+                blurDataURL="https://storage.googleapis.com/my-rest-api-2022-kasoma/6638de32-0257-46f4-9624-247e5ffedcf2_post.jpeg"
               />
             </div>
           ))
