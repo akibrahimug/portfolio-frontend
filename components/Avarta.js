@@ -47,7 +47,6 @@ function Avarta() {
                 objectFit="contain"
                 priority
               />
-              grid-cols-3{" "}
             </div>
           ))
         ) : (
