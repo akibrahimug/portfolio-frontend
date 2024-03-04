@@ -46,9 +46,8 @@ function Avarta() {
                 layout="fill"
                 objectFit="contain"
                 priority
-                placeholder="blur"
-                blurDataURL="https://storage.googleapis.com/my-rest-api-2022-kasoma/6638de32-0257-46f4-9624-247e5ffedcf2_post.jpeg"
               />
+              grid-cols-3{" "}
             </div>
           ))
         ) : (
