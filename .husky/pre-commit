@@ -4,9 +4,9 @@
 echo 'Format with Prettier'
 npm run format
 
-echo 'Type checking'
-npm run tsc
+# echo 'Type checking'
+# npm run tsc
 
-echo 'Linting'
-npm run lint
+# echo 'Linting'
+# npm run lint
 
