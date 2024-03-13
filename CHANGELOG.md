@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.1.0...v1.2.0) (2024-03-13)
+
+
+### Features
+
+* **semantic:** semantic ([108d3fd](https://github.com/akibrahimug/portfolio-frontend/commit/108d3fd2c6a73fd62db84d44293a7db37a964182))
+* **sematic:** sematic ([71f5d90](https://github.com/akibrahimug/portfolio-frontend/commit/71f5d907139b5325fd1563bf8dbfa2b93529fc99))
+
 # [1.1.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.0.0...v1.1.0) (2024-03-13)
 
 
