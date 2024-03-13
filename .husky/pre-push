@@ -1,0 +1,10 @@
+# #!/bin/sh
+# . "$(dirname "$0")/_/husky.sh"
+
+# echo "Type checking"
+# npm run tsc
+
+# echo "Linting"
+# npm run lint
+
+# echo "All good. Perhaps run 'npx npm-check-updates' to see if there are updates"
