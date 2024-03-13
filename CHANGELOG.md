@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.0.0...v1.1.0) (2024-03-13)
+
+
+### Features
+
+* **semantic-release:** commitlint - adding sematic release and its configurations ([9556094](https://github.com/akibrahimug/portfolio-frontend/commit/9556094119c204c5a27b7eacbecba98997206f9d))
+
 # 1.0.0 (2024-03-13)
 
 
