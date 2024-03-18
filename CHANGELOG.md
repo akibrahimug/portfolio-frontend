@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.2.0...v1.3.0) (2024-03-18)
+
+
+### Features
+
+* **fixing liniting issues:** fixing liniting issues ([72b0198](https://github.com/akibrahimug/portfolio-frontend/commit/72b0198a64160a4cf91a0ee1b56ceba645ecb34e))
+
 # [1.2.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.1.0...v1.2.0) (2024-03-13)
 
 
