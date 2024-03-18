@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild": "yarn format",
     "start": "next start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write 'components/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "format": "prettier --write 'components/**/*.{js,jsx,ts,tsx,css,md,json}' 'pages/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "prepare": "husky install",
     "commit": "git-cz"
   },
@@ -65,7 +66,6 @@
     "autoprefixer": "^10.4.7",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "8.14.0",
     "eslint-config-next": "12.1.6",
     "postcss": "^8.4.13",
     "semantic-release": "^17.4.2",

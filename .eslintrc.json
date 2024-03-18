@@ -29,7 +29,9 @@
   "ignorePatterns": ["*.json"],
   "rules": {
     "react/no-string-refs": "off",
-    "no-console": "error",
+    // "no-console": "error",
+    "no-unused-vars": "off",
+
     // "@typescript-eslint/ban-ts-ignore": "off",
     "no-alert": "error",
     "react/no-unescaped-entities": "warn",
@@ -40,6 +42,8 @@
     "spaced-comment": "error",
     "quotes": ["error", "single"],
     "no-duplicate-imports": "error",
-    "react/no-unknown-property": 0
+    "react/no-unknown-property": 0,
+    "react/prop-types": "off",
+    "no-console": "off"
   }
 }
