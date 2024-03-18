@@ -1,68 +1,64 @@
-import React, { useContext, useEffect, useState } from "react";
-import RestHead from "../../components/RestHead";
-import { useRouter } from "next/router";
-import { Context } from "../../components/Context";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
+import React, { useContext, useEffect, useState } from 'react'
+import RestHead from '../../components/RestHead'
+import { useRouter } from 'next/router'
+import { Context } from '../../components/Context'
+import CircularProgress from '@mui/material/CircularProgress'
+import Box from '@mui/material/Box'
 
 function Message() {
-  const router = useRouter();
-  const { noAuthRoutes, deleteMessage } = useContext(Context);
-  const [messages, setMessages] = useState([]);
+  const router = useRouter()
+  const { noAuthRoutes, deleteMessage } = useContext(Context)
+  const [messages, setMessages] = useState([])
   useEffect(() => {
     noAuthRoutes.getMessage().then((res) => {
-      setMessages(res);
-    });
-  }, []);
+      setMessages(res)
+    })
+  }, [])
 
   return (
     <div>
       <RestHead />
-      <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
-        <div className="flex justify-around">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-            My Messages
-          </h2>
-          <div className="flex gap-5">
+      <div className='mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 '>
+        <div className='flex justify-around'>
+          <h2 className='text-2xl font-bold tracking-tight text-gray-900'>My Messages</h2>
+          <div className='flex gap-5'>
             <button
               disabled
-              className="p-3 bg-gray-300 rounded-lg shadow-lg text-white font-bold"
-              onClick={() => router.push("newmessage")}
+              className='p-3 bg-gray-300 rounded-lg shadow-lg text-white font-bold'
+              onClick={() => router.push('newmessage')}
             >
               Create New Message
             </button>
             <button
-              className="p-3 bg-gray-400 rounded-lg hover:bg-gray-500 shadow-lg text-white font-bold"
-              onClick={() => router.push("/restapi")}
+              className='p-3 bg-gray-400 rounded-lg hover:bg-gray-500 shadow-lg text-white font-bold'
+              onClick={() => router.push('/restapi')}
             >
               Back
             </button>
           </div>
         </div>
       </div>
-      <main className="max-w-[1250px] m-auto p-[1rem]">
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+      <main className='max-w-[1250px] m-auto p-[1rem]'>
+        <div className='grid md:grid-cols-2 lg:grid-cols-2 gap-8'>
           {messages.length ? (
             messages.map((message, i) => (
               <div
                 key={i}
-                className="  mb-4 relative border py-8 px-3 rounded-md bg-gray-200 text-black"
+                className='  mb-4 relative border py-8 px-3 rounded-md bg-gray-200 text-black'
               >
-                <span className="text-[13px] mb-2">Email: {message.email}</span>
-                <p className="text-[14px] bg-white p-4 rounded-md">
-                  {message.message}
-                </p>
-                <span className="text-[12px] absolute bottom-2 right-2">
-                  {new Date(message.createdAt).toLocaleString().split(",")[0]}
+                <span className='text-[13px] mb-2'>Email: {message.email}</span>
+                <p className='text-[14px] bg-white p-4 rounded-md'>{message.message}</p>
+                <span className='text-[12px] absolute bottom-2 right-2'>
+                  {new Date(message.createdAt).toLocaleString().split(',')[0]}
                 </span>
-                <span className="absolute text-[14px] top-[-10px] left-[-10px] text-sm text-white rounded-md p-1 bg-gray-700">
+                <span className='absolute text-[14px] top-[-10px] left-[-10px] text-sm text-white rounded-md p-1 bg-gray-700'>
                   {message.name}
                 </span>
                 <button
-                  className="p-2 bg-gray-400 rounded-md absolute text-[14px] top-2 right-2 text-sm hover:bg-gray-500 shadow-lg text-white font-bold"
+                  className='p-2 bg-gray-400 rounded-md absolute text-[14px] top-2 right-2 text-sm hover:bg-gray-500 shadow-lg text-white font-bold'
                   onClick={() => {
-                    deleteMessage(message.messageID);
-                    setMessages(messages.filter((m) => m !== message));
+                    deleteMessage(message.messageID)
+                    setMessages(messages.filter((m) => m !== message))
                   }}
                 >
                   Delete
@@ -72,18 +68,18 @@ function Message() {
           ) : (
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "30px",
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '30px',
               }}
             >
-              <CircularProgress className="text-gray-500 " />
+              <CircularProgress className='text-gray-500 ' />
             </Box>
           )}
         </div>
       </main>
     </div>
-  );
+  )
 }
 
-export default Message;
+export default Message

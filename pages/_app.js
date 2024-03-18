@@ -1,6 +1,6 @@
-import "../styles/globals.css";
-import { Provider } from "../components/Context";
-import { StyledEngineProvider } from "@mui/material";
+import '../styles/globals.css'
+import { Provider } from '../components/Context'
+import { StyledEngineProvider } from '@mui/material'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </Provider>
     </StyledEngineProvider>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp
