@@ -1,16 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from 'react'
-import Card from '@mui/material/Card'
-import CardHeader from '@mui/material/CardHeader'
-import CardMedia from '@mui/material/CardMedia'
-import CardContent from '@mui/material/CardContent'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import { Context } from './Context'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-// import { useFetch } from "../pages/api/useFetch";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -104,103 +94,59 @@ export default function SmallProjects() {
   const handleClose = () => {
     setAnchorEl(null)
   }
-
+  console.log(projects)
   return (
-    <div className='bg-slate-100'>
-      <div className='md:grid xl:grid-cols-3 md:grid-cols-2 gap-8 place-content-center pt-32  max-w-[1400px] m-auto'>
-        {projectsWithTechStack
-          ? projectsWithTechStack.map((project, i) => (
-              <Card
-                className=' md:rounded-lg md:shadow-md py-4 border-t-8 border-black mb-10 md:mb-4'
-                key={i}
-              >
-                <CardHeader
-                  action={
-                    <div>
-                      <IconButton
-                        aria-label='Technologies'
-                        id='long-button'
-                        aria-controls={open ? 'long-menu' : undefined}
-                        aria-expanded={open ? 'true' : undefined}
-                        aria-haspopup='true'
-                        onClick={(event) => handleClick(event, i)}
-                      >
-                        <MoreVertIcon className=' text-red-500 text-3xl' />
-                      </IconButton>
-                      {selectedIndex === i && (
-                        <Menu
-                          id={'long-menu'}
-                          MenuListProps={{
-                            'aria-labelledby': 'long-button',
-                          }}
-                          anchorEl={anchorEl}
-                          open={open}
-                          onClose={handleClose}
-                          PaperProps={{
-                            style: {
-                              boxShadow: '0 0 6px 0 rgba(0,0,0,0.05)',
-                              minWidth: 200,
-                            },
-                          }}
-                        >
-                          <h3 className='border-b text-center bg-red-500 font-semibold text-white py-2'>
-                            Technologies Used
-                          </h3>
-                          {project.techStack.map((tech, i) => (
-                            <MenuItem onClick={handleClose} key={tech}>
-                              <span className='text-gray-500'>{tech}</span>
-                            </MenuItem>
-                          ))}
-                        </Menu>
-                      )}
-                    </div>
-                  }
-                  title={project.projectTitle}
-                  subheader={new Date(project.createdAt).toDateString()}
-                />
-                <CardMedia
-                  component='img'
-                  height='190'
-                  image={project.pictureUrl}
-                  alt={project.projectTitle}
-                  className='w-42 max-h-64 hover:scale-105 transition-all duration-500 cursor-pointer'
-                  onClick={() => window.open(project.liveSiteUrl)}
-                />
-                <CardContent className=''>
-                  <Typography variant='body2' color='text.secondary'>
-                    {project.projectDescription}
-                  </Typography>
-                </CardContent>
-                <div className='flex m-4 justify-between'>
-                  <div className='flex gap-5 h-12'>
-                    <button
-                      className={`${
-                        project.projectTitle === 'CHICOTÁS: STRETCHES OF LIFE' ? 'hidden w-0' : ''
-                      }bg-red-500 p-3  px-4 rounded-md text-white `}
-                    >
-                      <a href={project.githubUrl} target='_blank' rel='noreferrer'>
-                        Project Code
-                      </a>
-                    </button>
-                    <button
-                      className={`
-
-                  bg-red-500 p-3  px-4 rounded-md text-white `}
-                    >
-                      <a href={project.liveSiteUrl} target='_blank' rel='noreferrer'>
-                        Live Site
-                      </a>
-                    </button>
-                  </div>
-                </div>
-              </Card>
-            ))
-          : Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className=' m-6 rounded-md shadow-sm'>
-                <Skeleton key={i} height={580} />
+    <div className='md:grid xl:grid-cols-3 md:grid-cols-2 gap-6 place-content-center max-w-[1400px] m-8'>
+      {projectsWithTechStack
+        ? projectsWithTechStack.map((project, i) => (
+            <div
+              key={i}
+              className='max-w-m bg-white border mt-8 md:mt-0 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'
+            >
+              <img
+                className='rounded-t-lg h-60 w-full object-cover object-center'
+                src={project.pictureUrl}
+                alt={project.projectTitle}
+                onClick={() => window.open(project.liveSiteUrl)}
+              />
+              <div class='p-5 '>
+                <h5 class='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
+                  {project.projectTitle}
+                </h5>
+                <p class='mb-3 font-normal text-gray-500 dark:text-gray-400'>
+                  {project.projectDescription}
+                </p>
+                <a
+                  href={project.githubUrl}
+                  className={`${
+                    project.projectTitle === 'CHICOTÁS: STRETCHES OF LIFE' ? 'hidden w-0' : ''
+                  }inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-500 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`}
+                >
+                  Project Code
+                  <svg
+                    className='rtl:rotate-180 w-3.5 h-3.5 ms-2'
+                    aria-hidden='true'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 14 10'
+                  >
+                    <path
+                      stroke='currentColor'
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                      stroke-width='2'
+                      d='M1 5h12m0 0L9 1m4 4L9 9'
+                    />
+                  </svg>
+                </a>
               </div>
-            ))}
-      </div>
+            </div>
+          ))
+        : Array.from({ length: 12 }).map((_, i) => (
+            <div key={i} className=' m-6 rounded-md shadow-sm'>
+              <Skeleton key={i} height={580} />
+            </div>
+          ))}
     </div>
   )
 }
