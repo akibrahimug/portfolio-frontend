@@ -43,7 +43,7 @@ function Avarta() {
             >
               <Image
                 // src={p.from === "2022-11-25" ? p.pictureUrl : ""}
-                src='https://storage.googleapis.com/my-rest-api-2022-kasoma/6638de32-0257-46f4-9624-247e5ffedcf2_post.jpeg'
+                src='https://res.cloudinary.com/doyg3ppyn/image/upload/v1715623861/avarta_zodozj.png'
                 alt=''
                 layout='fill'
                 objectFit='contain'

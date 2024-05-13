@@ -35,3 +35,5 @@ yarn-error.log*
 .netlify
 yarn.lock
 next.lock
+
+*storybook.log
