@@ -104,7 +104,7 @@ export default function SmallProjects() {
               className='max-w-m bg-white border mt-8 md:mt-0 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'
             >
               <img
-                className='rounded-t-lg h-60 w-full object-cover object-center'
+                className='rounded-t-lg h-60 w-full object-cover object-center cursor-pointer'
                 src={project.pictureUrl}
                 alt={project.projectTitle}
                 onClick={() => window.open(project.liveSiteUrl)}
