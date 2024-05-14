@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <StyledEngineProvider injectFirst>
       <Provider>
-        <Component {...pageProps}/>
+        <Component {...pageProps} />
       </Provider>
     </StyledEngineProvider>
   )
