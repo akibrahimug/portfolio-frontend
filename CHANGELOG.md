@@ -1,3 +1,16 @@
+# [1.4.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.3.0...v1.4.0) (2024-05-20)
+
+
+### Bug Fixes
+
+* **cursor-pointer:** newcards - adding cursor-pointer class ([294ce5e](https://github.com/akibrahimug/portfolio-frontend/commit/294ce5e7b177a9288a475d9bc64f0cb7f9843b34))
+* **faster avatar load:** faster avatar load ([f1ed50c](https://github.com/akibrahimug/portfolio-frontend/commit/f1ed50ca1b825b157cf4d6a1a4c8b1b4c83abd1f))
+
+
+### Features
+
+* **new-small-cards:** new-small-cards ([fa34fb6](https://github.com/akibrahimug/portfolio-frontend/commit/fa34fb6a07aa53fdbd29af1c5ee5ef95987731fb))
+
 # [1.3.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.2.0...v1.3.0) (2024-03-18)
 
 
