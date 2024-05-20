@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.4.0...v1.5.0) (2024-05-20)
+
+
+### Features
+
+* **tech-capsoles:** tech-capsoles ([81b93e9](https://github.com/akibrahimug/portfolio-frontend/commit/81b93e9c1cd66dce228cb9f24f6d6b89b4abdb74))
+
 # [1.4.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.3.0...v1.4.0) (2024-05-20)
 
 
