@@ -1,88 +1,61 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useMemo } from 'react'
 import { Context } from './Context'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-
-const techStack = [
-  {
-    techStackID: 0,
-    techStackName: ['React', 'Nextjs', 'TailwindCSS', 'Vercel', 'GIT', 'GITHUB', 'AJAX'],
-  },
-  {
-    techStackID: 1,
-    techStackName: ['React', 'Firebase', 'CSS', 'Stripe', 'GIT', 'GITHUB'],
-  },
-  {
-    techStackID: 2,
-    techStackName: ['React', 'React-Router-DOM', 'CSS', 'GIT', 'GITHUB', 'Netlify', 'AJAX'],
-  },
-  {
-    techStackID: 3,
-    techStackName: ['React', 'AJAX', 'CSS', 'GIT', 'GITHUB', 'Netlify'],
-  },
-  {
-    techStackID: 4,
-    techStackName: ['WordPress', 'Elementor Page Builder', 'CSS', 'PHP', 'Docker'],
-  },
-  {
-    techStackID: 5,
-    techStackName: ['Sass', 'HTML', 'GIT', 'GITHUB', 'GitHub Pages'],
-  },
-  {
-    techStackID: 6,
-    techStackName: ['Bootstrap', 'CSS', 'GIT', 'GITHUB', 'HTML', 'Javascript'],
-  },
-  {
-    techStackID: 7,
-    techStackName: ['AJAX', 'CSS', 'GIT', 'GITHUB', 'HTML', 'Javascript'],
-  },
-  {
-    techStackID: 8,
-    techStackName: ['OOP', 'CSS', 'GIT', 'GITHUB', 'HTML', 'Javascript'],
-  },
-  {
-    techStackID: 9,
-    techStackName: [
-      'React',
-      'Tailwind',
-      'Nodejs',
-      'Express',
-      'Sequelize',
-      'Postgres',
-      'Google Colud Platform',
-      'Nextjs',
-    ],
-  },
-  {
-    techStackID: 10,
-    techStackName: ['Javascript', 'CSS', 'HTML', 'ChartJS', 'LocalStorage'],
-  },
-  {
-    techStackID: 11,
-    techStackName: ['Javascript', 'CSS', 'HTML', 'Regular Expressions'],
-  },
-]
 
 const ITEM_HEIGHT = 48
 
 export default function SmallProjects() {
   const { noAuthRoutes } = useContext(Context)
 
-  // get all projects
+  // State for projects, tech stacks, and technologies
   const [projects, setProjects] = useState([])
+  const [projectTechStacks, setProjectTechStacks] = useState([])
+  const [technologies, setTechnologies] = useState([])
+
   useEffect(() => {
-    noAuthRoutes.getProjects().then((res) => {
-      // rearrange projects array so that the most recent project is first
-      setProjects(res.sort((a, b) => a.projectID - b.projectID))
-    })
+    const fetchData = async () => {
+      try {
+        // Fetch all necessary data
+        const projectsRes = await noAuthRoutes.getProjects()
+        const techStacksRes = await noAuthRoutes.getProjectTechStack()
+        const technologiesRes = await noAuthRoutes.getTechnologies()
+
+        setProjects(projectsRes.sort((a, b) => a.projectID - b.projectID))
+        setProjectTechStacks(techStacksRes)
+        setTechnologies(technologiesRes)
+      } catch (error) {
+        console.error('Failed to fetch data:', error)
+      }
+    }
+    fetchData()
   }, [])
 
-  // create a new array adding to each object by index
-  // the tech stack that belongs to that project
-  const projectsWithTechStack = projects?.map((project, i) => {
-    return { ...project, techStack: techStack[i].techStackName }
-  })
+  // Create a map of techStackID to technology details for quick lookup
+  const techMap = useMemo(() => {
+    const map = new Map()
+    technologies.forEach((tech) => map.set(tech.techStackID, tech))
+    return map
+  }, [technologies])
+
+  // Map projects to include their tech stacks with full technology details
+  const projectsWithTechStack = useMemo(
+    () =>
+      projects.map((project) => {
+        const techStacksForProject = projectTechStacks.filter(
+          (ts) => ts.projectID === project.projectID,
+        )
+        const techDetails = techStacksForProject.map(
+          (ts) => techMap.get(ts.techStackID) || { techStackID: ts.techStackID, name: 'Unknown' },
+        )
+        return {
+          ...project,
+          techStacks: techDetails, // Include full details
+        }
+      }),
+    [projects, projectTechStacks, techMap],
+  )
 
   const [anchorEl, setAnchorEl] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(-1)
@@ -94,7 +67,7 @@ export default function SmallProjects() {
   const handleClose = () => {
     setAnchorEl(null)
   }
-  console.log(projects)
+  console.log(projectsWithTechStack)
   return (
     <div className='md:grid xl:grid-cols-3 md:grid-cols-2 gap-6 place-content-center max-w-[1400px] m-8'>
       {projectsWithTechStack
@@ -109,11 +82,22 @@ export default function SmallProjects() {
                 alt={project.projectTitle}
                 onClick={() => window.open(project.liveSiteUrl)}
               />
-              <div class='p-5 '>
-                <h5 class='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
+
+              <div className='p-5 '>
+                <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
                   {project.projectTitle}
                 </h5>
-                <p class='mb-3 font-normal text-gray-500 dark:text-gray-400'>
+                <div className='mb-4'>
+                  {project.techStacks.map((tech, index) => (
+                    <span
+                      key={index}
+                      className='inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-gray-500 rounded-3xl m-1 dark:bg-gray-600 '
+                    >
+                      {tech.techTitle}
+                    </span>
+                  ))}
+                </div>
+                <p className='mb-3 font-normal text-gray-500 dark:text-gray-400'>
                   {project.projectDescription}
                 </p>
                 <a
@@ -132,9 +116,9 @@ export default function SmallProjects() {
                   >
                     <path
                       stroke='currentColor'
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='2'
                       d='M1 5h12m0 0L9 1m4 4L9 9'
                     />
                   </svg>
