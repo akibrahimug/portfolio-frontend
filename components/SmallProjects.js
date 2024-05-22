@@ -1,10 +1,23 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext, useMemo } from 'react'
 import { Context } from './Context'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-const ITEM_HEIGHT = 48
+const TextToggle = ({ text, length }) => {
+  const [isShown, setIsShown] = useState(false)
+
+  return (
+    <div className='space-y-1 '>
+      <div className={isShown ? '' : 'line-clamp-3'}>{text}</div>
+      <button
+        onClick={() => setIsShown(!isShown)}
+        className='text-black hover:text-red-400 transition-colors font-semibold'
+      >
+        {isShown ? 'Show Less' : 'Show More'}
+      </button>
+    </div>
+  )
+}
 
 export default function SmallProjects() {
   const { noAuthRoutes } = useContext(Context)
@@ -22,7 +35,7 @@ export default function SmallProjects() {
         const techStacksRes = await noAuthRoutes.getProjectTechStack()
         const technologiesRes = await noAuthRoutes.getTechnologies()
 
-        setProjects(projectsRes.sort((a, b) => a.projectID - b.projectID))
+        setProjects(projectsRes.sort((a, b) => b.projectID - a.projectID))
         setProjectTechStacks(techStacksRes)
         setTechnologies(technologiesRes)
       } catch (error) {
@@ -67,14 +80,14 @@ export default function SmallProjects() {
   const handleClose = () => {
     setAnchorEl(null)
   }
-  console.log(projectsWithTechStack)
+
   return (
-    <div className='md:grid xl:grid-cols-3 md:grid-cols-2 gap-6 place-content-center max-w-[1400px] m-8'>
+    <div className='md:grid xl:grid-cols-3 md:grid-cols-2 gap-6 place-content-center max-w-[1400px] m-8 2xl:m-auto'>
       {projectsWithTechStack
         ? projectsWithTechStack.map((project, i) => (
             <div
               key={i}
-              className='max-w-m bg-white border mt-8 md:mt-0 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'
+              className='max-w-m relative bg-white border mt-8 md:mt-0 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'
             >
               <img
                 className='rounded-t-lg h-60 w-full object-cover object-center cursor-pointer'
@@ -87,7 +100,7 @@ export default function SmallProjects() {
                 <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
                   {project.projectTitle}
                 </h5>
-                <div className='mb-4'>
+                <div className='mb-4 '>
                   {project.techStacks.map((tech, index) => (
                     <span
                       key={index}
@@ -97,14 +110,16 @@ export default function SmallProjects() {
                     </span>
                   ))}
                 </div>
-                <p className='mb-3 font-normal text-gray-500 dark:text-gray-400'>
-                  {project.projectDescription}
+                <p className='mb-10 font-normal text-gray-500 dark:text-gray-400'>
+                  <TextToggle text={project.projectDescription} />
                 </p>
                 <a
+                  target='_blank'
                   href={project.githubUrl}
                   className={`${
                     project.projectTitle === 'CHICOTÁS: STRETCHES OF LIFE' ? 'hidden w-0' : ''
-                  }inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-500 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`}
+                  }inline-flex items-center absolute bottom-4  px-3 py-2 text-sm font-medium text-center text-white bg-red-500 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`}
+                  rel='noreferrer'
                 >
                   Project Code
                   <svg
