@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.5.0...v1.6.0) (2024-05-22)
+
+
+### Features
+
+* **new-cards:** new-cards ([f8c9ff6](https://github.com/akibrahimug/portfolio-frontend/commit/f8c9ff69127c040467e7ba2b6b38df1101a26abe))
+
 # [1.5.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.4.0...v1.5.0) (2024-05-20)
 
 
