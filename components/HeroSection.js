@@ -1,7 +1,7 @@
 import React from 'react'
 import Avarta from './Avarta'
 import ProfileDesc from './ProfileDesc'
-const cetified = [
+const certified = [
   'Testing and Debugging',
   'Algorithms and Data Structures',
   'Version control systems',
@@ -17,8 +17,8 @@ const cetified = [
 ]
 function HeroSection() {
   return (
-    <div className='grid ll:grid-cols-2 relative mb-32'>
-      <ProfileDesc cetified={cetified} />
+    <div className='grid lg:grid-cols-2 relative mb-32'>
+      <ProfileDesc certified={certified} />
       <Avarta />
     </div>
   )

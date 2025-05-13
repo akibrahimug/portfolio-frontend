@@ -10,22 +10,9 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 function Avarta() {
-  const { noAuthRoutes } = useContext(Context)
-
-  // get profile
-  const [profile, setProfile] = useState()
-  // useEffect(() => {
-  //   noAuthRoutes.getAvartas().then((profile) => {
-  //     setProfile(profile);
-  //   });
-  // }, []);
-
   const { data: avartas, error } = useFetch('/avartas')
-  useEffect(() => {
-    setProfile(avartas)
-  }, [avartas])
 
-  const isLoading = !avartas && !error
+  const isLoading = !avartas
 
   return (
     <div className='grid grid-rows-2'>
@@ -35,24 +22,17 @@ function Avarta() {
           <div className=' w-[100%] ml-8 lg:mt-10'>
             <Skeleton width={450} height={400} />
           </div>
-        ) : profile ? (
-          profile.map((p, i) => (
-            <div
-              key={i}
-              className='relative w-[360px] mt-8 h-[350px] min-w-[300px] md:h-[30em] md:w-[25em] m-auto lg:mt-10'
-            >
-              <Image
-                // src={p.from === "2022-11-25" ? p.pictureUrl : ""}
-                src='https://res.cloudinary.com/doyg3ppyn/image/upload/v1715623861/avarta_zodozj.png'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-                priority
-              />
-            </div>
-          ))
         ) : (
-          <></>
+          <div className='relative w-[360px] mt-8 h-[350px] min-w-[300px] md:h-[30em] md:w-[25em] m-auto lg:mt-10'>
+            <Image
+              // src={p.from === "2022-11-25" ? p.pictureUrl : ""}
+              src='https://res.cloudinary.com/doyg3ppyn/image/upload/v1715623861/avarta_zodozj.png'
+              alt=''
+              layout='fill'
+              objectFit='contain'
+              priority
+            />
+          </div>
         )}
         <span className='font-semibold absolute w-[219px] right-10 top-[90px] text-lg hidden xl:block text-gray-600'>
           {`"Let's create an amazing web experince together."`}

@@ -1,154 +1,185 @@
-/* eslint-disable quotes */
-/* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react'
-import TelegramIcon from '@mui/icons-material/Telegram'
-import CallMadeOutlinedIcon from '@mui/icons-material/CallMadeOutlined'
-import Line from './projectpics/line.svg'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import { LinkedIn, Twitter } from '@mui/icons-material'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import Contact from './Contact'
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
-function ProfileDesc({ cetified }) {
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const open = Boolean(anchorEl)
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
+'use client'
 
+import { useEffect, useState } from 'react'
+import { Send, ArrowUpRight, Github, Linkedin, Twitter, CheckCircle } from 'lucide-react'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { motion } from 'framer-motion'
+import Contact from './contact'
+
+export default function ProfileDesc({ certified }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     // Simulate data fetching with a delay
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 2000) // 2 seconds delay
+    }, 500) // 0.5 seconds delay
 
     return () => clearTimeout(timer)
   }, [])
 
+  const scrollToProjects = () => {
+    document.getElementById('projects')?.scrollIntoView({
+      behavior: 'smooth',
+    })
+  }
+
+  const socialLinks = [
+    {
+      icon: <Github className='h-5 w-5' />,
+      url: 'https://github.com/akibrahimug',
+      label: 'GitHub',
+    },
+    {
+      icon: <Linkedin className='h-5 w-5' />,
+      url: 'https://www.linkedin.com/in/kasoma-ibrahim-89a732168/',
+      label: 'LinkedIn',
+    },
+    {
+      icon: <Twitter className='h-5 w-5' />,
+      url: 'https://twitter.com/Akibrahimug',
+      label: 'Twitter',
+    },
+  ]
+
   return (
-    <div>
-      <div className='md:w-[75%] flex flex-col m-auto  xl:ml-10  2xl:ml-20 md:pt-20 '>
-        <div className='xl:ml-20 xl:mt-24 text-center'>
+    <div className='container mx-auto px-4 py-12 md:py-20'>
+      <div className='max-w-5xl mx-auto'>
+        {/* Hero Section */}
+        <section className='space-y-6 md:space-y-10'>
           {isLoading ? (
-            <Skeleton width={250} height={44} />
+            <div className='space-y-4'>
+              <div className='h-8 bg-gray-200 rounded-md w-64 animate-pulse'></div>
+              <div className='h-24 bg-gray-200 rounded-md w-full animate-pulse'></div>
+              <div className='h-24 bg-gray-200 rounded-md w-3/4 animate-pulse'></div>
+            </div>
           ) : (
-            <p className='lg:text-[40px] text-[30px] mt-12 md:mt-0'>
-              Hi, {`I'm`} <span className='text-red-600'>Ibrahim</span> a
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className='space-y-2 text-center md:text-left'
+            >
+              <h2 className='text-2xl md:text-3xl font-medium'>
+                Hi, I'm <span className='text-red-600 font-semibold'>Ibrahim</span> a
+              </h2>
+              <h1 className='text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-gray-500 leading-tight'>
+                FULLSTACK
+                <br className='hidden sm:block' /> DEVELOPER
+              </h1>
+            </motion.div>
           )}
+
+          {/* Action Buttons */}
           {isLoading ? (
-            <Skeleton width={450} height={94} count={2} />
+            <div className='flex justify-center md:justify-start space-x-4'>
+              <div className='h-10 bg-gray-200 rounded-md w-32 animate-pulse'></div>
+              <div className='h-10 bg-gray-200 rounded-md w-32 animate-pulse'></div>
+            </div>
           ) : (
-            <span className='lg:text-[70px] text-[60px] xl:text-[100px] leading-[75px] font-bold text-gray-500'>
-              FULLSTACK DEVELOPER
-            </span>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className='flex flex-wrap justify-center md:justify-start gap-4'
+            >
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className='bg-red-500 hover:bg-red-600 text-white rounded-[11px] px-4 hover:scale-125 transition-transform duration-700'>
+                    Let's talk
+                    <Send className='ml-2 h-4 w-4' />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className='sm:max-w-md'>
+                  <Contact />
+                </DialogContent>
+              </Dialog>
+
+              <Button
+                variant='ghost'
+                className='rounded-full text-gray-700 hover:bg-transparent hover:scale-125 transition-transform duration-700'
+                onClick={scrollToProjects}
+              >
+                Portfolio
+                <ArrowUpRight className='ml-2 h-4 w-4' />
+              </Button>
+            </motion.div>
           )}
-        </div>
 
-        {isLoading ? (
-          <div className='flex justify-center gap-3 mt-6'>
-            <Skeleton width={150} height={44} />
-            <Skeleton width={150} height={44} />
-          </div>
-        ) : (
-          <div className='z-40 mt-10 xl:ml-20 text-center'>
-            <button
-              id='basic-button'
-              aria-controls={open ? 'basic-menu' : undefined}
-              aria-haspopup='true'
-              aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick}
-              className='text-[12px] p-2 px-4 rounded-[11px] bg-red-500 text-white hover:scale-125 transition duration-700 ease-in-out'
+          {/* Social Links */}
+          {isLoading ? (
+            <div className='flex justify-center md:justify-start space-x-4'>
+              {[1, 2, 3].map((i) => (
+                <div key={i} className='h-12 w-12 bg-gray-200 rounded-full animate-pulse'></div>
+              ))}
+            </div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className='flex justify-center md:justify-start space-x-4'
             >
-              {`Let's talk  `}
-              <TelegramIcon className='mb-1 w-4' />
-            </button>
-            <Menu
-              id='basic-menu'
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button',
-              }}
-            >
-              <MenuItem className='hover:bg-white'>
-                <Contact />
-              </MenuItem>
-            </Menu>
-            <button
-              onClick={() => {
-                window.location.href = '#projects'
-              }}
-              className='text-gray-700 ml-6 hover:scale-125 transition duration-700 ease-in-out'
-            >
-              Portfolio <CallMadeOutlinedIcon className='fill-gray-500 w-6' />
-            </button>
-          </div>
-        )}
+              <div className='hidden md:flex items-center text-gray-400 text-sm mr-4'>
+                Check out my
+                <svg className='h-24 w-24 ml-2 rotate-90' viewBox='0 0 100 100'>
+                  <line x1='0' y1='50' x2='100' y2='50' stroke='currentColor' strokeWidth='1' />
+                </svg>
+              </div>
 
-        {isLoading ? (
-          <div className='flex justify-center gap-3 mt-6 '>
-            <Skeleton width={60} height={50} />
-            <Skeleton width={60} height={50} />
-            <Skeleton width={60} height={50} />
-          </div>
-        ) : (
-          <div className='flex xl:ml-20'>
-            <div className='text-gray-400 hidden 2xl:grid grid-cols-2 items-center'>
-              <span>Check out my</span>
-              <Line className='inline rotate-90 h-[140px] w-[183px]' />
+              <div className='flex space-x-3 items-center'>
+                {socialLinks.map((link, index) => (
+                  <motion.a
+                    key={index}
+                    href={link.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='flex items-center justify-center h-12 w-12 rounded-full bg-white border border-gray-200 shadow-md hover:border-red-500 hover:bg-red-500 hover:text-white transition-all duration-300 hover:scale-105 active:scale-75'
+                    whileHover={{ y: -2 }}
+                    aria-label={link.label}
+                  >
+                    {link.icon}
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </section>
+
+        {/* Certifications */}
+        <section className='mt-16'>
+          {isLoading ? (
+            <div className='grid grid-cols-2  gap-3'>
+              {Array(9)
+                .fill(0)
+                .map((_, i) => (
+                  <div key={i} className='h-6 bg-gray-200 rounded-md animate-pulse'></div>
+                ))}
             </div>
-            <div className='flex items-center w-[100%] justify-center gap-4 mt-10 mb-10 2xl:mb-0 2xl:mt-0 2xl:justify-end'>
-              <GitHubIcon
-                onClick={() => {
-                  window.open('https://github.com/akibrahimug')
-                }}
-                className='w-14 2xl:w-12 2xl:h-12 h-14 bg-white border active:scale-75  p-[12px]  hover:scale-105 hover:border hover:bg-red-500 transition transform ease-out duration-105  hover:text-white shadow-md rounded-full cursor-pointer'
-              />
-              <LinkedIn
-                onClick={() => {
-                  window.open('https://www.linkedin.com/in/kasoma-ibrahim-89a732168/')
-                }}
-                className='w-14 2xl:w-12 2xl:h-12 h-14 bg-white border active:scale-75  p-[12px]  hover:scale-105 hover:border hover:bg-red-500 transition transform ease-out duration-105  hover:text-white shadow-md rounded-full cursor-pointer'
-              />
-              <Twitter
-                onClick={() => {
-                  window.open('https://twitter.com/Akibrahimug')
-                }}
-                className='w-14 2xl:w-12 2xl:h-12 h-14 bg-white border active:scale-75  p-[12px]  hover:scale-105 hover:border hover:bg-red-500 transition transform ease-out duration-105  hover:text-white shadow-md rounded-full cursor-pointer'
-              />
-            </div>
-          </div>
-        )}
-      </div>
-      <div className='grid justify-center xl:!mt-0 ll:mt-32 '>
-        {isLoading ? (
-          <>
-            <Skeleton count={12} height={10} className='mb-2' />
-            <Skeleton width={300} height={10} />
-          </>
-        ) : (
-          <div className='grid md:grid-cols-3 sm:grid-cols-2  justify-center  md:ml-2 ll:grid-cols-1'>
-            {cetified.map((item, index) => (
-              <p key={index} className='text-gray-400 text-sm'>
-                <CheckCircleIcon className='text-red-400 mr-2' />
-                {item}
-              </p>
-            ))}
-          </div>
-        )}
+          ) : (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className='grid  grid-cols-2  gap-x-8 gap-y-3'
+            >
+              {certified.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.1 * index }}
+                  className='flex items-center text-gray-400 text-sm'
+                >
+                  <CheckCircle className='text-red-400 mr-2 h-5 w-5 flex-shrink-0' />
+                  <span>{item}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </section>
       </div>
     </div>
   )
 }
-
-export default ProfileDesc
