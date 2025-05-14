@@ -1,0 +1,57 @@
+{
+  "techStack": [
+    {
+      "name": "JavaScript",
+      "icon": "/icons/javascript.svg",
+      "color": "bg-gray-100 dark:bg-gray-900"
+    },
+    {
+      "name": "TypeScript",
+      "icon": "/icons/typescript.svg",
+      "color": "bg-gray-200 dark:bg-gray-800"
+    },
+    { "name": "React", "icon": "/icons/react.svg", "color": "bg-gray-100 dark:bg-gray-900" },
+    { "name": "Next.js", "icon": "/icons/nextjs.svg", "color": "bg-gray-200 dark:bg-gray-800" },
+    { "name": "Node.js", "icon": "/icons/nodejs.svg", "color": "bg-gray-100 dark:bg-gray-900" },
+    { "name": "Express", "icon": "/icons/express.svg", "color": "bg-gray-200 dark:bg-gray-800" },
+    { "name": "MongoDB", "icon": "/icons/mongodb.svg", "color": "bg-gray-100 dark:bg-gray-900" },
+    {
+      "name": "PostgreSQL",
+      "icon": "/icons/postgresql.svg",
+      "color": "bg-gray-200 dark:bg-gray-800"
+    },
+    { "name": "GraphQL", "icon": "/icons/graphql.svg", "color": "bg-red-100 dark:bg-red-950" },
+    { "name": "Redux", "icon": "/icons/redux.svg", "color": "bg-gray-100 dark:bg-gray-900" },
+    {
+      "name": "Tailwind CSS",
+      "icon": "/icons/tailwind.svg",
+      "color": "bg-gray-200 dark:bg-gray-800"
+    },
+    { "name": "Sass", "icon": "/icons/sass.svg", "color": "bg-red-100 dark:bg-red-950" },
+    { "name": "Git", "icon": "/icons/git.svg", "color": "bg-gray-100 dark:bg-gray-900" },
+    { "name": "Jest", "icon": "/icons/jest.svg", "color": "bg-red-100 dark:bg-red-950" },
+    { "name": "Webpack", "icon": "/icons/webpack.svg", "color": "bg-gray-200 dark:bg-gray-800" },
+    {
+      "name": "Firebase",
+      "icon": "/icons/firebase.svg",
+      "color": "bg-gray-100 dark:bg-gray-900"
+    },
+    { "name": "AWS", "icon": "/icons/aws.svg", "color": "bg-gray-200 dark:bg-gray-800" },
+    { "name": "Sentry", "icon": "/icons/sentry.svg", "color": "bg-gray-100 dark:bg-gray-900" },
+    { "name": "Vercel", "icon": "/icons/vercel.svg", "color": "bg-gray-200 dark:bg-gray-800" },
+    { "name": "Figma", "icon": "/icons/figma.svg", "color": "bg-gray-100 dark:bg-gray-900" },
+    { "name": "Storybook", "icon": "/icons/storybook.svg", "color": "bg-red-100 dark:bg-red-950" },
+    { "name": "Cypress", "icon": "/icons/cypress.svg", "color": "bg-gray-200 dark:bg-gray-800" },
+    { "name": "Jira", "icon": "/icons/jira.svg", "color": "bg-gray-100 dark:bg-gray-900" },
+    {
+      "name": "Confluence",
+      "icon": "/icons/confluence.svg",
+      "color": "bg-gray-200 dark:bg-gray-800"
+    },
+    { "name": "Slack", "icon": "/icons/slack.svg", "color": "bg-gray-100 dark:bg-gray-900" },
+    { "name": "Notion", "icon": "/icons/notion.svg", "color": "bg-gray-200 dark:bg-gray-800" },
+    { "name": "Postman", "icon": "/icons/postman.svg", "color": "bg-gray-100 dark:bg-gray-900" },
+    { "name": "HTML", "icon": "/icons/html.svg", "color": "bg-red-100 dark:bg-red-950" },
+    { "name": "CSS", "icon": "/icons/css.svg", "color": "bg-gray-200 dark:bg-gray-800" }
+  ]
+}
