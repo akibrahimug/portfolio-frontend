@@ -1,3 +1,12 @@
+# [1.7.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.6.0...v1.7.0) (2025-05-15)
+
+
+### Features
+
+* **new ui ux updates:** new ui ux updates ([35792a8](https://github.com/akibrahimug/portfolio-frontend/commit/35792a8f06741a2eebd92140523140690c95c61d))
+* **new_features:** new_features ([e2833c7](https://github.com/akibrahimug/portfolio-frontend/commit/e2833c7c770fe70733a88549ae44885485a3079f))
+* **ui:** updating ui and ux to match modern requirments ([660eef0](https://github.com/akibrahimug/portfolio-frontend/commit/660eef0300e3af2d47a8febb9dbccf05d78e29dc))
+
 # [1.6.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.5.0...v1.6.0) (2024-05-22)
 
 
