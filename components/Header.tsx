@@ -1,29 +1,26 @@
 import React from 'react'
-import Logo from './projectpics/Logo.svg'
-import MainHeader from './MainHeader'
+import MainHeader from '@/components/MainHeader'
 import Link from 'next/link'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import Methodologies from './Methodologies'
+import Methodologies from '@/components/Methodologies'
 
 const Header: React.FC = () => {
   return (
-    <div className='border-b items-center shadow-sd grid md:grid-cols-3 pt-3 pb-4'>
+    <div className='border-b items-center shadow-sd grid grid-cols-[1fr_auto_1fr] md:grid-cols-[20%_1fr_30%] lg:grid-cols-3 pt-3 pb-4'>
       {/* logo */}
-      <div className='hidden md:block'>
-        <Link href='/'>
-          <Logo className='w-20 md:ml-10 hidden lg:inline-flex cursor-pointer active:scale-75 trasition duration-75' />
-        </Link>
-        <Link href='/'>
-          <ArrowBackIcon
-            className='lg:hidden text-red-500 ml-4 hover:bg-gray-100 rounded-full p-2 hover:scale-105 transition duration-150 ease-out'
-            sx={{ fontSize: 45 }}
-          />
-        </Link>
-      </div>
+      <Link href='/'>
+        <ArrowBackIcon
+          className='lg:hidden text-black md:ml-4 hover:bg-black hover:text-white rounded-full p-2 hover:scale-105 transition duration-150 ease-out'
+          sx={{ fontSize: 45 }}
+        />
+      </Link>
 
       {/* middle section */}
+
       <MainHeader />
-      <Methodologies />
+      <div className='hidden md:block m-auto'>
+        <Methodologies />
+      </div>
     </div>
   )
 }

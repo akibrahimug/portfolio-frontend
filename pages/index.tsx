@@ -32,7 +32,7 @@ const Home: React.FC = () => {
       <div className='max-w-[1400px] m-auto'>
         <HeroSection />
       </div>
-      <div className='max-w-[1400px] m-auto'>
+      <div className='max-w-[1400px] m-auto' id='tech-stack'>
         <TechStackScroll />
       </div>
       <div>

@@ -1,12 +1,11 @@
 'use client'
 
-import React from 'react'
-import { useEffect, useState } from 'react'
-import { Send, ArrowUpRight, Github, Linkedin, Twitter, CheckCircle } from 'lucide-react'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Send, ArrowUpRight, Github, Linkedin, CheckCircle } from 'lucide-react'
+
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
-import Contact from '@/components/Contact'
 
 interface SocialLink {
   icon: React.ReactNode
@@ -52,11 +51,30 @@ export default function ProfileDesc({ certified }: ProfileDescProps) {
       label: 'LinkedIn',
     },
     {
-      icon: <Twitter className='h-5 w-5' />,
+      icon: (
+        <div className='w-full h-full flex items-center justify-center hover:brightness-0 hover:invert'>
+          <Image
+            src={'icons/twitter.svg'}
+            alt='twitter'
+            width={20}
+            height={20}
+            className='h-5 w-5 transition-all duration-200 '
+          />
+        </div>
+      ),
       url: 'https://twitter.com/Akibrahimug',
       label: 'Twitter',
     },
   ]
+
+  const handleEmail = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    const emailParams = new URLSearchParams({
+      subject: 'Regarding Your work as a Software Engineer',
+      body: 'Hello Kasoma,\n\nI saw your website and would like to discuss...',
+    }).toString()
+    window.open(`mailto:kasomaibrahim@gmail.com?${emailParams}`, '_self')
+  }, [])
 
   return (
     <div className='container mx-auto px-14 py-12 md:py-46 xl:py-40'>
@@ -77,7 +95,7 @@ export default function ProfileDesc({ certified }: ProfileDescProps) {
               className='space-y-2 text-center md:text-left'
             >
               <h2 className='text-2xl md:text-3xl font-medium'>
-                Hi, I'm <span className='text-red-600 font-semibold'>Ibrahim</span> a
+                Hi, I&apos;m <span className='text-red-600 font-semibold'>Ibrahim</span> a
               </h2>
               <h1 className='text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-gray-500 leading-tight'>
                 FULLSTACK
@@ -99,18 +117,13 @@ export default function ProfileDesc({ certified }: ProfileDescProps) {
               transition={{ duration: 0.5, delay: 0.2 }}
               className='flex flex-wrap justify-center md:justify-start gap-4'
             >
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button className='bg-red-500 hover:bg-red-600 text-white rounded-[11px] px-4 hover:scale-125 transition-transform duration-700'>
-                    Let's talk
-                    <Send className='ml-2 h-4 w-4' />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className='sm:max-w-md'>
-                  <Contact />
-                </DialogContent>
-              </Dialog>
-
+              <Button
+                onClick={handleEmail}
+                className='bg-red-500 hover:bg-red-600 text-white rounded-[11px] px-4 hover:scale-125 transition-transform duration-700'
+              >
+                Let&apos;s talk
+                <Send className='ml-2 h-4 w-4' />
+              </Button>
               <Button
                 variant='ghost'
                 className='rounded-full text-gray-700 hover:bg-transparent hover:scale-125 transition-transform duration-700'
@@ -150,7 +163,7 @@ export default function ProfileDesc({ certified }: ProfileDescProps) {
                     href={link.url}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='flex items-center justify-center h-12 w-12 rounded-full bg-white border border-gray-200 shadow-md hover:border-red-500 hover:bg-red-500 hover:text-white transition-all duration-300 hover:scale-105 active:scale-75'
+                    className='flex items-center justify-center h-12 w-12 rounded-full bg-white border border-gray-200 shadow-md hover:border-red-500 hover:bg-red-500 hover:text-white  transition-all duration-300 hover:scale-105 active:scale-75'
                     whileHover={{ y: -2 }}
                     aria-label={link.label}
                   >
@@ -177,7 +190,7 @@ export default function ProfileDesc({ certified }: ProfileDescProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className='grid grid-cols-2 gap-x-8 gap-y-3'
+              className='grid md:grid-cols-2 gap-x-8 gap-y-3'
             >
               {certified.map((item, index) => (
                 <MotionDiv

@@ -4,9 +4,11 @@ import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 
 const Bio: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const router = useRouter()
 
   // Define motion components with proper typing
   const MotionDiv = motion.div as any
@@ -78,7 +80,7 @@ const Bio: React.FC = () => {
             className='flex justify-end'
           >
             <div className='inline-flex items-center text-sm text-gray-500 hover:text-gray-700 cursor-pointer transition-colors'>
-              <span>Read more</span>
+              <span onClick={() => router.push('/cv')}>Read more</span>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 className='h-4 w-4 ml-1'

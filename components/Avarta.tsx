@@ -1,21 +1,13 @@
-/* eslint-disable quotes */
-/* eslint-disable no-unused-vars */
-import React, { useContext, useEffect, useState } from 'react'
-import Line from '@/components/projectpics/line.svg'
-import Bio from '@/components/Bio'
-import { Context } from './Context'
-import { useFetch } from '../pages/api/useFetch'
+import React from 'react'
+import Line from '@/public/icons/line.svg'
+import { useFetch } from '@/pages/api/useFetch'
 import Image from 'next/image'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-
-interface AvartaData {
-  pictureUrl: string
-  from: string
-}
+import Bio from '@/components/Bio'
 
 const Avarta: React.FC = () => {
-  const { data: avartas, error } = useFetch('/avartas')
+  const { data: avartas } = useFetch('/avartas')
 
   const isLoading = !avartas
 
@@ -40,7 +32,7 @@ const Avarta: React.FC = () => {
           </div>
         )}
         <span className='font-semibold absolute w-[219px] right-10 top-[90px] text-lg hidden xl:block text-gray-600'>
-          {`"Let's create an amazing web experince together."`}
+          {'"Let\'s create an amazing web experince together."'}
         </span>
         <div className='absolute top-[250px] right-16 hidden xl:block'>
           <div

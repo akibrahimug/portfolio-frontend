@@ -1,16 +1,27 @@
 'use client'
 
-import React from 'react'
-import { useRef, useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { Search } from 'lucide-react'
+import React, { useRef, useState, useEffect } from 'react'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { Search, X, ExternalLink, Award, BookOpen, BarChart2 } from 'lucide-react'
 import techStackData from '@/lib/technologies.json'
+import { Button } from '@/components/ui/button'
+
+// Extended Technology interface with additional details
+interface Technology {
+  name: string
+  icon: string
+  color: string
+  experience?: string
+  learningSource?: string
+  confidenceLevel?: number
+  description?: string
+}
 
 export default function TechStackScroll() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef as any, { once: false, amount: 0.2 })
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedTech, setSelectedTech] = useState<Technology | null>(null)
 
   // Get the technologies array from the techStack property
   const technologies: Technology[] = techStackData.techStack
@@ -29,6 +40,11 @@ export default function TechStackScroll() {
         ? technologies
         : technologies.filter((tech) => tech.name.toLowerCase().includes(query)),
     )
+
+    // If there's exactly one match and it's an exact match, select it automatically
+    if (query && filteredTech.length === 1 && filteredTech[0].name.toLowerCase() === query) {
+      setSelectedTech(filteredTech[0])
+    }
   }, [searchQuery])
 
   // Split into rows for marquee
@@ -49,8 +65,18 @@ export default function TechStackScroll() {
 
   const [row1, row2, row3] = getRowTechnologies()
 
+  // Handle tech selection
+  const handleTechSelect = (tech: Technology) => {
+    setSelectedTech(tech)
+  }
+
+  // Close tech detail modal
+  const closeDetail = () => {
+    setSelectedTech(null)
+  }
+
   return (
-    <section className='py-16'>
+    <section className='py-16 relative'>
       <div className='container mx-auto px-4'>
         <div className='text-center mb-8' ref={containerRef}>
           <MotionH2
@@ -86,12 +112,12 @@ export default function TechStackScroll() {
                 className='w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 dark:border-gray-700 bg-transparent text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all'
               />
               {searchQuery && (
-                <button
+                <Button
                   onClick={() => setSearchQuery('')}
                   className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'
                 >
                   ✕
-                </button>
+                </Button>
               )}
             </div>
           </MotionDiv>
@@ -107,19 +133,19 @@ export default function TechStackScroll() {
             <p className='text-lg text-gray-600 dark:text-gray-300'>
               No technologies found matching "{searchQuery}"
             </p>
-            <button
+            <Button
               onClick={() => setSearchQuery('')}
               className='mt-4 px-4 py-2 text-gray-500 border border-gray-300 rounded-md hover:text-gray-700 hover:border-gray-400 transition-colors'
             >
               Clear Search
-            </button>
+            </Button>
           </MotionDiv>
         ) : (
           <>
             {searchQuery || filteredTech.length <= 7 ? (
               <div className='flex flex-wrap gap-4 justify-center py-6'>
                 {filteredTech.map((tech) => (
-                  <TechCard key={tech.name} tech={tech} />
+                  <TechCard key={tech.name} tech={tech} onClick={() => handleTechSelect(tech)} />
                 ))}
               </div>
             ) : (
@@ -130,21 +156,33 @@ export default function TechStackScroll() {
                 {row1.length > 0 && (
                   <MarqueeSlider duration={25}>
                     {row1.map((tech) => (
-                      <TechCard key={tech.name} tech={tech} />
+                      <TechCard
+                        key={tech.name}
+                        tech={tech}
+                        onClick={() => handleTechSelect(tech)}
+                      />
                     ))}
                   </MarqueeSlider>
                 )}
                 {row2.length > 0 && (
                   <MarqueeSlider duration={30} reverse>
                     {row2.map((tech) => (
-                      <TechCard key={tech.name} tech={tech} />
+                      <TechCard
+                        key={tech.name}
+                        tech={tech}
+                        onClick={() => handleTechSelect(tech)}
+                      />
                     ))}
                   </MarqueeSlider>
                 )}
                 {row3.length > 0 && (
                   <MarqueeSlider duration={20}>
                     {row3.map((tech) => (
-                      <TechCard key={tech.name} tech={tech} />
+                      <TechCard
+                        key={tech.name}
+                        tech={tech}
+                        onClick={() => handleTechSelect(tech)}
+                      />
                     ))}
                   </MarqueeSlider>
                 )}
@@ -158,23 +196,22 @@ export default function TechStackScroll() {
             <p className='text-sm text-gray-500 dark:text-gray-400'>
               Showing {filteredTech.length} of {technologies.length} technologies
             </p>
-            <button
+            <Button
               onClick={() => setSearchQuery('')}
               className='mt-2 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 text-sm'
             >
               Clear Search
-            </button>
+            </Button>
           </div>
         )}
       </div>
+
+      {/* Tech Detail Modal */}
+      <AnimatePresence>
+        {selectedTech && <TechDetailCard tech={selectedTech} onClose={closeDetail} />}
+      </AnimatePresence>
     </section>
   )
-}
-
-interface Technology {
-  name: string
-  icon: string
-  color: string
 }
 
 interface MarqueeSliderProps {
@@ -219,14 +256,144 @@ function MarqueeSlider({ children, duration, reverse = false }: MarqueeSliderPro
 
 interface TechCardProps {
   tech: Technology
+  onClick: () => void
 }
-function TechCard({ tech }: TechCardProps) {
+function TechCard({ tech, onClick }: TechCardProps) {
   return (
     <div
+      onClick={onClick}
       className={`flex items-center gap-3 flex-shrink-0 py-3 px-5 rounded-xl ${tech.color} shadow-sm border border-white dark:border-gray-800 transition-all duration-300 hover:scale-105 hover:shadow-md cursor-pointer`}
     >
-      <img src={tech.icon} alt={`${tech.name} icon`} className='w-6 h-6 object-contain' />
+      <img
+        src={tech.icon || '/placeholder.svg'}
+        alt={`${tech.name} icon`}
+        className='w-6 h-6 object-contain'
+      />
       <span className='font-medium whitespace-nowrap'>{tech.name}</span>
     </div>
+  )
+}
+
+interface TechDetailCardProps {
+  tech: Technology
+  onClose: () => void
+}
+function TechDetailCard({ tech, onClose }: TechDetailCardProps) {
+  // Default values if not provided in the data
+  const experience = tech.experience || '3+ years'
+  const learningSource = tech.learningSource || 'Self-taught & professional projects'
+  const confidenceLevel = tech.confidenceLevel || 85
+  const description =
+    tech.description ||
+    `${tech.name} is a key technology in my stack that I've used extensively in various projects.`
+
+  const scrollToProjects = () => {
+    document.getElementById('projects')?.scrollIntoView({
+      behavior: 'smooth',
+    })
+    onClose()
+  }
+  return (
+    <motion.div
+      className='fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className={`relative max-w-md w-full rounded-2xl overflow-hidden shadow-xl ${tech.color} border border-white/20 dark:border-gray-700`}
+        initial={{ scale: 0.9, y: 20, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.9, y: 20, opacity: 0 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className='relative p-6 pb-4'>
+          <Button
+            onClick={onClose}
+            className='absolute top-4 right-4 p-1 rounded-full bg-white/20 dark:bg-gray-800/50 hover:bg-white/30 dark:hover:bg-gray-800/80 transition-colors'
+          >
+            <X className='h-5 w-5' />
+          </Button>
+
+          <div className='flex items-center gap-4'>
+            <div className='p-3 rounded-xl bg-white/30 dark:bg-gray-800/30'>
+              <img
+                src={tech.icon || '/placeholder.svg'}
+                alt={tech.name}
+                className='w-10 h-10 object-contain'
+              />
+            </div>
+            <div>
+              <h3 className='text-2xl font-bold'>{tech.name}</h3>
+              <p className='text-sm opacity-80'>Technology Details</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className='bg-white/90 dark:bg-gray-900/90 p-6 pt-5'>
+          <p className='text-gray-700 dark:text-gray-300 mb-6'>{description}</p>
+
+          <div className='space-y-5'>
+            {/* Experience */}
+            <div className='flex items-start gap-3'>
+              <div className='mt-0.5 p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30'>
+                <Award className='h-5 w-5 text-blue-600 dark:text-blue-400' />
+              </div>
+              <div>
+                <h4 className='font-medium text-gray-900 dark:text-gray-100'>Experience</h4>
+                <p className='text-sm text-gray-600 dark:text-gray-400'>{experience}</p>
+              </div>
+            </div>
+
+            {/* Learning Source */}
+            <div className='flex items-start gap-3'>
+              <div className='mt-0.5 p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30'>
+                <BookOpen className='h-5 w-5 text-purple-600 dark:text-purple-400' />
+              </div>
+              <div>
+                <h4 className='font-medium text-gray-900 dark:text-gray-100'>Learning Source</h4>
+                <p className='text-sm text-gray-600 dark:text-gray-400'>{learningSource}</p>
+              </div>
+            </div>
+
+            {/* Confidence Level */}
+            <div className='flex items-start gap-3'>
+              <div className='mt-0.5 p-2 rounded-lg bg-green-100 dark:bg-green-900/30'>
+                <BarChart2 className='h-5 w-5 text-green-600 dark:text-green-400' />
+              </div>
+              <div className='flex-1'>
+                <h4 className='font-medium text-gray-900 dark:text-gray-100'>Confidence Level</h4>
+                <div className='mt-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5'>
+                  <motion.div
+                    className='bg-green-600 dark:bg-green-500 h-2.5 rounded-full'
+                    initial={{ width: 0 }}
+                    animate={{ width: `${confidenceLevel}%` }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                  />
+                </div>
+                <p className='text-xs text-right mt-1 text-gray-600 dark:text-gray-400'>
+                  {confidenceLevel}%
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className='mt-6 pt-4 border-t border-gray-200 dark:border-gray-700'>
+            <Button
+              onClick={scrollToProjects}
+              className='w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300'
+            >
+              <ExternalLink className='h-4 w-4' />
+              <span>View Projects</span>
+            </Button>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
   )
 }
