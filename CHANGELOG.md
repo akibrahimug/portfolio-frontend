@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.7.0...v1.8.0) (2025-05-19)
+
+
+### Features
+
+* **adding and fixing restapi endpoints:** adding and fixing restapi endpoints ([3d1433f](https://github.com/akibrahimug/portfolio-frontend/commit/3d1433f0282b136cbf0250e56a89cd40a247f324))
+
 # [1.7.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.6.0...v1.7.0) (2025-05-15)
 
 
