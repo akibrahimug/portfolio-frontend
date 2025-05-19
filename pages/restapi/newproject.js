@@ -11,6 +11,13 @@ function Newproject() {
   const router = useRouter()
   const [anchorEl, setAnchorEl] = useState(null)
 
+  // Check authentication status on component mount and redirect if not authenticated
+  useEffect(() => {
+    if (!authenticatedUser) {
+      router.push('/signin')
+    }
+  }, [authenticatedUser, router])
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
@@ -49,9 +56,21 @@ function Newproject() {
     pictureUrl: '',
     liveSiteUrl: '',
     githubUrl: '',
-    userID: authenticatedUser ? authenticatedUser.userID : '',
+    userID: '',
   })
+
+  // Update userID whenever authenticatedUser changes
+  useEffect(() => {
+    if (authenticatedUser && authenticatedUser.userID) {
+      setData((prevData) => ({
+        ...prevData,
+        userID: authenticatedUser.userID,
+      }))
+    }
+  }, [authenticatedUser])
+
   data.pictureUrl = currentImage ? currentImage : ''
+
   // create a change method
   const change = (e) => {
     // create name and value to store the event targets
@@ -60,28 +79,40 @@ function Newproject() {
     // as key value pairs
     setData((project) => ({ ...project, [name]: value }))
   }
+
   const [errors, setErrors] = useState([])
+
   const submit = (e) => {
     e.preventDefault()
-    if (!authenticatedUser) {
+
+    // Double-check authentication and ensure userID is present
+    if (!authenticatedUser || !authenticatedUser.userID) {
+      console.log('User not authenticated or missing userID', authenticatedUser)
       router.push('/signin')
-    } else {
-      noAuthRoutes
-        .createProject(data)
-        .then((errors) => {
-          if (errors.length) {
-            // set the errors array to display them
-            setErrors(errors)
-            // else signIn with user emailAddress and password
-          } else {
-            router.push('projects')
-          }
-        })
-        // catch any errors thrown by the api and log them to the console
-        .catch((err) => {
-          console.log(err)
-        })
+      return
     }
+
+    // Create a new object with guaranteed userID
+    const projectData = {
+      ...data,
+      userID: authenticatedUser.userID,
+    }
+
+    noAuthRoutes
+      .createProject(projectData)
+      .then((errors) => {
+        if (errors.length) {
+          // set the errors array to display them
+          setErrors(errors)
+          console.log('Validation errors:', errors)
+        } else {
+          router.push('projects')
+        }
+      })
+      // catch any errors thrown by the api and log them to the console
+      .catch((err) => {
+        console.log('API error:', err)
+      })
   }
 
   return (
@@ -133,13 +164,14 @@ function Newproject() {
                           type='text'
                           name='pictureURL'
                           id='pictureURL'
-                          className='block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                          className='block  flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm w-full'
                           placeholder='https://www.example.com'
                           value={currentImage}
                           onClick={handleClick}
                           onChange={change}
                         />
                         <Popover
+                          className='[&>div]:w-[80%]'
                           id={id}
                           open={open}
                           anchorEl={anchorEl}

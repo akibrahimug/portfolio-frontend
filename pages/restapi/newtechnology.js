@@ -7,7 +7,7 @@ import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import Image from 'next/image'
 function Newtechonlogy() {
-  const { googleUpload, noAuthRoutes, authenticatedUser } = useContext(Context)
+  const { googleUpload, noAuthRoutes, authenticatedUser, createTechnologies } = useContext(Context)
   const router = useRouter()
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -69,8 +69,8 @@ function Newtechonlogy() {
     if (!authenticatedUser) {
       router.push('/signin')
     } else {
-      noAuthRoutes
-        .createTechnologies(data)
+      // Use the Context's createTechnologies function which handles authentication
+      createTechnologies(data)
         .then((errors) => {
           if (errors.length) {
             // set the errors array to display them
@@ -102,8 +102,6 @@ function Newtechonlogy() {
       setExperiences(res)
     })
   }, [])
-
-  console.log(data)
 
   return (
     <div>
@@ -161,6 +159,7 @@ function Newtechonlogy() {
                           onChange={change}
                         />
                         <Popover
+                          className='[&>div]:w-[80%]'
                           id={id}
                           open={open}
                           anchorEl={anchorEl}

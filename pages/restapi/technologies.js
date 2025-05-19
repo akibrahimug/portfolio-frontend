@@ -15,7 +15,6 @@ function Technologies() {
       setTechnologies(res)
     })
   }, [])
-  console.log(technologies)
   return (
     <div>
       <RestHead />

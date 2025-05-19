@@ -30,9 +30,9 @@ export default class NoAuth {
   // set method to defualt(GET) body(null) requiresAuth(false), credentials(null)
   api(
     path: string,
-    method: string = 'GET',
+    method = 'GET',
     body: any = null,
-    requiresAuth: boolean = false,
+    requiresAuth = false,
     credentials: Credentials | null = null,
   ): Promise<Response> {
     // create a url constant to store the url from config and the path
@@ -267,30 +267,41 @@ export default class NoAuth {
 
   // get experience
   async getExperience(): Promise<any | null> {
-    // create a response constant to save the data that GET from the api
-    const response = await this.api('/experience')
-    // if the get was successful
-    if (response.status === 200) {
-      // return the json data and then save it as data
-      return response.json().then((data) => data)
-      // else id the response has any problem
-    } else if (
-      response.status === 401 ||
-      response.status === 400 ||
-      response.status === 500
-      // return null
-    ) {
+    try {
+      // create a response constant to save the data that GET from the api
+      // Fix: use plural 'experiences' endpoint to match the POST endpoint
+      const response = await this.api('/experiences')
+
+      // if the get was successful
+      if (response.status === 200) {
+        // return the json data and then save it as data
+        return response.json().then((data) => data)
+      }
+      // else if response has any problem
+      else if (
+        response.status === 401 ||
+        response.status === 400 ||
+        response.status === 500 ||
+        response.status === 404
+      ) {
+        console.log(`Experience API error with status ${response.status}`)
+        return null
+      }
+      // else for any other unexpected status
+      else {
+        console.log(`Unexpected status in getExperience: ${response.status}`)
+        return null
+      }
+    } catch (error) {
+      console.log('Error fetching experience data:', error)
       return null
-      // else throw an error from the api response
-    } else {
-      throw new Error('Something went wrong')
     }
   }
 
   // get resume
   async getResume(): Promise<any | null> {
     // create a response constant to save the data that GET from the api
-    const response = await this.api('/resume')
+    const response = await this.api('/resumes')
     // if the get was successful
     if (response.status === 200) {
       // return the json data and then save it as data
@@ -311,45 +322,65 @@ export default class NoAuth {
 
   // get social media
   async getSocialMedia(): Promise<any | null> {
-    // create a response constant to save the data that GET from the api
-    const response = await this.api('/socialMedia')
-    // if the get was successful
-    if (response.status === 200) {
-      // return the json data and then save it as data
-      return response.json().then((data) => data)
-      // else id the response has any problem
-    } else if (
-      response.status === 401 ||
-      response.status === 400 ||
-      response.status === 500
-      // return null
-    ) {
+    try {
+      // create a response constant to save the data that GET from the api
+      const response = await this.api('/socialMedia')
+
+      // if the get was successful
+      if (response.status === 200) {
+        // return the json data and then save it as data
+        return response.json().then((data) => data)
+      }
+      // else if response has any problem
+      else if (
+        response.status === 401 ||
+        response.status === 400 ||
+        response.status === 500 ||
+        response.status === 404
+      ) {
+        console.log(`SocialMedia API error with status ${response.status}`)
+        return null
+      }
+      // else for any other unexpected status
+      else {
+        console.log(`Unexpected status in getSocialMedia: ${response.status}`)
+        return null
+      }
+    } catch (error) {
+      console.log('Error fetching social media data:', error)
       return null
-      // else throw an error from the api response
-    } else {
-      throw new Error('Something went wrong')
     }
   }
 
   // get messages
   async getMessage(): Promise<any | null> {
-    // create a response constant to save the data that GET from the api
-    const response = await this.api('/messages')
-    // if the get was successful
-    if (response.status === 200) {
-      // return the json data and then save it as data
-      return response.json().then((data) => data)
-      // else id the response has any problem
-    } else if (
-      response.status === 401 ||
-      response.status === 400 ||
-      response.status === 500
-      // return null
-    ) {
+    try {
+      // create a response constant to save the data that GET from the api
+      const response = await this.api('/messages')
+
+      // if the get was successful
+      if (response.status === 200) {
+        // return the json data and then save it as data
+        return response.json().then((data) => data)
+      }
+      // else if response has any problem
+      else if (
+        response.status === 401 ||
+        response.status === 400 ||
+        response.status === 500 ||
+        response.status === 404
+      ) {
+        console.log(`Messages API error with status ${response.status}`)
+        return null
+      }
+      // else for any other unexpected status
+      else {
+        console.log(`Unexpected status in getMessage: ${response.status}`)
+        return null
+      }
+    } catch (error) {
+      console.log('Error fetching message data:', error)
       return null
-      // else throw an error from the api response
-    } else {
-      throw new Error('Something went wrong')
     }
   }
 
@@ -376,6 +407,59 @@ export default class NoAuth {
       return response.json().then((data) => data)
     } else {
       return null
+    }
+  }
+
+  // create project
+  async createProject(project: any): Promise<any[]> {
+    // create a response constant to save the data that POST to the api
+    const response = await this.api('/projects', 'POST', project)
+    // if the post was successful
+    if (response.status === 201) {
+      // return nothing
+      return []
+      // else if the post had a problem
+    } else if (response.status === 400) {
+      // return a response as JSON then
+      return response.json().then((data) => {
+        // return the errors
+        return data.errors
+      })
+      // else throw any other errors from the api
+    } else {
+      throw new Error('Something went wrong')
+    }
+  }
+
+  // create technologies
+  async createTechnologies(technologies: any): Promise<any[]> {
+    try {
+      // create a response constant to save the data that POST to the api
+      const response = await this.api('/technologies', 'POST', technologies, true, {
+        emailAddress: technologies.emailAddress || '',
+        password: technologies.password || '',
+      })
+
+      // if the post was successful
+      if (response.status === 201) {
+        // return empty array (no errors)
+        return []
+      }
+      // else if the post had a problem with validation
+      else if (response.status === 400) {
+        // return validation errors
+        return response.json().then((data) => {
+          return data.errors || []
+        })
+      }
+      // else for any other unexpected status
+      else {
+        console.log(`Unexpected status in createTechnologies: ${response.status}`)
+        return ['An error occurred while creating the technology.']
+      }
+    } catch (error) {
+      console.log('Error creating technology:', error)
+      return ['Failed to connect to the server. Please try again.']
     }
   }
 }
