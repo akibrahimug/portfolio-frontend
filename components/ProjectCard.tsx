@@ -88,7 +88,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           className='h-full w-full object-cover '
           loading='lazy'
         />
-        <div className='absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
+        <div className='absolute inset-0 bg-gradient-to-t from-gray-200/90 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
       </div>
 
       <div className='flex flex-1 flex-col p-5'>
