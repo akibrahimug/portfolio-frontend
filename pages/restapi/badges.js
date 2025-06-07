@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
 function Badges() {
   const router = useRouter()
-  const { noAuthRoutes } = useContext(Context)
+  const { noAuth } = useContext(AppContext)
 
   const [badges, setBadges] = useState([])
   useEffect(() => {
-    noAuthRoutes.getBadges().then((res) => {
+    noAuth.getBadges().then((res) => {
       setBadges(res)
     })
   }, [])

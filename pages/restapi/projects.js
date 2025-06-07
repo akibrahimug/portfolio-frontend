@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
 function Projects() {
   const router = useRouter()
-  const { noAuthRoutes } = useContext(Context)
+  const { noAuth } = useContext(AppContext)
 
   const [projects, setProjects] = useState([])
   useEffect(() => {
-    noAuthRoutes.getProjects().then((res) => {
+    noAuth.getProjects().then((res) => {
       setProjects(res)
     })
   }, [])

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Github } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const NavButtons = () => {
   const router = useRouter()
@@ -55,7 +56,7 @@ const NavButtons = () => {
             REST API
           </Button>
 
-          <a
+          <Link
             href='https://github.com/akibrahimug'
             target='_blank'
             rel='noopener noreferrer'
@@ -71,7 +72,7 @@ const NavButtons = () => {
             aria-label='GitHub Profile'
           >
             <Github className='w-5 h-5' />
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
 import { useRouter } from 'next/router'
 import RestHead from '../../components/RestHead'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
 function Pictures() {
-  const { googleUpload } = useContext(Context)
+  const { googleUpload } = useContext(AppContext)
   const router = useRouter()
   const [pictureURL, setPictureURL] = useState()
   useEffect(() => {

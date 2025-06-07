@@ -5,6 +5,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Search, X, ExternalLink, Award, BookOpen, BarChart2 } from 'lucide-react'
 import techStackData from '@/lib/technologies.json'
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
 
 // Extended Technology interface with additional details
 interface Technology {
@@ -93,7 +94,7 @@ export default function TechStackScroll() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Technologies I work with as a fullstack JavaScript developer
+            Hover over the technologies to stop the scroll and click to see more details
           </MotionP>
 
           <MotionDiv
@@ -264,7 +265,9 @@ function TechCard({ tech, onClick }: TechCardProps) {
       onClick={onClick}
       className={`flex items-center gap-3 flex-shrink-0 py-3 px-5 rounded-xl ${tech.color} shadow-sm border border-white dark:border-gray-800 transition-all duration-300 hover:scale-105 hover:shadow-md cursor-pointer`}
     >
-      <img
+      <Image
+        width={24}
+        height={24}
         src={tech.icon || '/placeholder.svg'}
         alt={`${tech.name} icon`}
         className='w-6 h-6 object-contain'
@@ -320,7 +323,9 @@ function TechDetailCard({ tech, onClose }: TechDetailCardProps) {
 
           <div className='flex items-center gap-4'>
             <div className='p-3 rounded-xl bg-white/30 dark:bg-gray-800/30'>
-              <img
+              <Image
+                width={40}
+                height={40}
                 src={tech.icon || '/placeholder.svg'}
                 alt={tech.name}
                 className='w-10 h-10 object-contain'

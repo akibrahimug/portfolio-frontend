@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import Avarta from '../Avarta'
 
 // Mock the useFetch hook
-jest.mock('../pages/api/useFetch', () => ({
+jest.mock('../../pages/api/useFetch', () => ({
   useFetch: jest.fn().mockReturnValue({
     data: [
       {
@@ -24,9 +24,10 @@ jest.mock('next/image', () => ({
 }))
 
 // Mock the Line SVG component
-jest.mock('@/components/projectpics/line.svg', () => () => (
-  <div data-testid='line-svg'>Line SVG</div>
-))
+jest.mock('@/public/icons/line.svg', () => ({
+  __esModule: true,
+  default: () => <div data-testid='line-svg'>Line SVG</div>,
+}))
 
 // Mock the Bio component
 jest.mock('@/components/Bio', () => () => <div data-testid='bio-component'>Bio Component</div>)
@@ -65,7 +66,7 @@ describe('Avarta Component', () => {
 
   it('renders skeleton when data is loading', () => {
     // Override the mock to simulate loading state
-    require('../pages/api/useFetch').useFetch.mockReturnValueOnce({
+    require('../../pages/api/useFetch').useFetch.mockReturnValueOnce({
       data: null,
       error: null,
     })

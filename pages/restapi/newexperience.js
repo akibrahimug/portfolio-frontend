@@ -1,13 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
+import { AuthContext } from '@/components/AuthProvider'
 import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css' // theme css file
 import { DateRangePicker } from 'react-date-range'
 
 function Newexperience() {
-  const { noAuthRoutes, authenticatedUser } = useContext(Context)
+  const { noAuth } = useContext(AppContext)
+  const { user } = useContext(AuthContext)
   const router = useRouter()
   const [value, setValue] = useState([null, null])
   const [startDate, setStartDate] = useState(new Date())
@@ -31,7 +33,7 @@ function Newexperience() {
     description: '',
     startDate: '',
     endDate: '',
-    userID: authenticatedUser ? authenticatedUser.userID : '',
+    userID: user ? user.userID : '',
   })
 
   // create a change method
@@ -45,10 +47,10 @@ function Newexperience() {
   const [errors, setErrors] = useState([])
   const submit = (e) => {
     e.preventDefault()
-    if (!authenticatedUser) {
+    if (!user) {
       router.push('/signin')
     } else {
-      noAuthRoutes
+      noAuth
         .createExperience(data)
         .then((errors) => {
           if (errors.length) {

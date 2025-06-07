@@ -1,18 +1,48 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
-import { Context } from '../../components/Context'
-
+import { AuthContext } from '@/components/AuthProvider'
+import { api } from '@/pages/api/Config'
 function Newresume() {
-  const { noAuthRoutes, authenticatedUser } = useContext(Context)
+  const { user, axiosJWT, getUserID } = useContext(AuthContext)
   const router = useRouter()
+
+  // create resume with consistent userID
+  const createResume = async (resume) => {
+    try {
+      // Ensure it has userID
+      const dataWithUserID = {
+        ...resume,
+        userID: getUserID(),
+      }
+
+      // create a response constant to save the data that POST to the api
+      const response = await axiosJWT.post(`${api.apiBaseUrl}/resumes`, dataWithUserID, {
+        headers: {
+          Authorization: `Bearer ${user?.accessToken}`,
+        },
+      })
+      // if the post was successful
+      if (response.status === 201) {
+        // return nothing
+        return []
+        // else if the post had a problem
+      } else if (response.status === 400) {
+        // return a response as JSOn then
+        return response
+        // else throw any other errors from the api
+      }
+    } catch (e) {
+      throw new Error('Something went wrong')
+    }
+  }
 
   // get the data from the form
   const [data, setData] = useState({
     resumeTitle: '',
     resumeUrl: '',
     date: '',
-    userID: authenticatedUser ? authenticatedUser.userID : '',
+    userID: user ? user.userID : '',
   })
 
   // create a change method
@@ -26,11 +56,10 @@ function Newresume() {
   const [errors, setErrors] = useState([])
   const submit = (e) => {
     e.preventDefault()
-    if (!authenticatedUser) {
+    if (!user) {
       router.push('/signin')
     } else {
-      noAuthRoutes
-        .createResume(data)
+      createResume(data)
         .then((errors) => {
           if (errors.length) {
             // set the errors array to display them

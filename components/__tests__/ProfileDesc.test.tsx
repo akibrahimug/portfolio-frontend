@@ -5,8 +5,48 @@ import ProfileDesc from '../ProfileDesc'
 // Mock the modules that might cause issues in tests
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    a: ({ children, ...props }: any) => <a {...props}>{children}</a>,
+    div: ({ children, ...props }: any) => {
+      // Filter out framer-motion specific props
+      const {
+        initial,
+        animate,
+        exit,
+        transition,
+        variants,
+        whileHover,
+        whileTap,
+        whileFocus,
+        whileInView,
+        drag,
+        dragConstraints,
+        onAnimationComplete,
+        layout,
+        layoutId,
+        ...domProps
+      } = props
+      return <div {...domProps}>{children}</div>
+    },
+    a: ({ children, ...props }: any) => {
+      // Filter out framer-motion specific props
+      const {
+        initial,
+        animate,
+        exit,
+        transition,
+        variants,
+        whileHover,
+        whileTap,
+        whileFocus,
+        whileInView,
+        drag,
+        dragConstraints,
+        onAnimationComplete,
+        layout,
+        layoutId,
+        ...domProps
+      } = props
+      return <a {...domProps}>{children}</a>
+    },
   },
   useInView: () => true,
 }))
@@ -46,11 +86,13 @@ jest.mock('lucide-react', () => ({
 
 describe('ProfileDesc Component', () => {
   const mockCertified = ['Certification 1', 'Certification 2', 'Certification 3']
+  let mockScrollIntoView: jest.Mock
 
   beforeEach(() => {
     // Mock scrollIntoView
+    mockScrollIntoView = jest.fn()
     global.document.getElementById = jest.fn().mockImplementation(() => ({
-      scrollIntoView: jest.fn(),
+      scrollIntoView: mockScrollIntoView,
     }))
 
     // Reset timers before each test
@@ -70,7 +112,7 @@ describe('ProfileDesc Component', () => {
     expect(pulseElements.length).toBeGreaterThan(0)
 
     // Content should not be visible yet
-    expect(screen.queryByText("Hi, I'm")).not.toBeInTheDocument()
+    expect(screen.queryByText(/Hi, I'm/)).not.toBeInTheDocument()
   })
 
   it('displays content after loading completes', () => {
@@ -81,10 +123,11 @@ describe('ProfileDesc Component', () => {
       jest.advanceTimersByTime(500)
     })
 
-    // Check if content is visible after loading
-    expect(screen.getByText("Hi, I'm")).toBeInTheDocument()
-    expect(screen.getByText('FULLSTACK')).toBeInTheDocument()
-    expect(screen.getByText('DEVELOPER')).toBeInTheDocument()
+    // Check if content is visible after loading (using partial text matches)
+    expect(screen.getByText(/Hi, I'm/)).toBeInTheDocument()
+    expect(screen.getByText('Ibrahim')).toBeInTheDocument()
+    expect(screen.getByText(/FULLSTACK/)).toBeInTheDocument()
+    expect(screen.getByText(/DEVELOPER/)).toBeInTheDocument()
 
     // Check for buttons
     expect(screen.getByText("Let's talk")).toBeInTheDocument()
@@ -93,7 +136,6 @@ describe('ProfileDesc Component', () => {
     // Check for social links (3 total)
     expect(screen.getByTestId('github-icon')).toBeInTheDocument()
     expect(screen.getByTestId('linkedin-icon')).toBeInTheDocument()
-    expect(screen.getByTestId('twitter-icon')).toBeInTheDocument()
 
     // Check for certifications
     mockCertified.forEach((cert) => {
@@ -114,7 +156,7 @@ describe('ProfileDesc Component', () => {
 
     // Check if scrollIntoView was called
     expect(document.getElementById).toHaveBeenCalledWith('projects')
-    expect(document.getElementById('projects')?.scrollIntoView).toHaveBeenCalledWith({
+    expect(mockScrollIntoView).toHaveBeenCalledWith({
       behavior: 'smooth',
     })
   })

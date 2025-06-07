@@ -2,13 +2,13 @@ import React, { useState, useContext, useEffect } from 'react'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
 import Popover from '@mui/material/Popover'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
 
 function Newproject() {
-  const { googleUpload, createBadges, noAuthRoutes, authenticatedUser } = useContext(Context)
+  const { googleUpload, createBadges, noAuth, authenticatedUser } = useContext(AppContext)
   const router = useRouter()
   const [anchorEl, setAnchorEl] = useState(null)
   const [value, setValue] = useState([null, null])
@@ -92,7 +92,7 @@ function Newproject() {
   // get the technologies
   const [technologies, setTechnologies] = useState([])
   useEffect(() => {
-    noAuthRoutes.getTechnologies().then((technologies) => {
+    noAuth.getTechnologies().then((technologies) => {
       setTechnologies(technologies)
     })
   }, [])

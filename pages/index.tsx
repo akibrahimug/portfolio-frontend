@@ -2,10 +2,15 @@ import React from 'react'
 import Head from 'next/head'
 import Header from '@/components/Header'
 import HeroSection from '@/components/HeroSection'
-import Projects from '@/components/Projects'
 import { motion, useScroll, useSpring } from 'framer-motion'
-import TechStackScroll from '@/components/TechStack-scroll'
+import dynamic from 'next/dynamic'
 
+const TechStackScroll = dynamic(() => import('@/components/TechStack-scroll'), {
+  ssr: false, // skip server-side bundle
+  loading: () => null,
+})
+
+const Projects = dynamic(() => import('@/components/Projects'), { ssr: false })
 const Home: React.FC = () => {
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, {

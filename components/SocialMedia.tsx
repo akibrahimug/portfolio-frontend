@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React, { ReactNode } from 'react'
 
 interface SocialMediaProps {
@@ -8,7 +9,7 @@ interface SocialMediaProps {
 
 const SocialMedia: React.FC<SocialMediaProps> = ({ icon, link, text }) => {
   return (
-    <a
+    <Link
       rel='noreferrer'
       target='_blank'
       href={link}
@@ -16,7 +17,7 @@ const SocialMedia: React.FC<SocialMediaProps> = ({ icon, link, text }) => {
     >
       <span className='mr-3 text-red-500'>{icon}</span>
       <p>{text}</p>
-    </a>
+    </Link>
   )
 }
 

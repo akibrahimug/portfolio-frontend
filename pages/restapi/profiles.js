@@ -1,23 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
 function Profiles() {
   const router = useRouter()
-  const { noAuthRoutes } = useContext(Context)
+  const { noAuth } = useContext(AppContext)
   const [personalStatement, setPersonalStatement] = useState([])
   const [avartas, setAvarta] = useState([])
   useEffect(() => {
-    noAuthRoutes.getAvartas().then((res) => {
+    noAuth.getAvartas().then((res) => {
       setAvarta(res)
     })
   }, [])
 
   useEffect(() => {
-    noAuthRoutes.getPersonalStatement().then((res) => {
+    noAuth.getPersonalStatement().then((res) => {
       setPersonalStatement(res)
     })
   }, [])

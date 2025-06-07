@@ -2,21 +2,23 @@ import React, { useState, useContext, useEffect } from 'react'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
 import Popover from '@mui/material/Popover'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
+import { AuthContext } from '@/components/AuthProvider'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import Image from 'next/image'
 function Newproject() {
-  const { googleUpload, noAuthRoutes, authenticatedUser } = useContext(Context)
+  const { googleUpload, noAuth } = useContext(AppContext)
+  const { user } = useContext(AuthContext)
   const router = useRouter()
   const [anchorEl, setAnchorEl] = useState(null)
 
   // Check authentication status on component mount and redirect if not authenticated
   useEffect(() => {
-    if (!authenticatedUser) {
+    if (!user) {
       router.push('/signin')
     }
-  }, [authenticatedUser, router])
+  }, [user, router])
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -61,13 +63,13 @@ function Newproject() {
 
   // Update userID whenever authenticatedUser changes
   useEffect(() => {
-    if (authenticatedUser && authenticatedUser.userID) {
+    if (user && user.userID) {
       setData((prevData) => ({
         ...prevData,
-        userID: authenticatedUser.userID,
+        userID: user.userID,
       }))
     }
-  }, [authenticatedUser])
+  }, [user])
 
   data.pictureUrl = currentImage ? currentImage : ''
 
@@ -86,8 +88,8 @@ function Newproject() {
     e.preventDefault()
 
     // Double-check authentication and ensure userID is present
-    if (!authenticatedUser || !authenticatedUser.userID) {
-      console.log('User not authenticated or missing userID', authenticatedUser)
+    if (!user || !user.userID) {
+      console.log('User not authenticated or missing userID', user)
       router.push('/signin')
       return
     }
@@ -95,10 +97,10 @@ function Newproject() {
     // Create a new object with guaranteed userID
     const projectData = {
       ...data,
-      userID: authenticatedUser.userID,
+      userID: user.userID,
     }
 
-    noAuthRoutes
+    noAuth
       .createProject(projectData)
       .then((errors) => {
         if (errors.length) {

@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import BigProject from '../BigProject'
 
 // Mock the useFetch hook
-jest.mock('../pages/api/useFetch', () => ({
+jest.mock('../../pages/api/useFetch', () => ({
   useFetch: jest.fn().mockImplementation(() => ({
     data: [
       {
@@ -73,7 +73,7 @@ describe('BigProject Component', () => {
 
   it('renders a skeleton when data is loading', () => {
     // Override the mock for this test to simulate loading
-    require('../pages/api/useFetch').useFetch.mockReturnValueOnce({
+    require('../../pages/api/useFetch').useFetch.mockReturnValueOnce({
       data: null,
       error: null,
     })

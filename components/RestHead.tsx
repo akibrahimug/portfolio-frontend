@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Context } from './Context'
+import { AuthContext } from './AuthProvider'
 import Link from 'next/link'
 import Avatar from '@mui/material/Avatar'
 
@@ -10,8 +10,7 @@ interface User {
 }
 
 const RestHead: React.FC = () => {
-  const context = useContext(Context)
-  const authenticatedUser = context?.authenticatedUser
+  const authenticatedUser = useContext(AuthContext)?.user
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {

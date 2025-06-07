@@ -1,23 +1,14 @@
-import React, { useEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
-import { Context } from '../components/Context'
+import { AuthContext } from '@/components/AuthProvider'
 
-const SignOut: React.FC = () => {
-  // pull in the signOut method from the context
-  const context = useContext(Context)
-  const signOut = context?.signOut
+export default function SignOutPage() {
+  const auth = useContext(AuthContext)
   const router = useRouter()
 
-  // when the component mounts
-  // bring in the signOut functionality
   useEffect(() => {
-    if (signOut) {
-      signOut()
-    }
-    router.push('/restapi')
-  }, [signOut, router])
+    auth?.signOut().finally(() => router.push('/'))
+  }, [])
 
-  return <div />
+  return null
 }
-
-export default SignOut

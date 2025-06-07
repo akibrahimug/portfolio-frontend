@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
 import Header from '../../components/Header'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
@@ -46,7 +46,7 @@ const titles = [
 ]
 function MyRestAPI() {
   // call the authenticated user data fro context
-  const { noAuthRoutes } = useContext(Context)
+  const { noAuth } = useContext(AppContext)
   const router = useRouter()
 
   const [messages, setMessages] = useState([])
@@ -54,7 +54,7 @@ function MyRestAPI() {
   // rerender the page if new message is added
 
   useEffect(() => {
-    noAuthRoutes.getMessage().then((res) => {
+    noAuth.getMessage().then((res) => {
       setMessages(res)
     })
   }, [])

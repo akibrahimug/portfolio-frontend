@@ -4,9 +4,9 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import Form from '../components/Form'
-import { Context } from '../components/Context'
+import { AuthContext } from '../components/AuthProvider'
 
 interface UserSignInData {
   emailAddress: string
@@ -20,8 +20,7 @@ const UserSignIn: React.FC = () => {
   // create an errors instance in state and set it to an empty array
   const [errors, setErrors] = useState<string[]>([])
   // pull in the signIn method from context
-  const context = useContext(Context)
-  const signIn = context?.signIn
+  const signIn = useContext(AuthContext)?.signIn
 
   // create the change function
   const change = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +65,6 @@ const UserSignIn: React.FC = () => {
         ])
       })
   }
-
   return (
     <div className='form--centered'>
       <Form

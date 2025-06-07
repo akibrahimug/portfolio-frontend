@@ -2,6 +2,18 @@ import React from 'react'
 import { render, screen, act } from '@testing-library/react'
 import Bio from '../Bio'
 
+// Mock Next.js useRouter
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    prefetch: jest.fn(),
+    back: jest.fn(),
+    forward: jest.fn(),
+    refresh: jest.fn(),
+  }),
+}))
+
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {

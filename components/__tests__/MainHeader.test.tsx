@@ -2,95 +2,89 @@ import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import MainHeader from '../MainHeader'
 
-// Mock the components used in MainHeader
-jest.mock('../NavButtons', () => {
-  return ({ handleClick }: { handleClick: (e: any) => void }) => (
-    <div data-testid='nav-buttons'>
-      <button data-testid='contact-button' value='Contact Me' onClick={handleClick}>
-        Contact Me
-      </button>
-      <button data-testid='tech-button' value='TechStack' onClick={handleClick}>
-        TechStack
-      </button>
-      <button data-testid='rest-button' value='Restful API' onClick={handleClick}>
-        REST API
-      </button>
-    </div>
-  )
-})
+// Mock next/navigation
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    prefetch: jest.fn(),
+    back: jest.fn(),
+    forward: jest.fn(),
+    refresh: jest.fn(),
+  }),
+}))
 
-jest.mock('../ModalMenu', () => {
-  return ({ title }: { title: string }) => <div data-testid='modal-menu'>Modal: {title}</div>
-})
-
-jest.mock('../Contact', () => {
-  return () => <div data-testid='contact-component'>Contact Component</div>
-})
-
-jest.mock('../MyRestApi', () => {
-  return () => <div data-testid='restapi-component'>REST API Component</div>
-})
-
-jest.mock('../TechStack', () => {
+// Mock the TechStack component that might be referenced
+jest.mock('../TechStack-scroll', () => {
   return () => <div data-testid='techstack-component'>TechStack Component</div>
 })
 
-jest.mock('../Resume', () => {
-  return () => <div data-testid='resume-component'>Resume Component</div>
+// Mock lucide-react icons
+jest.mock('lucide-react', () => ({
+  Github: () => <div data-testid='github-icon'>GitHub Icon</div>,
+}))
+
+// Mock scrollIntoView method
+Object.defineProperty(window, 'Element', {
+  value: {
+    prototype: {
+      scrollIntoView: jest.fn(),
+    },
+  },
 })
 
-jest.mock('@heroicons/react/24/solid', () => ({
-  BeakerIcon: () => <div data-testid='beaker-icon'>Beaker Icon</div>,
-}))
+// Mock document.getElementById
+Object.defineProperty(document, 'getElementById', {
+  value: jest.fn().mockReturnValue({
+    scrollIntoView: jest.fn(),
+  }),
+})
 
-jest.mock('@mui/icons-material', () => ({
-  Close: () => <div data-testid='close-icon'>Close Icon</div>,
-}))
+// Mock window.open
+const mockOpen = jest.fn()
+global.open = mockOpen
 
 describe('MainHeader Component', () => {
-  it('renders NavButtons component', () => {
-    render(<MainHeader />)
-
-    // Check if NavButtons is rendered
-    expect(screen.getByTestId('nav-buttons')).toBeInTheDocument()
-
-    // Modal should not be visible initially
-    expect(screen.queryByTestId('modal-menu')).not.toBeInTheDocument()
+  beforeEach(() => {
+    jest.clearAllMocks()
   })
 
-  it('shows Contact component when Contact Me button is clicked', () => {
+  it('renders the navigation buttons', () => {
     render(<MainHeader />)
 
-    // Click Contact Me button
-    fireEvent.click(screen.getByTestId('contact-button'))
-
-    // Modal should be visible
-    expect(screen.getByTestId('modal-menu')).toBeInTheDocument()
-
-    // Contact component should be visible
-    expect(screen.getByTestId('contact-component')).toBeInTheDocument()
-
-    // Other components should not be visible
-    expect(screen.queryByTestId('restapi-component')).not.toBeInTheDocument()
-    expect(screen.queryByTestId('techstack-component')).not.toBeInTheDocument()
-    expect(screen.queryByTestId('resume-component')).not.toBeInTheDocument()
+    // Check if all buttons are rendered
+    expect(screen.getByText('Email Me')).toBeInTheDocument()
+    expect(screen.getByText('TechStack')).toBeInTheDocument()
+    expect(screen.getByText('REST API')).toBeInTheDocument()
   })
 
-  it('shows TechStack component when TechStack button is clicked', () => {
+  it('opens email when Contact Me button is clicked', () => {
     render(<MainHeader />)
 
-    // Click TechStack button
-    fireEvent.click(screen.getByTestId('tech-button'))
+    // Click the Contact Me button (Email Me)
+    fireEvent.click(screen.getByText('Email Me'))
 
-    // Modal should be visible
-    expect(screen.getByTestId('modal-menu')).toBeInTheDocument()
+    // Check if window.open was called with mailto
+    expect(mockOpen).toHaveBeenCalledWith(
+      expect.stringContaining('mailto:kasomaibrahim@gmail.com'),
+      '_self',
+    )
+  })
 
-    // TechStack component should be visible
-    expect(screen.getByTestId('techstack-component')).toBeInTheDocument()
+  it('scrolls to tech stack when TechStack button is clicked', () => {
+    const mockScrollIntoView = jest.fn()
+    const mockElement = {
+      scrollIntoView: mockScrollIntoView,
+    }
 
-    // Other components should not be visible
-    expect(screen.queryByTestId('contact-component')).not.toBeInTheDocument()
-    expect(screen.queryByTestId('restapi-component')).not.toBeInTheDocument()
-    expect(screen.queryByTestId('resume-component')).not.toBeInTheDocument()
+    jest.spyOn(document, 'getElementById').mockReturnValue(mockElement as any)
+
+    render(<MainHeader />)
+
+    // Click the TechStack button
+    fireEvent.click(screen.getByText('TechStack'))
+
+    // Check if getElementById was called with 'tech-stack'
+    expect(document.getElementById).toHaveBeenCalledWith('tech-stack')
   })
 })

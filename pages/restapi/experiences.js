@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 function Experiences() {
   const router = useRouter()
-  const { noAuthRoutes } = useContext(Context)
+  const { noAuth } = useContext(AppContext)
 
   const [experience, setExperience] = useState([])
   useEffect(() => {
-    noAuthRoutes.getExperience().then((res) => {
+    noAuth.getExperience().then((res) => {
       setExperience(res)
     })
   }, [])

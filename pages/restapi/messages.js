@@ -1,16 +1,44 @@
 import React, { useContext, useEffect, useState } from 'react'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
+import { AuthContext } from '@/components/AuthProvider'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
+import { api } from '@/pages/api/Config'
 
 function Message() {
   const router = useRouter()
-  const { noAuthRoutes, deleteMessage } = useContext(Context)
+  const { noAuth } = useContext(AppContext)
+  const { axiosJWT, user } = useContext(AuthContext)
   const [messages, setMessages] = useState([])
+
+  // delete message
+  const deleteMessage = async (id) => {
+    try {
+      // create a response constant to save the data that DELETE from the api
+      const response = await axiosJWT.delete(`${api.apiBaseUrl}/messages/${id}`, {
+        headers: {
+          Authorization: `Bearer ${user?.accessToken}`,
+        },
+      })
+      // if the delete was successful
+      if (response.status === 204) {
+        // return nothing
+        return []
+        // else if the delete had a problem
+      } else if (response.status === 400) {
+        // return a response as JSOn then
+        return response
+        // else throw any other errors from the api
+      }
+    } catch (e) {
+      throw new Error('Something went wrong')
+    }
+  }
+
   useEffect(() => {
-    noAuthRoutes.getMessage().then((res) => {
+    noAuth.getMessage().then((res) => {
       setMessages(res)
     })
   }, [])
