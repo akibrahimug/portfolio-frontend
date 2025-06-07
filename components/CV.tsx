@@ -5,6 +5,7 @@ import { Download, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import Link from 'next/link'
 export function CvComponent() {
   const [isDownloading, setIsDownloading] = useState(false)
   const router = useRouter()
@@ -74,30 +75,30 @@ export function CvComponent() {
             <h2 className='text-xl font-semibold mb-2'>Contact</h2>
             <p>07310843342</p>
             <p>
-              <a
+              <Link
                 href='mailto:kasomaibrahim@gmail.com'
                 className='text-blue-400 underline hover:underline'
               >
                 kasomaibrahim@gmail.com
-              </a>
+              </Link>
             </p>
             <p>
-              <a href='https://linkedin.com' className='text-blue-400 underline hover:underline'>
+              <Link href='https://linkedin.com' className='text-blue-400 underline hover:underline'>
                 LinkedIn
-              </a>
+              </Link>
             </p>
             <p>
-              <a href='https://github.com' className='text-blue-400 underline hover:underline'>
+              <Link href='https://github.com' className='text-blue-400 underline hover:underline'>
                 GitHub
-              </a>
+              </Link>
             </p>
             <p>
-              <a
+              <Link
                 href='https://kasomaibrahim.dev'
                 className='text-blue-400 underline hover:underline'
               >
                 Portfolio
-              </a>
+              </Link>
             </p>
           </section>
 

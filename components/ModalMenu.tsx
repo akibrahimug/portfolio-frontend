@@ -1,6 +1,7 @@
 import React from 'react'
 import Logo from './projectpics/Logo.svg'
 import { GitHub } from '@mui/icons-material'
+import Link from 'next/link'
 
 interface ModalMenuProps {
   title: string
@@ -50,12 +51,12 @@ const ModalMenu: React.FC<ModalMenuProps> = ({ title, handleClick }) => {
         >
           Restful API
         </button>
-        <a
+        <Link
           href='https://github.com/akibrahimug'
           className='bg-white p-[22px] top-0 right-0 m-0 hover:scale-105 hover:border hover:bg-red-500 transition transform ease-out duration-105  hover:text-white shadow-md rounded-full absolute '
         >
           <GitHub aria-label='GitHub' />
-        </a>
+        </Link>
       </div>
     </div>
   )

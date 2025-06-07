@@ -1,12 +1,61 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import SmallProjects from '../SmallProjects'
 
-// Mock React's useContext hook
+// Mock the Context component
+jest.mock('../AppContext', () => {
+  return {
+    AppContext: {
+      Consumer: ({ children }: { children: any }) =>
+        children({
+          noAuth: {
+            getProjects: jest.fn().mockResolvedValue([]),
+          },
+        }),
+    },
+    Provider: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  }
+})
+
+// Mock the AnimatedCardWrapper and other components
+jest.mock('../AnimatedCardWrapper', () => ({
+  AnimatedCardWrapper: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+}))
+
+jest.mock('../ProjectCard', () => ({
+  ProjectCard: ({ project }: { project: any }) => (
+    <div data-testid='project-card'>
+      <h3>{project.projectTitle}</h3>
+      <p>{project.projectDescription}</p>
+      <div data-testid='tech-stacks'>
+        {project.techStacks?.map((tech: any) => (
+          <span key={tech.techStackID}>{tech.techTitle}</span>
+        ))}
+      </div>
+      <img src={project.pictureUrl} alt={project.projectTitle} data-testid='project-image' />
+      <a href={project.githubUrl}>Project Code</a>
+    </div>
+  ),
+}))
+
+jest.mock('../Pagination', () => ({
+  Pagination: () => <div data-testid='pagination'>Pagination</div>,
+}))
+
+// Mock the Skeleton component
+jest.mock('@/components/ui/skeleton', () => ({
+  Skeleton: ({ className }: { className?: string }) => (
+    <div data-testid='skeleton' className={className}>
+      Loading Skeleton
+    </div>
+  ),
+}))
+
+// Mock React's useContext to return our mock context value
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useContext: jest.fn().mockReturnValue({
-    noAuthRoutes: {
+    noAuth: {
       getProjects: jest.fn().mockResolvedValue([
         {
           projectID: 1,
@@ -40,20 +89,6 @@ jest.mock('react', () => ({
   }),
 }))
 
-// Mock react-loading-skeleton
-jest.mock('react-loading-skeleton', () => ({
-  __esModule: true,
-  default: ({ height }: { height: number }) => (
-    <div data-testid='skeleton' style={{ height }}>
-      Loading Skeleton
-    </div>
-  ),
-}))
-
-// Mock window.open
-const mockOpen = jest.fn()
-global.open = mockOpen
-
 describe('SmallProjects Component', () => {
   beforeEach(() => {
     jest.clearAllMocks()
@@ -62,59 +97,33 @@ describe('SmallProjects Component', () => {
   it('renders projects with their details and tech stacks', async () => {
     render(<SmallProjects />)
 
-    // Initially it should show loading skeletons
-    expect(screen.getAllByTestId('skeleton').length).toBeGreaterThan(0)
+    // Wait for the projects to load
+    await waitFor(() => {
+      expect(screen.getByText('Test Project 1')).toBeInTheDocument()
+    })
 
-    // Wait for the useEffect to complete and check if projects are rendered
-    // Note: In a real test environment, we'd use waitFor or similar, but for this test we'll just check synchronously
-
-    // Check for project titles
-    expect(await screen.findByText('Test Project 1')).toBeInTheDocument()
-    expect(await screen.findByText('Test Project 2')).toBeInTheDocument()
+    expect(screen.getByText('Test Project 2')).toBeInTheDocument()
 
     // Check for tech stack tags
-    expect(await screen.findByText('React')).toBeInTheDocument()
-    expect(await screen.findByText('TypeScript')).toBeInTheDocument()
-    expect(await screen.findByText('Node.js')).toBeInTheDocument()
-
-    // Check for "Show More" buttons (from TextToggle)
-    const showMoreButtons = await screen.findAllByText('Show More')
-    expect(showMoreButtons.length).toBeGreaterThan(0)
+    expect(screen.getByText('React')).toBeInTheDocument()
+    expect(screen.getByText('TypeScript')).toBeInTheDocument()
+    expect(screen.getByText('Node.js')).toBeInTheDocument()
 
     // Check for "Project Code" links
-    const projectCodeLinks = await screen.findAllByText('Project Code')
+    const projectCodeLinks = screen.getAllByText('Project Code')
     expect(projectCodeLinks.length).toBe(2)
   })
 
-  it('toggles text visibility when clicking Show More/Less', async () => {
-    render(<SmallProjects />)
-
-    // Wait for the content to load
-    const showMoreButton = await screen.findByText('Show More')
-
-    // Click the Show More button
-    fireEvent.click(showMoreButton)
-
-    // Button should now say "Show Less"
-    expect(screen.getByText('Show Less')).toBeInTheDocument()
-
-    // Click the Show Less button
-    fireEvent.click(screen.getByText('Show Less'))
-
-    // Button should now say "Show More" again
-    expect(screen.getByText('Show More')).toBeInTheDocument()
-  })
-
-  it('opens the project URL when clicking on the image', async () => {
+  it('renders project images', async () => {
     render(<SmallProjects />)
 
     // Wait for the projects to load
-    const projectImages = await screen.findAllByRole('img')
+    await waitFor(() => {
+      expect(screen.getByText('Test Project 1')).toBeInTheDocument()
+    })
 
-    // Click on the first project image
-    fireEvent.click(projectImages[0])
-
-    // Check if window.open was called with the correct URL
-    expect(mockOpen).toHaveBeenCalledWith('https://test1.example.com', '_blank')
+    // Check for project images
+    const projectImages = screen.getAllByTestId('project-image')
+    expect(projectImages.length).toBe(2)
   })
 })

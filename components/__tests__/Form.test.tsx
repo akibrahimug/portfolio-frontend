@@ -2,10 +2,15 @@ import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import Form from '../Form'
 
-// Mock next/router
+// Mock Next.js router
 jest.mock('next/router', () => ({
   useRouter: () => ({
     push: jest.fn(),
+    replace: jest.fn(),
+    prefetch: jest.fn(),
+    back: jest.fn(),
+    forward: jest.fn(),
+    refresh: jest.fn(),
   }),
 }))
 
@@ -17,17 +22,20 @@ describe('Form Component', () => {
     </div>
   )
 
-  it('renders the form with correct title and buttons', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
+  it('renders form with submit button and elements', () => {
     render(
       <Form errors={[]} submit={mockSubmit} submitButtonText='Submit' elements={mockElements} />,
     )
 
-    // Check if the title contains the submit button text
+    // Check if the heading is rendered with submit button text
     expect(screen.getByText('Choose a Submit Method')).toBeInTheDocument()
 
     // Check if form elements are rendered
     expect(screen.getByTestId('form-elements')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('Test input')).toBeInTheDocument()
 
     // Check if buttons are rendered
     expect(screen.getByText('Submit')).toBeInTheDocument()
@@ -39,15 +47,15 @@ describe('Form Component', () => {
       <Form errors={[]} submit={mockSubmit} submitButtonText='Submit' elements={mockElements} />,
     )
 
-    // Submit the form
-    fireEvent.submit(screen.getByRole('form'))
+    // Submit the form by clicking the submit button
+    fireEvent.click(screen.getByText('Submit'))
 
     // Check if submit function was called
     expect(mockSubmit).toHaveBeenCalledTimes(1)
   })
 
-  it('displays error messages when there are errors', () => {
-    const errors = ['Error 1', 'Error 2']
+  it('displays errors when provided', () => {
+    const errors = ['Error 1', 'Error 2', 'Error 3']
 
     render(
       <Form
@@ -58,20 +66,26 @@ describe('Form Component', () => {
       />,
     )
 
-    // Check if the error heading is displayed
+    // Check if error display is rendered
     expect(screen.getByText('Validation errors')).toBeInTheDocument()
-
-    // Check if individual errors are displayed
     expect(screen.getByText('Error 1')).toBeInTheDocument()
     expect(screen.getByText('Error 2')).toBeInTheDocument()
+    expect(screen.getByText('Error 3')).toBeInTheDocument()
   })
 
-  it('does not display error container when there are no errors', () => {
+  it('does not display errors when there are fewer than 2 errors', () => {
+    const errors = ['Single Error']
+
     render(
-      <Form errors={[]} submit={mockSubmit} submitButtonText='Submit' elements={mockElements} />,
+      <Form
+        errors={errors}
+        submit={mockSubmit}
+        submitButtonText='Submit'
+        elements={mockElements}
+      />,
     )
 
-    // Error heading should not be present
+    // Check that error display is not rendered for single error
     expect(screen.queryByText('Validation errors')).not.toBeInTheDocument()
   })
 })

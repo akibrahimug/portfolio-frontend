@@ -1,17 +1,19 @@
-import React, { useState, useContext, useEffect } from 'react'
-import RestHead from '../../../components/RestHead'
+import React, { useState, useContext } from 'react'
+import RestHead from '@/components/RestHead'
 import { useRouter } from 'next/router'
-import { Context } from '../../../components/Context'
+import { AppContext } from '@/components/AppContext'
+import { AuthContext } from '@/components/AuthProvider'
 
 function Newmethodology() {
-  const { googleUpload, noAuthRoutes, authenticatedUser } = useContext(Context)
+  const { noAuth } = useContext(AppContext)
+  const { user } = useContext(AuthContext)
   const router = useRouter()
 
   // get the data from the form
   const [data, setData] = useState({
     methodologyTitle: '',
     description: '',
-    userID: authenticatedUser ? authenticatedUser.userID : '',
+    userID: user ? user.userID : '',
   })
 
   // create a change method
@@ -25,7 +27,7 @@ function Newmethodology() {
   const [errors, setErrors] = useState([])
   const submit = (e) => {
     e.preventDefault()
-    noAuthRoutes
+    noAuth
       .createMethodology(data)
       .then((errors) => {
         if (errors.length) {

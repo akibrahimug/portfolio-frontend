@@ -3,9 +3,9 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react'
 import { AnimatedCardWrapper } from '@/components/AnimatedCardWrapper'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Context } from '@/components/Context'
 import { ProjectCard } from '@/components/ProjectCard'
 import { Pagination } from '@/components/Pagination'
+import { AppContext } from './AppContext'
 interface Technology {
   techStackID: string | number
   techTitle: string
@@ -44,11 +44,9 @@ interface SmallProjectsProps {
   initialData?: DataState
 }
 
-const SmallProjects: React.FC<SmallProjectsProps> = ({
-  itemsPerPage = 6, // Default to 6 items per page
-}) => {
-  const context = useContext(Context)
-  const noAuthRoutes = context?.noAuthRoutes
+const SmallProjects: React.FC<SmallProjectsProps> = ({ itemsPerPage = 6 }) => {
+  const context = useContext(AppContext)
+  const noAuthRoutes = context?.noAuth
 
   const [data, setData] = useState<DataState>({
     projects: [],

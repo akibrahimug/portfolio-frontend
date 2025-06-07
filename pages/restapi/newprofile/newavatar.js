@@ -2,7 +2,8 @@ import React, { useState, useContext, useEffect } from 'react'
 import RestHead from '../../../components/RestHead'
 import { useRouter } from 'next/router'
 import Popover from '@mui/material/Popover'
-import { Context } from '../../../components/Context'
+import { AppContext } from '@/components/AppContext'
+import { AuthContext } from '@/components/AuthProvider'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import 'react-date-range/dist/styles.css' // main style file
@@ -11,7 +12,8 @@ import { DateRangePicker } from 'react-date-range'
 import Image from 'next/image'
 
 function Newproject() {
-  const { googleUpload, noAuthRoutes, authenticatedUser } = useContext(Context)
+  const { googleUpload, noAuth } = useContext(AppContext)
+  const { user } = useContext(AuthContext)
   const router = useRouter()
   const [value, setValue] = useState([null, null])
   const [anchorEl, setAnchorEl] = useState(null)
@@ -65,7 +67,7 @@ function Newproject() {
     from: '',
     to: '',
     pictureUrl: '',
-    userID: authenticatedUser ? authenticatedUser.userID : '',
+    userID: user ? user.userID : '',
   })
   data.pictureUrl = currentImage ? currentImage : ''
 
@@ -93,7 +95,7 @@ function Newproject() {
   const [errors, setErrors] = useState([])
   const submit = (e) => {
     e.preventDefault()
-    noAuthRoutes
+    noAuth
       .createAvarta(data)
       .then((errors) => {
         if (errors.length) {

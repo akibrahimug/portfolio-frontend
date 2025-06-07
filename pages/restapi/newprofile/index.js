@@ -1,11 +1,8 @@
-import React, { useContext } from 'react'
-import { Context } from '../../../components/Context'
+import React from 'react'
 import Header from '../../../components/Header'
 import RestHead from '../../../components/RestHead'
 import { useRouter } from 'next/router'
 function MyRestAPI() {
-  // call the authenticated user data fro context
-  const { authenticatedUser, googleUpload } = useContext(Context)
   const router = useRouter()
   return (
     <>

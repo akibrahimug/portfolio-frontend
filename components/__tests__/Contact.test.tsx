@@ -1,13 +1,13 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 import Contact from '../Contact'
 
-// Mock the Context
-jest.mock('../Context', () => ({
-  Context: {
+// Mock the AppContext
+jest.mock('../AppContext', () => ({
+  AppContext: {
     Consumer: ({ children }: { children: any }) =>
       children({
-        noAuthRoutes: {
+        noAuth: {
           createMessage: jest.fn().mockResolvedValue([]),
         },
       }),
@@ -19,7 +19,7 @@ jest.mock('../Context', () => ({
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useContext: () => ({
-    noAuthRoutes: {
+    noAuth: {
       createMessage: jest.fn().mockResolvedValue([]),
     },
   }),
@@ -66,7 +66,7 @@ describe('Contact Component', () => {
     expect(screen.getByText('LinkedIn')).toBeInTheDocument()
   })
 
-  it('updates form data when inputs change', () => {
+  it('updates form data when inputs change and submits successfully', async () => {
     render(<Contact />)
 
     // Fill in the form
@@ -79,11 +79,14 @@ describe('Contact Component', () => {
       target: { value: 'Test message' },
     })
 
-    // Submit the form
-    fireEvent.submit(screen.getByText('Send').closest('form')!)
+    // Submit the form wrapped in act()
+    await act(async () => {
+      fireEvent.submit(screen.getByText('Send').closest('form')!)
+    })
 
-    // After successful submission, feedback message should appear
-    // Note: This test might be flaky since we're mocking the API response
-    // and the component might not re-render in time
+    // Wait for the success message to appear
+    await waitFor(() => {
+      expect(screen.getByText('Message sent successfully!')).toBeInTheDocument()
+    })
   })
 })

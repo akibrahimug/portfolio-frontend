@@ -9,7 +9,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState, useContext } from 'react'
 import Form from '../components/Form'
-import { Context } from '../components/Context'
+import { AuthContext } from '../components/AuthProvider'
+import { AppContext } from '@/components/AppContext'
 
 interface UserSignUpData {
   firstName: string
@@ -19,12 +20,10 @@ interface UserSignUpData {
 }
 
 const UserSignUp: React.FC = () => {
-  const context = useContext(Context)
-
   // pull in the data and signIn methods from the context
-  const noAuthRoutes = context?.noAuthRoutes
-  const authenticatedUser = context?.authenticatedUser
-  const signIn = context?.signIn
+  const noAuthRoutes = useContext(AppContext)?.noAuth
+  const authenticatedUser = useContext(AuthContext)?.user
+  const signIn = useContext(AuthContext)?.signIn
 
   // create a user instence in the component state and set it to an object
   const [user, setUser] = useState<UserSignUpData>({

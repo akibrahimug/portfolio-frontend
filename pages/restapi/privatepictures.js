@@ -1,15 +1,14 @@
 import React, { useContext, useEffect } from 'react'
-import { Context } from '../../components/Context'
+import { AuthContext } from '@/components/AuthProvider'
 import Pictures from './pictures'
 import { useRouter } from 'next/router'
 
 function Authorised() {
   // call the authenticated user data from context
-  const { authenticatedUser } = useContext(Context)
-  console.log(authenticatedUser)
+  const { user } = useContext(AuthContext)
   const router = useRouter()
   useEffect(() => {
-    if (!authenticatedUser) {
+    if (!user) {
       router?.push('/signin')
     }
   }, [])

@@ -3,6 +3,8 @@
 import React from 'react'
 import { ExternalLink, Github, ChevronDown, ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
+import Link from 'next/link'
 
 interface TextToggleProps {
   text: string
@@ -82,11 +84,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div className=' hover:scale-101 group relative flex h-full flex-col overflow-hidden rounded-lg border border-gray-300 bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-md'>
       <div className='relative aspect-video overflow-hidden'>
-        <img
+        <Image
           src={project.pictureUrl || '/placeholder.svg'}
           alt={project.projectTitle}
           className='h-full w-full object-cover '
           loading='lazy'
+          width={500}
+          height={500}
         />
         <div className='absolute inset-0 bg-gradient-to-t from-gray-200/90 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
       </div>
@@ -113,7 +117,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         <div className='absolute bottom-5 left-5 right-5 flex gap-2'>
-          <a
+          <Link
             href={project.githubUrl}
             target='_blank'
             rel='noreferrer'
@@ -121,8 +125,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
           >
             <Github className='mr-1.5 h-3.5 w-3.5' />
             <span>Code</span>
-          </a>
-          <a
+          </Link>
+          <Link
             href={project.liveSiteUrl}
             target='_blank'
             rel='noreferrer'
@@ -130,7 +134,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           >
             <ExternalLink className='mr-1.5 h-3.5 w-3.5' />
             <span>Live Site</span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

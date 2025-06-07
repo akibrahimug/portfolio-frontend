@@ -1,14 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react'
 import RestHead from '../../../components/RestHead'
 import { useRouter } from 'next/router'
-import { Context } from '../../../components/Context'
-import Box from '@mui/material/Box'
+import { AppContext } from '@/components/AppContext'
+import { AuthContext } from '@/components/AuthProvider'
 import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css' // theme css file
 import { DateRangePicker } from 'react-date-range'
 
 function Newproject() {
-  const { googleUpload, noAuthRoutes, authenticatedUser } = useContext(Context)
+  const { noAuth } = useContext(AppContext)
+  const { user } = useContext(AuthContext)
   const router = useRouter()
   const [value, setValue] = useState([null, null])
   const [anchorEl, setAnchorEl] = useState(null)
@@ -34,7 +35,7 @@ function Newproject() {
     from: '',
     to: '',
     statement: '',
-    userID: authenticatedUser ? authenticatedUser.userID : '',
+    userID: user ? user.userID : '',
   })
 
   const [date, setDate] = useState()
@@ -60,7 +61,7 @@ function Newproject() {
   const [errors, setErrors] = useState([])
   const submit = (e) => {
     e.preventDefault()
-    noAuthRoutes
+    noAuth
       .createPersonalStatement(data)
       .then((errors) => {
         if (errors.length) {

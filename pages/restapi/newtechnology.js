@@ -2,12 +2,14 @@ import React, { useState, useContext, useEffect } from 'react'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
 import Popover from '@mui/material/Popover'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
+import { AuthContext } from '@/components/AuthProvider'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import Image from 'next/image'
 function Newtechonlogy() {
-  const { googleUpload, noAuthRoutes, authenticatedUser, createTechnologies } = useContext(Context)
+  const { googleUpload, noAuth } = useContext(AppContext)
+  const { user } = useContext(AuthContext)
   const router = useRouter()
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -48,7 +50,7 @@ function Newtechonlogy() {
     pictureUrl: '',
     certificationID: '',
     experienceID: '',
-    userID: authenticatedUser ? authenticatedUser.userID : '',
+    userID: user ? user.userID : '',
   })
   data.pictureUrl = currentImage ? currentImage : ''
 
@@ -66,11 +68,12 @@ function Newtechonlogy() {
   const [errors, setErrors] = useState([])
   const submit = (e) => {
     e.preventDefault()
-    if (!authenticatedUser) {
+    if (!user) {
       router.push('/signin')
     } else {
       // Use the Context's createTechnologies function which handles authentication
-      createTechnologies(data)
+      noAuth
+        .createTechnologies(data)
         .then((errors) => {
           if (errors.length) {
             // set the errors array to display them
@@ -90,7 +93,7 @@ function Newtechonlogy() {
   // get the certificates
   const [certificates, setCertificates] = useState([])
   useEffect(() => {
-    noAuthRoutes.getCertifications().then((res) => {
+    noAuth.getCertifications().then((res) => {
       setCertificates(res)
     })
   }, [])
@@ -98,7 +101,7 @@ function Newtechonlogy() {
   // get the experiences
   const [experiences, setExperiences] = useState([])
   useEffect(() => {
-    noAuthRoutes.getExperience().then((res) => {
+    noAuth.getExperience().then((res) => {
       setExperiences(res)
     })
   }, [])

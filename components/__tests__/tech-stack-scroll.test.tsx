@@ -10,6 +10,7 @@ jest.mock('framer-motion', () => ({
     p: ({ children, ...props }: React.PropsWithChildren<any>) => <p {...props}>{children}</p>,
   },
   useInView: () => true,
+  AnimatePresence: ({ children }: React.PropsWithChildren<any>) => <>{children}</>,
 }))
 
 describe('TechStackScroll Component', () => {
@@ -21,7 +22,9 @@ describe('TechStackScroll Component', () => {
 
     // Check if the description is rendered
     expect(
-      screen.getByText('Technologies I work with as a fullstack JavaScript developer'),
+      screen.getByText(
+        'Hover over the technologies to stop the scroll and click to see more details',
+      ),
     ).toBeInTheDocument()
 
     // Check if the search input is rendered

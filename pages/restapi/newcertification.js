@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
 import Popover from '@mui/material/Popover'
-import { Context } from '../../components/Context'
+import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import 'react-date-range/dist/styles.css' // main style file
@@ -10,7 +10,7 @@ import 'react-date-range/dist/theme/default.css' // theme css file
 import { DateRangePicker } from 'react-date-range'
 import Image from 'next/image'
 function Newproject() {
-  const { googleUpload, noAuthRoutes, authenticatedUser } = useContext(Context)
+  const { googleUpload, noAuth, authenticatedUser } = useContext(AppContext)
   const router = useRouter()
   const [anchorEl, setAnchorEl] = useState(null)
   const [value, setValue] = useState([null, null])
@@ -83,7 +83,7 @@ function Newproject() {
     if (!authenticatedUser) {
       router.push('/signin')
     } else {
-      noAuthRoutes
+      noAuth
         .createCertifications(data)
         .then((errors) => {
           if (errors.length) {

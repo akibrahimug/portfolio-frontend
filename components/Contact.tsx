@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import SocialMedia from './SocialMedia'
 import { Google, Twitter, LinkedIn } from '@mui/icons-material'
-import { Context } from './Context'
+import { AppContext } from './AppContext'
 
 interface ContactData {
   name: string
@@ -11,7 +11,7 @@ interface ContactData {
 }
 
 const Contact: React.FC = () => {
-  const { noAuthRoutes } = useContext(Context)
+  const { noAuth } = useContext(AppContext)
 
   // get the data from the form
   const [data, setData] = useState<ContactData>({
@@ -34,7 +34,7 @@ const Contact: React.FC = () => {
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    noAuthRoutes
+    noAuth
       .createMessage(data)
       .then((errors: string[]) => {
         if (errors.length) {

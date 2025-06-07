@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useFetch } from '../pages/api/useFetch'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import Link from 'next/link'
 
 interface Project {
   projectID: string | number
@@ -43,7 +44,7 @@ const BigProject: React.FC = () => {
       {project ? (
         <div className='grow relative lg:px-20 cursor-pointer rounded-md lg:border-0 m-4 '>
           <div className='relative lg:static h-96 min-w-[250px]'>
-            <a href={project.liveSiteUrl} target='_blank' rel='noreferrer'>
+            <Link href={project.liveSiteUrl} target='_blank' rel='noreferrer'>
               <Image
                 src={Airbnb}
                 alt='Airbnb'
@@ -51,7 +52,7 @@ const BigProject: React.FC = () => {
                 objectFit='cover'
                 className='rounded-xl'
               />
-            </a>
+            </Link>
           </div>
         </div>
       ) : (
