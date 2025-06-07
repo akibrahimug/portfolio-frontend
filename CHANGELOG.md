@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/akibrahimug/portfolio-frontend/compare/v1.8.0...v1.8.1) (2025-06-07)
+
+
+### Bug Fixes
+
+* **optimising entire project:** optimising entire project ([2eec5a4](https://github.com/akibrahimug/portfolio-frontend/commit/2eec5a4ed32f5c3730efeaee5b38cbad7facbce1))
+
 # [1.8.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.7.0...v1.8.0) (2025-05-19)
 
 
