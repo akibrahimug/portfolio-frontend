@@ -18,6 +18,11 @@ interface Technology {
   description?: string
 }
 
+/**
+ * Displays an animated, searchable tech stack section with marquee scrolling and detailed modal views.
+ *
+ * Renders a responsive list of technologies with search filtering, animated marquee rows for large lists, and a modal for detailed information on each technology. Supports smooth animations, automatic selection on exact search match, and adapts layout based on the number of filtered technologies.
+ */
 export default function TechStackScroll() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef as any, { once: false, amount: 0.2 })
@@ -259,6 +264,12 @@ interface TechCardProps {
   tech: Technology
   onClick: () => void
 }
+/**
+ * Renders a clickable card displaying a technology's icon and name.
+ *
+ * @param tech - The technology to display.
+ * @param onClick - Handler invoked when the card is clicked.
+ */
 function TechCard({ tech, onClick }: TechCardProps) {
   return (
     <div
@@ -281,6 +292,14 @@ interface TechDetailCardProps {
   tech: Technology
   onClose: () => void
 }
+/**
+ * Displays a modal with detailed information about a selected technology.
+ *
+ * Shows the technology's icon, name, description, experience, learning source, and confidence level, with animated transitions. Includes a button to scroll to the projects section and closes the modal when clicking outside or on the close button.
+ *
+ * @param tech - The technology object to display details for.
+ * @param onClose - Callback to close the modal.
+ */
 function TechDetailCard({ tech, onClose }: TechDetailCardProps) {
   // Default values if not provided in the data
   const experience = tech.experience || '3+ years'

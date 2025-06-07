@@ -7,6 +7,13 @@ import { AuthContext } from '@/components/AuthProvider'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import Image from 'next/image'
+/**
+ * Renders a form for creating a new technology entry, allowing users to input a title, select an image, and associate certifications and experiences.
+ *
+ * Fetches available images, certifications, and experiences from APIs, and submits the form data to create a new technology record. Redirects unauthenticated users to the sign-in page and navigates to the technologies list upon successful creation.
+ *
+ * @returns {JSX.Element} The form UI for creating a new technology.
+ */
 function Newtechonlogy() {
   const { googleUpload, noAuth } = useContext(AppContext)
   const { user } = useContext(AuthContext)

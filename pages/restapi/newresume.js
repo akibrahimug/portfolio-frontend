@@ -3,6 +3,13 @@ import RestHead from '../../components/RestHead'
 import { useRouter } from 'next/router'
 import { AuthContext } from '@/components/AuthProvider'
 import { api } from '@/pages/api/Config'
+/**
+ * Renders a form for creating a new resume entry associated with the authenticated user.
+ *
+ * Displays input fields for resume title, URL, and creation date. Handles form submission by sending the data to the backend API, including the current user's ID, and manages validation errors or redirects upon success.
+ *
+ * @returns {JSX.Element} The new resume creation form component.
+ */
 function Newresume() {
   const { user, axiosJWT, getUserID } = useContext(AuthContext)
   const router = useRouter()

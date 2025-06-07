@@ -5,6 +5,11 @@ import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
+/**
+ * Displays a list of technologies fetched from an API, allowing users to create new entries or navigate back.
+ *
+ * Renders a grid of technology cards with images and titles. Shows a loading indicator while data is being fetched.
+ */
 function Technologies() {
   const router = useRouter()
   const { noAuth } = useContext(AppContext)

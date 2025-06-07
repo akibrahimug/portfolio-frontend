@@ -9,6 +9,13 @@ import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css' // theme css file
 import { DateRangePicker } from 'react-date-range'
 import Image from 'next/image'
+/**
+ * Renders a form for creating a new certification record, including fields for title, school, image selection, and date range.
+ *
+ * Allows users to select an image from a popover populated with images fetched from an external service, pick a date range, and submit the form to create a new certification. Displays validation errors if present and redirects unauthenticated users to the sign-in page.
+ *
+ * @returns {JSX.Element} The form UI for creating a new certification.
+ */
 function Newproject() {
   const { googleUpload, noAuth, authenticatedUser } = useContext(AppContext)
   const router = useRouter()

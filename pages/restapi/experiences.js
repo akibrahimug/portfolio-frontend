@@ -4,6 +4,11 @@ import { useRouter } from 'next/router'
 import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
+/**
+ * Displays a list of user experiences fetched from an API, with options to add a new experience or navigate back.
+ *
+ * Renders a loading indicator while fetching data and displays each experience in a styled card with company, position, description, and formatted dates.
+ */
 function Experiences() {
   const router = useRouter()
   const { noAuth } = useContext(AppContext)

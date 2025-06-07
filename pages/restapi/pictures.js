@@ -5,6 +5,11 @@ import RestHead from '../../components/RestHead'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
+/**
+ * Displays a gallery of uploaded pictures retrieved from Google Cloud Storage.
+ *
+ * Fetches picture metadata on mount, constructs accessible image URLs, and renders them in a responsive grid. Provides navigation to upload new pictures or return to the previous page. Shows a loading spinner while images are being loaded.
+ */
 function Pictures() {
   const { googleUpload } = useContext(AppContext)
   const router = useRouter()

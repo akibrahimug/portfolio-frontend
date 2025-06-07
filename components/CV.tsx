@@ -6,6 +6,13 @@ import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import Link from 'next/link'
+/**
+ * Renders an interactive CV/resume page with contact information, skills, education, and professional experience, including a button to download a PDF version of the CV.
+ *
+ * @returns The complete CV page as a React component.
+ *
+ * @remark The download button fetches a hosted PDF and triggers a client-side download. If the download fails, an error notification is displayed.
+ */
 export function CvComponent() {
   const [isDownloading, setIsDownloading] = useState(false)
   const router = useRouter()

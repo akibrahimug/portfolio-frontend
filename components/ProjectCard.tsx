@@ -80,6 +80,13 @@ function TextToggle({ text, clamp = 3 }: TextToggleProps) {
   )
 }
 
+/**
+ * Displays a project card with image, title, technology stack, expandable description, and links to code and live site.
+ *
+ * Renders a visually styled card for a given project, including an image, project title, technology badges, a collapsible description, and external links to the project's GitHub repository and live site.
+ *
+ * @param project - The project data to display in the card.
+ */
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div className=' hover:scale-101 group relative flex h-full flex-col overflow-hidden rounded-lg border border-gray-300 bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-md'>

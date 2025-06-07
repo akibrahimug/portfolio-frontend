@@ -7,6 +7,13 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
 
+/**
+ * Renders a form for creating a new badge, allowing users to input a title, select an image, and choose a technology stack.
+ *
+ * Fetches available images and technology stacks for selection. On submission, creates a new badge and navigates to the badges page or displays validation errors.
+ *
+ * @remark Redirects unauthenticated users to the sign-in page when attempting to submit the form.
+ */
 function Newproject() {
   const { googleUpload, createBadges, noAuth, authenticatedUser } = useContext(AppContext)
   const router = useRouter()
