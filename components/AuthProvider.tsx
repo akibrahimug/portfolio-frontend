@@ -343,8 +343,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
- 
-
   // // create socialMedia with consistent userID
   // const createSocialMedia = async (socialMedia: any) => {
   //   try {

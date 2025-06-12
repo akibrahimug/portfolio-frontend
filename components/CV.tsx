@@ -115,11 +115,17 @@ export function CvComponent() {
                 'Nx Monorepos',
                 'CI/CD',
                 'Semantic Release',
-                'Agile',
+                'Agile & Scrum',
                 'SQL',
                 'AWS / GCP',
                 'REST APIs',
                 'Git & GitHub',
+                'Storyblok',
+                'Chart.js',
+                'Jest',
+                'React Testing Library',
+                'Tailwind CSS',
+                'HTML',
               ].map((skill) => (
                 <li key={skill} className='text-sm'>
                   {skill}
@@ -155,11 +161,9 @@ export function CvComponent() {
                 location: 'London',
                 period: 'Mar 2023 – Present',
                 bullets: [
-                  'Maintained 28+ React, Next.js & Gatsby apps.',
-                  'Automated deployments with Semantic Release.',
-                  'Migrated Gatsby → Next.js for performance & SEO.',
-                  'Built Nx monorepo for 20 shared projects.',
-                  'Engineered CI/CD via GitHub Actions.',
+                  'Managed & optimized 28+ microfrontends (React, Next.js, Gatsby) — reduced average bundle size by 45% and accelerated release cycles by 30%.',
+                  'Built & maintained an Nx monorepo housing ~20 shared projects, streamlining dependency updates, package releases, and cross-team collaboration — cut CI build times by 35%.',
+                  'Revamped EF English Proficiency Index (EPI) data visualizations with Chart.js for 2.1 million test results across 116 countries (113 ranked, top score 647 in the Netherlands), aligning design/backend API structures and accelerating stakeholder insights by 40%',
                 ],
               },
               {
@@ -168,10 +172,11 @@ export function CvComponent() {
                 location: 'London',
                 period: 'Mar 2022 – Feb 2023',
                 bullets: [
-                  'Developed UIs in React & Next.js.',
-                  'Integrated Storyblok CMS.',
-                  'Streamlined CI/CD pipelines.',
-                  'Conducted code reviews.',
+                  'Led WP→Next.js + Storyblok migration of three flagship EF blogs (We are EF, EF Academy, Teach Online), replacing a monolithic PHP setup with a React-based stack that now supports 40+ language locales, powering 3.5 million monthly visits (global rank #15,967) at 4.26 pages per visit and a 00:02:50 avg session duration',
+                  'Slashed First Contentful Paint by 60% (from ~4.2 s down to ~1.7 s) via Next.js image optimization, code-splitting, and on-demand Storyblok delivery—driving improvements in Core Web Vitals and helping push the bounce rate down to 50.31%',
+                  'Orchestrated 100+ cross-regional releases/month using GitHub Actions → AWS S3 static deployments, achieving zero-downtime launches and sub-2 s average load times.',
+                  'Collaborated with designers, backend engineers, SEO specialists, content teams and analytics leads across 55 countries, embedding A/B testing and data-driven insights into every rollout.',
+                  'Integrated Storyblok headlessly into React, Gatsby and Next.js projects, cutting editorial build-pipeline overhead by 50% and empowering content creators to publish updates in minutes.',
                 ],
               },
               {
@@ -183,16 +188,6 @@ export function CvComponent() {
                   'Built internal tools with Express & React.',
                   'Optimized workflows—40% faster.',
                   'Enhanced responsive UIs.',
-                ],
-              },
-              {
-                company: 'Freelance',
-                role: 'Web Developer',
-                location: 'London',
-                period: 'Feb 2020 – Nov 2022',
-                bullets: [
-                  'Delivered client websites with high satisfaction.',
-                  'Designed wireframes & prototypes in Adobe XD.',
                 ],
               },
             ].map((job) => (
