@@ -1,3 +1,39 @@
+# [1.9.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.8.1...v1.9.0) (2025-06-13)
+
+
+### Bug Fixes
+
+* **avarta:** avarta file .ext was breaking ([d690efd](https://github.com/akibrahimug/portfolio-frontend/commit/d690efdd90b34d9745956e309957370ebfac89cd))
+* **fixing load time for avarta image:** fixing load time for avarta image ([64a9147](https://github.com/akibrahimug/portfolio-frontend/commit/64a91475715255222b14e7caa36030210d727d90))
+
+
+### Features
+
+* **adding more context:** adding more context ([d8a971e](https://github.com/akibrahimug/portfolio-frontend/commit/d8a971e6724e91e7a40b1d384d33d6aa1ce10124))
+
+## [1.8.1](https://github.com/akibrahimug/portfolio-frontend/compare/v1.8.0...v1.8.1) (2025-06-07)
+
+
+### Bug Fixes
+
+* **optimising entire project:** optimising entire project ([2eec5a4](https://github.com/akibrahimug/portfolio-frontend/commit/2eec5a4ed32f5c3730efeaee5b38cbad7facbce1))
+
+# [1.8.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.7.0...v1.8.0) (2025-05-19)
+
+
+### Features
+
+* **adding and fixing restapi endpoints:** adding and fixing restapi endpoints ([3d1433f](https://github.com/akibrahimug/portfolio-frontend/commit/3d1433f0282b136cbf0250e56a89cd40a247f324))
+
+# [1.7.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.6.0...v1.7.0) (2025-05-15)
+
+
+### Features
+
+* **new ui ux updates:** new ui ux updates ([35792a8](https://github.com/akibrahimug/portfolio-frontend/commit/35792a8f06741a2eebd92140523140690c95c61d))
+* **new_features:** new_features ([e2833c7](https://github.com/akibrahimug/portfolio-frontend/commit/e2833c7c770fe70733a88549ae44885485a3079f))
+* **ui:** updating ui and ux to match modern requirments ([660eef0](https://github.com/akibrahimug/portfolio-frontend/commit/660eef0300e3af2d47a8febb9dbccf05d78e29dc))
+
 # [1.6.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.5.0...v1.6.0) (2024-05-22)
 
 
