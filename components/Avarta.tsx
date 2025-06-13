@@ -23,7 +23,7 @@ const Avarta: React.FC = () => {
           <div className='relative w-[360px] mt-8 h-[350px] min-w-[300px] md:h-[30em] md:w-[25em] m-auto lg:mt-10'>
             <Image
               // src={p.from === "2022-11-25" ? p.pictureUrl : ""}
-              src='https://res.cloudinary.com/doyg3ppyn/image/upload/v1715623861/avarta_zodozj.png'
+              src='/icons/avarta.webp'
               alt=''
               layout='fill'
               objectFit='contain'

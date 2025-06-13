@@ -57,17 +57,24 @@ const Bio: React.FC = () => {
               transition={{ duration: 0.5 }}
               className='text-base'
             >
-              I'm a Full-Stack JavaScript Developer with{' '}
-              <span className='font-medium text-black'>six years of experience</span> crafting
-              high-performance, user-centric web applications using{' '}
+              Results-driven Frontend Developer with{' '}
               <span className='font-medium text-black'>
-                React, Next.js, Gatsby, Node.js and TypeScript
+                six years of Full-Stack JavaScript expertise
               </span>
-              . I've architected <span className='font-medium text-black'>scalable monorepos</span>,{' '}
-              <span className='font-medium text-black'>automated CI/CD pipelines</span>, and built
-              bespoke internal tools that cut operation times from hours to minutes—driving an
-              <span className='font-medium text-black'> 80% productivity boost</span>—while thriving
-              in agile, mid-sized teams to solve complex challenges.
+              , building and scaling high-performance web applications using{' '}
+              <span className='font-medium text-black'>React, Next.js & Node.js</span>. I’ve led
+              migrations to headless CMS (Storyblok),{' '}
+              <span className='font-medium text-black'>
+                architected Nx monorepos powering 20+ microfrontends
+              </span>
+              , and implemented{' '}
+              <span className='font-medium text-black'>rock-solid CI/CD pipelines</span> to AWS S3.
+              Passionate about data-driven UX, I’ve{' '}
+              <span className='font-medium text-black'>cut bundle sizes by 60%</span> and delivered
+              interactive visualizations for millions of data points. A collaborative mentor, I
+              champion clean code, rigorous testing (
+              <span className='font-medium text-black'>Jest & React Testing Library – RTL</span>),
+              and continuous innovation.
             </MotionP>
           )}
         </div>
