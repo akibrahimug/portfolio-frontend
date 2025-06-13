@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['storage.googleapis.com', 'res.cloudinary.com'],
+    domains: ['storage.googleapis.com'],
   },
   webpack(config) {
     config.module.rules.push({
