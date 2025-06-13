@@ -15,6 +15,13 @@ export const AppContext = createContext<AppContextValue>({
   googleUpload: new GoogleUpload(),
 })
 
+/**
+ * Provides API helper instances to descendant React components via context.
+ *
+ * Wraps child components with an {@link AppContext.Provider} that supplies new instances of {@link NoAuth} and {@link GoogleUpload}, making them accessible throughout the component tree.
+ *
+ * @param children - The React nodes to render within the provider.
+ */
 export function AppProvider({ children }: { children: ReactNode }) {
   return (
     <AppContext.Provider

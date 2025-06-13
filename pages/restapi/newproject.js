@@ -7,6 +7,13 @@ import { AuthContext } from '@/components/AuthProvider'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import Image from 'next/image'
+/**
+ * React component for creating a new project entry with authentication, image selection, and form validation.
+ *
+ * Presents a form for entering project details, allows authenticated users to select an image from a remote source, and submits the data to create a new project. Redirects unauthenticated users to the sign-in page. Displays validation errors if present.
+ *
+ * @returns {JSX.Element} The rendered new project creation form.
+ */
 function Newproject() {
   const { googleUpload, noAuth } = useContext(AppContext)
   const { user } = useContext(AuthContext)

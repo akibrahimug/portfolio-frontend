@@ -44,6 +44,11 @@ const titles = [
     tag: 'Private',
   },
 ]
+/**
+ * Renders a dashboard of buttons linking to various REST API endpoints, including a dynamic badge for unread messages.
+ *
+ * Fetches messages on mount and displays their count on the "Messages" button. Buttons are styled and labeled based on their metadata, and navigation is handled client-side.
+ */
 function MyRestAPI() {
   // call the authenticated user data fro context
   const { noAuth } = useContext(AppContext)

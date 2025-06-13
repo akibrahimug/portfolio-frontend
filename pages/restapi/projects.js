@@ -5,6 +5,11 @@ import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
+/**
+ * Displays a list of the user's projects with options to create a new project or navigate back.
+ *
+ * Fetches project data on mount and renders each project with its image, title, description, GitHub link, and live site link. Shows a loading indicator while projects are being loaded.
+ */
 function Projects() {
   const router = useRouter()
   const { noAuth } = useContext(AppContext)

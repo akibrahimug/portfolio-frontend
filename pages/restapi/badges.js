@@ -5,6 +5,11 @@ import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
+/**
+ * Displays a list of badges fetched from an API, with options to add a new badge or navigate back.
+ *
+ * Renders a loading indicator while badges are being fetched and displays each badge's image once loaded.
+ */
 function Badges() {
   const router = useRouter()
   const { noAuth } = useContext(AppContext)

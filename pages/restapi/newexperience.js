@@ -7,6 +7,13 @@ import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css' // theme css file
 import { DateRangePicker } from 'react-date-range'
 
+/**
+ * Renders a form for creating a new work experience entry, including company, position, description, and date range selection.
+ *
+ * Handles form state, input validation, and submission. If the user is not authenticated, redirects to the sign-in page. On successful creation, navigates to the experiences list; otherwise, displays validation errors.
+ *
+ * @returns {JSX.Element} The form UI for adding a new experience.
+ */
 function Newexperience() {
   const { noAuth } = useContext(AppContext)
   const { user } = useContext(AuthContext)

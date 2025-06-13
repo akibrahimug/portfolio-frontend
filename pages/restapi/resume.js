@@ -5,6 +5,11 @@ import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
+/**
+ * Displays a list of user resumes with preview images, allowing navigation to create a new resume or return to the main API page.
+ *
+ * Fetches resume data on mount and shows a loading indicator while data is being retrieved.
+ */
 function Resumes() {
   const router = useRouter()
   const { noAuth } = useContext(AppContext)

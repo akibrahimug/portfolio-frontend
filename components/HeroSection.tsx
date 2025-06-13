@@ -5,7 +5,7 @@ import ProfileDesc from '@/components/ProfileDesc'
 type CertifiedSkill = string
 
 interface HeroSectionProps {
-  // Add any props here if needed in the future
+  certified: CertifiedSkill[]
 }
 
 const certified: CertifiedSkill[] = [
