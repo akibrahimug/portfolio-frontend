@@ -16,8 +16,8 @@ const Avarta: React.FC = () => {
       <div className='flex justify-center lg:justify-end'>
         {isLoading ? (
           // Display skeleton when data is loading
-          <div className=' w-[100%] ml-8 lg:mt-10'>
-            <Skeleton width={450} height={400} />
+          <div className=' w-[100%] flex justify-center lg:justify-start lg:ml-20 lg:mt-30 xl:ml-40 xl:mt-40'>
+            <Skeleton width={350} height={350} />
           </div>
         ) : (
           <div className='relative w-[360px] mt-8 h-[350px] min-w-[300px] md:h-[30em] md:w-[25em] m-auto lg:mt-10'>
