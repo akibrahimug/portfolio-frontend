@@ -1,3 +1,16 @@
+# [1.9.0](https://github.com/akibrahimug/portfolio-frontend/compare/v1.8.1...v1.9.0) (2025-06-13)
+
+
+### Bug Fixes
+
+* **avarta:** avarta file .ext was breaking ([d690efd](https://github.com/akibrahimug/portfolio-frontend/commit/d690efdd90b34d9745956e309957370ebfac89cd))
+* **fixing load time for avarta image:** fixing load time for avarta image ([64a9147](https://github.com/akibrahimug/portfolio-frontend/commit/64a91475715255222b14e7caa36030210d727d90))
+
+
+### Features
+
+* **adding more context:** adding more context ([d8a971e](https://github.com/akibrahimug/portfolio-frontend/commit/d8a971e6724e91e7a40b1d384d33d6aa1ce10124))
+
 ## [1.8.1](https://github.com/akibrahimug/portfolio-frontend/compare/v1.8.0...v1.8.1) (2025-06-07)
 
 
