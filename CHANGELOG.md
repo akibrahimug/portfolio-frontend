@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/akibrahimug/portfolio-frontend/compare/v1.9.1...v1.9.2) (2025-06-13)
+
+
+### Bug Fixes
+
+* **avarta rendering:** avarta rendering ([077e9fd](https://github.com/akibrahimug/portfolio-frontend/commit/077e9fd7f6ceaf5c4f0a9b7ed52eb4274214079d))
+
 ## [1.9.1](https://github.com/akibrahimug/portfolio-frontend/compare/v1.9.0...v1.9.1) (2025-06-13)
 
 
