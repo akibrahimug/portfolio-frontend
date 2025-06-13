@@ -1,6 +1,13 @@
 import React, { useRef, useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { AppContext } from '@/components/AppContext'
+/**
+ * React component for uploading image files to a cloud storage bucket.
+ *
+ * Allows users to select or drag-and-drop an image file (PNG, JPEG, or SVG) and upload it via an API. On successful upload, navigates to the `/restapi` route. Displays a prompt if no file is selected.
+ *
+ * @returns {JSX.Element} The rendered upload form component.
+ */
 function UploadPictures() {
   const { googleUpload } = useContext(AppContext)
   const uuidv4 = () => {

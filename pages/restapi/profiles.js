@@ -5,6 +5,11 @@ import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
+/**
+ * Displays a list of user profiles with avatars and associated personal statements.
+ *
+ * Fetches avatar and personal statement data on mount, merges statements into corresponding avatar objects, and renders a responsive grid of profile cards. Provides navigation to create a new profile or return to the previous page. Shows a loading spinner while data is being fetched.
+ */
 function Profiles() {
   const router = useRouter()
   const { noAuth } = useContext(AppContext)

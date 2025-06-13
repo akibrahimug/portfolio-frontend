@@ -4,6 +4,11 @@ import { useRouter } from 'next/router'
 import { AppContext } from '@/components/AppContext'
 import { AuthContext } from '@/components/AuthProvider'
 
+/**
+ * Renders a form for creating a new methodology entry and handles its submission.
+ *
+ * Displays input fields for methodology title and description, validates input via an API call, and redirects to the profile page upon successful creation. Validation errors from the API are shown to the user.
+ */
 function Newmethodology() {
   const { noAuth } = useContext(AppContext)
   const { user } = useContext(AuthContext)

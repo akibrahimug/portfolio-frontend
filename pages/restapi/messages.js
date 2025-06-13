@@ -7,6 +7,13 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import { api } from '@/pages/api/Config'
 
+/**
+ * React component that displays a list of user messages with the ability to delete individual messages.
+ *
+ * Fetches messages on mount and renders them in a grid. Each message card shows sender details, content, and a delete button. Deleting a message removes it from the UI and attempts to delete it from the backend API.
+ *
+ * @returns {JSX.Element} The rendered message management UI.
+ */
 function Message() {
   const router = useRouter()
   const { noAuth } = useContext(AppContext)

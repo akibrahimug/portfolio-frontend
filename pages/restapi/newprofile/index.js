@@ -2,6 +2,11 @@ import React from 'react'
 import Header from '../../../components/Header'
 import RestHead from '../../../components/RestHead'
 import { useRouter } from 'next/router'
+/**
+ * Renders a page with navigation buttons for creating new profile sections in the REST API.
+ *
+ * Displays a header, page head, and a grid of buttons that navigate to routes for creating avatars, personal statements, or methodologies.
+ */
 function MyRestAPI() {
   const router = useRouter()
   return (

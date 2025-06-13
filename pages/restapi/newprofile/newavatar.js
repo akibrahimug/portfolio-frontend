@@ -11,6 +11,11 @@ import 'react-date-range/dist/theme/default.css' // theme css file
 import { DateRangePicker } from 'react-date-range'
 import Image from 'next/image'
 
+/**
+ * Renders a form for creating a new avatar entry, allowing users to select an image, specify a date range, and submit the data to be stored in a PostgreSQL database.
+ *
+ * The form includes image selection from a popover, date range picking, and displays validation errors if present. On successful submission, the user is redirected to the profile page.
+ */
 function Newproject() {
   const { googleUpload, noAuth } = useContext(AppContext)
   const { user } = useContext(AuthContext)

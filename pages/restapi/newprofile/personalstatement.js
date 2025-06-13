@@ -7,6 +7,11 @@ import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css' // theme css file
 import { DateRangePicker } from 'react-date-range'
 
+/**
+ * Renders a form for creating a new personal statement with a selectable date range.
+ *
+ * Allows users to enter a personal statement, select a date range, and submit the information to be saved in a database. Displays validation errors if present and navigates to the profile page upon successful submission.
+ */
 function Newproject() {
   const { noAuth } = useContext(AppContext)
   const { user } = useContext(AuthContext)

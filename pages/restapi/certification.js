@@ -5,6 +5,13 @@ import { AppContext } from '@/components/AppContext'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
 import Image from 'next/image'
+/**
+ * Displays a list of user certifications with options to add a new certificate or navigate back.
+ *
+ * Fetches certification data on mount and renders each certification with its image, title, school, and years. Shows a loading spinner while data is being retrieved.
+ *
+ * @returns {JSX.Element} The rendered certifications page.
+ */
 function Certifications() {
   const router = useRouter()
   const { noAuth } = useContext(AppContext)

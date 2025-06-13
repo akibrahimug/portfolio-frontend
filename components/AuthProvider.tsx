@@ -22,6 +22,16 @@ interface AuthContextValue {
 
 export const AuthContext = createContext<AuthContextValue | null>(null)
 
+/**
+ * Provides authentication context and methods to child components.
+ *
+ * Initializes and manages user authentication state, token refresh, and exposes methods for signing in, signing out, retrieving the user ID, and making authenticated API requests. Also persists user state in a secure cookie and handles automatic token refresh on mount.
+ *
+ * @param children - React components that will have access to the authentication context.
+ *
+ * @remark
+ * If the refresh token is invalid or expired, the user is automatically signed out and redirected to the sign-in page.
+ */
 export function AuthProvider({ children }: { children: ReactNode }) {
   const noAuth = new NoAuth()
   const [user, setUser] = useState<AuthenticatedUser | null>(() => {

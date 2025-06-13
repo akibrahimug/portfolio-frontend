@@ -11,6 +11,14 @@ const AuthProvider = dynamic(
   { ssr: false },
 )
 
+/**
+ * Custom Next.js App component that sets up global providers and conditionally enforces authentication for protected routes.
+ *
+ * Wraps all pages with Material UI's {@link StyledEngineProvider} and the application context provider. For routes starting with `/dashboard` or `/restapi`, the page is additionally wrapped with an authentication provider to require user authentication.
+ *
+ * @param Component - The active page component to render.
+ * @param pageProps - Props for the active page component.
+ */
 function MyApp({ Component, pageProps }: AppProps) {
   const path = usePathname() || ''
   const protectedRoute = path.startsWith('/dashboard') || path.startsWith('/restapi')
